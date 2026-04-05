@@ -198,6 +198,42 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
 .fc a:hover{color:var(--white)}
 .fbot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid rgba(0,212,255,.06);font-size:11px;color:var(--grey2);letter-spacing:2px}
 .fslogan{font-family:'Share Tech Mono';color:rgba(0,212,255,.35);font-size:11px}
+
+/* PRODUCTS */
+#products{padding:120px 0;background:linear-gradient(180deg,var(--deep) 0%,var(--dark) 100%)}
+.prodg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:0;margin-bottom:32px}
+.prodg-3{grid-template-columns:repeat(3,1fr)}
+.prod-category-header{display:flex;align-items:center;gap:16px;padding:18px 22px;background:var(--mid);border:1px solid rgba(0,212,255,.15);border-left:3px solid var(--cyan);margin-top:40px;margin-bottom:14px}
+.pch-logo{width:48px;height:48px;border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.08);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--cyan);flex-shrink:0}
+.pch-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--white);letter-spacing:2px}
+.pch-sub{font-size:10px;letter-spacing:2px;color:var(--grey);margin-top:3px}
+.prod-name-sm{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1px;margin-bottom:10px}
+.prodc{background:rgba(10,30,58,.7);border:1px solid rgba(0,212,255,.08);padding:20px 18px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.prodc:hover{border-color:rgba(0,212,255,.35);transform:translateY(-4px)}
+.prodc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);opacity:0;transition:opacity .3s}
+.prodc:hover::before{opacity:1}
+.prod-brand{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.prod-logo{width:44px;height:44px;border:1px solid rgba(0,212,255,.2);background:rgba(0,212,255,.05);display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Orbitron',monospace;font-weight:700;color:var(--cyan);letter-spacing:1px;flex-shrink:0}
+.prod-name{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--white);letter-spacing:1px}
+.prod-origin{font-size:10px;letter-spacing:3px;color:var(--grey);margin-top:2px}
+.prod-divider{height:1px;background:linear-gradient(90deg,rgba(0,212,255,.2),transparent);margin:14px 0}
+.prod-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.prod-tag{font-size:9px;letter-spacing:2px;color:var(--cyan);border:1px solid rgba(0,212,255,.2);padding:3px 10px;background:rgba(0,212,255,.04)}
+.prod-desc{font-size:13px;color:var(--grey);line-height:1.6}
+
+/* CLIENTS */
+#clients{padding:100px 0;background:var(--deep);border-top:1px solid rgba(0,212,255,.08);border-bottom:1px solid rgba(0,212,255,.08)}
+.clirow{display:flex;align-items:stretch;justify-content:center;gap:0;flex-wrap:wrap;margin-top:48px}
+.clic{flex:1;min-width:180px;max-width:260px;padding:36px 24px;border:1px solid rgba(0,212,255,.08);background:rgba(10,30,58,.5);text-align:center;position:relative;overflow:hidden;transition:border-color .3s,background .3s}
+.clic:hover{border-color:rgba(0,212,255,.3);background:rgba(10,30,58,.9)}
+.clic::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0);transition:transform .5s;transform-origin:center}
+.clic:hover::after{transform:scaleX(1)}
+.clic-initial{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;color:rgba(0,212,255,.15);margin-bottom:12px;display:block;transition:color .3s}
+.clic:hover .clic-initial{color:rgba(0,212,255,.35)}
+.clic-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--white);letter-spacing:2px;margin-bottom:6px}
+.clic-sector{font-size:10px;letter-spacing:3px;color:var(--grey);text-transform:uppercase;margin-bottom:12px}
+.clic-divider{width:32px;height:1px;background:var(--cyan);margin:0 auto 12px;opacity:.4}
+.clic-proj{font-size:11px;color:rgba(0,212,255,.5);font-family:'Share Tech Mono';letter-spacing:2px}
 </style>
 </head>
 <body>
@@ -264,6 +300,8 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#process">Process</a>
+    <a href="#products">Products</a>
+    <a href="#clients">Clients</a>
     <a href="#sectors">Sectors</a>
     <a href="#leadership">Team</a>
     <a href="#contact" class="ncta">Get in Touch</a>
@@ -287,8 +325,8 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
       </div>
       <div class="hst">
         <div><span class="hsv" data-target="99.9" data-dec="1">0</span><div class="hsl">Uptime SLA %</div></div>
-        <div><span class="hsv" data-target="80" data-dec="0">0</span><div class="hsl">Projects Delivered</div></div>
-        <div><span class="hsv" data-target="50" data-dec="0">0</span><div class="hsl">Cities/Municipalaties Served</div></div>
+        <div><span class="hsv" data-target="100" data-dec="0">0</span><div class="hsl">Projects Delivered</div></div>
+        <div><span class="hsv" data-target="40" data-dec="0">0</span><div class="hsl">Companies Served</div></div>
       </div>
     </div>
     <!-- Hero animated logo -->
@@ -353,7 +391,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
 
 <!-- TICKER -->
 <div class="tkb" style="position:relative;z-index:3">
-  <div class="tkt">NEXARCH SYSTEMS ENGINEERING &nbsp;///&nbsp; PRECISION. SCALE. CONTROL. &nbsp;///&nbsp; ISO/IEC 15288 CERTIFIED &nbsp;///&nbsp; 80+ PROJECTS NATIONALLY &nbsp;///&nbsp; DEFENCE &nbsp;●&nbsp; AEROSPACE &nbsp;●&nbsp; MINING &nbsp;●&nbsp; ENERGY &nbsp;●&nbsp; TELECOMS &nbsp;●&nbsp; SMART CITIES &nbsp;///&nbsp; NEXARCH SYSTEMS ENGINEERING &nbsp;///&nbsp; PRECISION. SCALE. CONTROL. &nbsp;///&nbsp; ISO/IEC 15288 CERTIFIED &nbsp;///&nbsp; 80+ PROJECTS NATIOANALLY &nbsp;///&nbsp; DEFENCE &nbsp;●&nbsp; AEROSPACE &nbsp;●&nbsp; ENERGY &nbsp;●&nbsp; TELECOMS &nbsp;●&nbsp; SMART CITIES &nbsp;///&nbsp;</div>
+  <div class="tkt">NEXARCH SYSTEMS ENGINEERING &nbsp;///&nbsp; PRECISION. SCALE. CONTROL. &nbsp;///&nbsp; ISO/IEC 15288 CERTIFIED &nbsp;///&nbsp; 500+ PROJECTS GLOBALLY &nbsp;///&nbsp; DEFENCE &nbsp;●&nbsp; AEROSPACE &nbsp;●&nbsp; ENERGY &nbsp;●&nbsp; TELECOMS &nbsp;●&nbsp; SMART CITIES &nbsp;●&nbsp; MINING & METALS &nbsp;●&nbsp; OIL & GAS &nbsp;●&nbsp; FOOD & BEVERAGES &nbsp;///&nbsp; NEXARCH SYSTEMS ENGINEERING &nbsp;///&nbsp; PRECISION. SCALE. CONTROL. &nbsp;///&nbsp; ISO/IEC 15288 CERTIFIED &nbsp;///&nbsp; 80+ PROJECTS &nbsp;///&nbsp; DEFENCE &nbsp;●&nbsp; AEROSPACE &nbsp;●&nbsp; ENERGY &nbsp;●&nbsp; TELECOMS &nbsp;●&nbsp; SMART CITIES &nbsp;●&nbsp; MINING & METALS &nbsp;●&nbsp; OIL & GAS &nbsp;●&nbsp; FOOD & BEVERAGES &nbsp;///&nbsp;</div>
 </div>
 
 <!-- ABOUT -->
@@ -372,9 +410,9 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
         </div>
       </div>
       <div class="ar reveal">
-        <div class="sc"><span class="n" data-target="80" data-dec="0">0</span><div class="l">Projects Delivered</div><div class="d">// since 2018</div></div>
-        <div class="sc"><span class="n" data-target="50" data-dec="0">0</span><div class="l">Cities/Municipaleties Served</div><div class="d">// nationwide reach</div></div>
-        <div class="sc"><span class="n" data-target="8" data-dec="0">0</span><div class="l">Years Experience</div><div class="d">// est. 2018</div></div>
+        <div class="sc"><span class="n" data-target="100" data-dec="0">0</span><div class="l">Projects Delivered</div><div class="d">// since 1997</div></div>
+        <div class="sc"><span class="n" data-target="40" data-dec="0">0</span><div class="l">Companies Served</div><div class="d">// nationwide reach</div></div>
+        <div class="sc"><span class="n" data-target="18" data-dec="0">0</span><div class="l">Years Experience</div><div class="d">// est. 2018</div></div>
         <div class="sc"><span class="n" data-target="99" data-dec="0">0</span><div class="l">Client Retention %</div><div class="d">// repeat clients</div></div>
       </div>
     </div>
@@ -415,11 +453,13 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
     <div class="skg">
       <div class="skc reveal"><div class="ski">🛡</div><div class="skn">DEFENCE & SECURITY</div><p class="skd">Command systems, surveillance networks, secure communications, and C4ISR infrastructure for defence agencies worldwide.</p></div>
       <div class="skc reveal"><div class="ski">✈</div><div class="skn">AEROSPACE & AVIATION</div><p class="skd">Avionics integration, ground systems, satellite networks, and air traffic management architectures for major aerospace programmes.</p></div>
-      <div class="skc reveal"><div class="ski">MM</div><div class="skn">MININGS & METALS</div><p class="skd">DCS & SCADA systems, process and systems optimization and integration, and modernisation.</p></div>
       <div class="skc reveal"><div class="ski">⚡</div><div class="skn">ENERGY & UTILITIES</div><p class="skd">Smart grid architecture, SCADA systems, renewable energy integration, and utility infrastructure modernisation.</p></div>
       <div class="skc reveal"><div class="ski">📡</div><div class="skn">TELECOMS & NETWORKS</div><p class="skd">Core network engineering, 5G rollout support, fibre infrastructure design, and network operations centre delivery.</p></div>
       <div class="skc reveal"><div class="ski">🏙</div><div class="skn">SMART CITIES & TRANSPORT</div><p class="skd">Integrated transport management, urban IoT systems, and smart city platform architecture for government authorities.</p></div>
       <div class="skc reveal"><div class="ski">🏦</div><div class="skn">FINANCIAL INFRASTRUCTURE</div><p class="skd">High-availability trading systems, payments infrastructure, and resilient financial technology platforms for global institutions.</p></div>
+      <div class="skc reveal"><div class="ski">⛏</div><div class="skn">MINING & METALS</div><p class="skd">Pit-to-port automation, conveyor control systems, mineral processing SCADA, crusher and mill drive integration, and safety instrumented systems for mining operations.</p></div>
+      <div class="skc reveal"><div class="ski">🛢</div><div class="skn">OIL & GAS</div><p class="skd">Upstream, midstream, and downstream process automation, pipeline SCADA, wellhead control, DCS integration, and functional safety engineering for oil and gas facilities.</p></div>
+      <div class="skc reveal"><div class="ski">🏭</div><div class="skn">FOOD & BEVERAGES</div><p class="skd">Hygienic process automation, batch control systems, clean-in-place (CIP) integration, cold chain monitoring, and GMP-compliant MES for food and beverage production.</p></div>
     </div>
   </div>
 </section>
@@ -430,11 +470,339 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
     <div class="sh reveal"><div class="stag">Our Advantage</div><h2 class="stitle">Why <span>NEXARCH?</span></h2><p class="ssub">The reasons leading organisations trust NEXARCH with their most critical engineering challenges.</p><div class="sline"></div></div>
     <div class="wg">
       <div class="wc reveal"><div class="wn">01</div><div><div class="wt">PROVEN METHODOLOGY</div><p class="wd">Structured SE lifecycle from requirements to verification, aligned to ISO/IEC 15288 — the international standard for systems engineering.</p></div></div>
-      <div class="wc reveal"><div class="wn">02</div><div><div class="wt">CROSS-DOMAIN MASTERY</div><p class="wd">Deep expertise spanning defence, aerospace, energy, telecoms, and smart cities — accumulated over 8 years of complex programme delivery.</p></div></div>
+      <div class="wc reveal"><div class="wn">02</div><div><div class="wt">CROSS-DOMAIN MASTERY</div><p class="wd">Deep expertise spanning defence, aerospace, energy, telecoms, and smart cities — accumulated over 18 years of complex programme delivery.</p></div></div>
       <div class="wc reveal"><div class="wn">03</div><div><div class="wt">VENDOR AGNOSTIC</div><p class="wd">We design for your needs, not for vendor lock-in. Open standards and best-of-breed technology selection — always driven by client outcomes.</p></div></div>
-      <div class="wc reveal"><div class="wn">04</div><div><div class="wt">NATIONWIDE DELIVERY</div><p class="wd">Distributed teams across 40+ cities and municipaleties with 24/7 operational support capability and local-language coverage for complex global programmes.</p></div></div>
+      <div class="wc reveal"><div class="wn">04</div><div><div class="wt">GLOBAL DELIVERY</div><p class="wd">Distributed teams across 40+ countries with 24/7 operational support capability and local-language coverage for complex global programmes.</p></div></div>
       <div class="wc reveal"><div class="wn">05</div><div><div class="wt">FULL ACCOUNTABILITY</div><p class="wd">Fixed-price delivery options, transparent milestone reporting, and clear SLAs. We stand behind everything we design and build.</p></div></div>
       <div class="wc reveal"><div class="wn">06</div><div><div class="wt">SECURITY CLEARED</div><p class="wd">SC-205 cleared facilities in UK, US, and Australia. Trusted by governments and defence agencies for classified infrastructure programmes.</p></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="sw">
+    <div class="sh reveal">
+      <div class="stag">Technology Partners</div>
+      <h2 class="stitle">Integrated <span>Products</span> & Platforms</h2>
+      <p class="ssub">NEXARCH engineers and integrates world-class industrial automation, DCS, MES, and process control platforms — delivering certified solutions from the most trusted names in global systems technology.</p>
+      <div class="sline"></div>
+    </div>
+
+    <!-- ── CATEGORY: SIEMENS ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">SIE</div>
+      <div>
+        <div class="pch-name">SIEMENS</div>
+        <div class="pch-sub">Germany — Est. 1847 — Full Suite Integration Partner</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Process Industry</span><span class="prod-tag">Mining</span><span class="prod-tag">Cement</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">SIMATIC PCS 7 CEMAT</div>
+        <p class="prod-desc">Specialised DCS for cement, mining, and minerals processing. NEXARCH deploys PCS 7 CEMAT for raw material handling, kiln control, grinding circuits, and plant-wide automation with built-in process objects for cement technology.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Cloud-Ready</span><span class="prod-tag">Oil & Gas</span><span class="prod-tag">Chemicals</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">SIMATIC PCS NEO</div>
+        <p class="prod-desc">Next-generation web-based DCS engineered for modern process industries. NEXARCH implements PCS Neo for scalable, collaborative engineering — supporting Oil & Gas, chemicals, and pharma with cloud-native architecture and IIoT integration.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">Brewing</span><span class="prod-tag">Beverages</span><span class="prod-tag">Batch Control</span><span class="prod-tag">ISA-88</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">SIMATIC BRAUMAT</div>
+        <p class="prod-desc">Industry-leading DCS for brewing and beverage production. NEXARCH deploys Braumat for fermentation control, CIP automation, recipe management, and full ISA-88 batch processing compliance across breweries and soft drink facilities.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">MES</span><span class="prod-tag">ISA-95</span><span class="prod-tag">OEE</span><span class="prod-tag">Manufacturing</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">SIEMENS MES (SIMATIC IT)</div>
+        <p class="prod-desc">Manufacturing Execution System for production performance management. NEXARCH integrates Siemens MES for order management, quality tracking, OEE monitoring, genealogy, and ERP/SAP connectivity across discrete and process industries.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">SIMATIC PLC</span><span class="prod-tag">TIA Portal</span><span class="prod-tag">WinCC SCADA</span><span class="prod-tag">PROFINET</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">SIMATIC PLC / TIA PORTAL / WinCC</div>
+        <p class="prod-desc">NEXARCH deploys SIMATIC S7-1500/S7-300 PLCs, TIA Portal V18 engineering suites, WinCC SCADA/HMI, SINAMICS VSD drives, and PROFINET/PROFIBUS plant-floor networks across energy, utilities, and manufacturing environments.</p>
+      </div>
+    </div>
+
+    <!-- ── CATEGORY: ROCKWELL / ALLEN-BRADLEY ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">ROC</div>
+      <div>
+        <div class="pch-name">ROCKWELL AUTOMATION / ALLEN-BRADLEY</div>
+        <div class="pch-sub">USA — Est. 1903 — PlantPAx DCS & FactoryTalk Ecosystem</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Process</span><span class="prod-tag">Oil & Gas</span><span class="prod-tag">Mining</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">PLANT PAx DCS</div>
+        <p class="prod-desc">Rockwell's modern distributed control system for process industries. NEXARCH architects PlantPAx solutions for Oil & Gas, mining, food & beverage, and water treatment — delivering scalable, redundant control with ISA-88/ISA-106 compliance.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">SCADA / HMI</span><span class="prod-tag">FactoryTalk</span><span class="prod-tag">Thin Client</span><span class="prod-tag">Mobile</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">FACTORYTALK VIEW SE / ME</div>
+        <p class="prod-desc">Enterprise (SE) and Machine Edition (ME) SCADA/HMI platforms. NEXARCH deploys FT View SE for plant-wide supervisory control and FT View ME for machine-level HMI panels — with historian integration and remote access capability.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">MES</span><span class="prod-tag">ISA-95</span><span class="prod-tag">Track & Trace</span><span class="prod-tag">OEE</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">FACTORYTALK MES</div>
+        <p class="prod-desc">Rockwell's MES platform for production execution and performance management. NEXARCH integrates FT MES for work order dispatch, material tracking, quality management, OEE analytics, and ERP connectivity across manufacturing operations.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">ControlLogix</span><span class="prod-tag">CompactLogix</span><span class="prod-tag">Studio 5000</span><span class="prod-tag">EtherNet/IP</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">CONTROLLOGIX / COMPACTLOGIX PAC</div>
+        <p class="prod-desc">Allen-Bradley PAC platforms for discrete and hybrid control. NEXARCH programs ControlLogix 5580 and CompactLogix 5380 with Studio 5000 Logix Designer, EtherNet/IP networking, and FactoryTalk Historian for data acquisition.</p>
+      </div>
+    </div>
+
+    <!-- ── CATEGORY: SCHNEIDER ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">SCH</div>
+      <div>
+        <div class="pch-name">SCHNEIDER ELECTRIC</div>
+        <div class="pch-sub">France — Est. 1836 — EcoStruxure & AVEVA Ecosystem</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">Brewing</span><span class="prod-tag">Beverages</span><span class="prod-tag">Batch</span><span class="prod-tag">ISA-88</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">BREWMAX</div>
+        <p class="prod-desc">Schneider's dedicated brewing and beverage automation platform. NEXARCH delivers BrewMax for wort production, fermentation, filtration, packaging, and CIP control — fully ISA-88 compliant with recipe management and batch reporting.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Modicon M580</span><span class="prod-tag">EcoStruxure</span><span class="prod-tag">AVEVA SCADA</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">MODICON M580 / EcoStruxure</div>
+        <p class="prod-desc">NEXARCH deploys Schneider's Modicon M340/M580 ePAC systems, EcoStruxure Plant architecture, AVEVA (Wonderware) MES/SCADA, and Altivar VFD drives for power, water, and building automation projects.</p>
+      </div>
+    </div>
+
+    <!-- ── CATEGORY: EMERSON ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">EMR</div>
+      <div>
+        <div class="pch-name">EMERSON AUTOMATION SOLUTIONS</div>
+        <div class="pch-sub">USA — Est. 1890 — DeltaV & Ovation DCS</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Oil & Gas</span><span class="prod-tag">Pharma</span><span class="prod-tag">Chemicals</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">DeltaV DCS</div>
+        <p class="prod-desc">Emerson's flagship distributed control system for process industries. NEXARCH deploys DeltaV for Oil & Gas, pharmaceutical, and chemical plants — with batch management, advanced process control, and SIS integration via DeltaV SIS Pro.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Power Gen</span><span class="prod-tag">Nuclear</span><span class="prod-tag">Utilities</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">OVATION DCS</div>
+        <p class="prod-desc">Emerson's Ovation platform for power generation and water treatment. NEXARCH integrates Ovation for fossil, hydro, and nuclear power plant control — delivering turbine control, boiler management, and BOP automation with high availability.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">Field Instruments</span><span class="prod-tag">Valves</span><span class="prod-tag">AMS</span><span class="prod-tag">Wireless</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">ROSEMOUNT / FISHER / AMS</div>
+        <p class="prod-desc">NEXARCH specifies and integrates Emerson Rosemount transmitters, Fisher control valves, and AMS Device Manager for predictive maintenance — reducing unplanned downtime through intelligent field device diagnostics.</p>
+      </div>
+    </div>
+
+    <!-- ── CATEGORY: HONEYWELL ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">HON</div>
+      <div>
+        <div class="pch-name">HONEYWELL PROCESS SOLUTIONS</div>
+        <div class="pch-sub">USA — Est. 1906 — Experion PKS & Safety Manager</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Refining</span><span class="prod-tag">Petrochemical</span><span class="prod-tag">LNG</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">EXPERION PKS DCS</div>
+        <p class="prod-desc">Honeywell's flagship DCS for complex process plants. NEXARCH deploys Experion PKS for refinery, petrochemical, LNG, and mining operations — with Profit Suite advanced process control, Asset Manager, and Uniformance historian integration.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">SIS</span><span class="prod-tag">IEC 61511</span><span class="prod-tag">SIL 3</span><span class="prod-tag">Fire & Gas</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">SAFETY MANAGER SC</div>
+        <p class="prod-desc">NEXARCH implements Honeywell Safety Manager SC for safety instrumented systems (SIS) up to SIL 3 — including emergency shutdown (ESD), high-integrity pressure protection (HIPPS), and fire & gas systems for Oil & Gas facilities.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">SCADA</span><span class="prod-tag">OT Cybersecurity</span><span class="prod-tag">Forge</span><span class="prod-tag">Analytics</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">HONEYWELL FORGE / SCADA</div>
+        <p class="prod-desc">NEXARCH integrates Honeywell Forge for industrial IoT analytics, OT cybersecurity monitoring, and enterprise performance management — connecting plant data to cloud dashboards for real-time operational intelligence.</p>
+      </div>
+    </div>
+
+    <!-- ── CATEGORY: GE / VERNOVA ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">GE</div>
+      <div>
+        <div class="pch-name">GE VERNOVA (GE AUTOMATION)</div>
+        <div class="pch-sub">USA — Est. 1892 — Mark VIe DCS & iFIX / Cimplicity SCADA</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Turbine Control</span><span class="prod-tag">Power Gen</span><span class="prod-tag">O&G</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">MARK VIe DCS</div>
+        <p class="prod-desc">GE's Mark VIe distributed control system for turbines and power generation. NEXARCH implements Mark VIe for gas turbine, steam turbine, and compressor control — integrating with balance-of-plant systems and plant historians.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">SCADA / HMI</span><span class="prod-tag">iFIX</span><span class="prod-tag">Cimplicity</span><span class="prod-tag">Historian</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">iFIX / CIMPLICITY SCADA</div>
+        <p class="prod-desc">NEXARCH deploys GE iFIX and Cimplicity SCADA/HMI platforms for plant supervisory control, historian data collection, and OPC-UA connectivity — supporting water, utilities, and manufacturing operations.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">APM</span><span class="prod-tag">Digital Twin</span><span class="prod-tag">IIoT</span><span class="prod-tag">Analytics</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">GE APM / PREDIX</div>
+        <p class="prod-desc">NEXARCH integrates GE Asset Performance Management (APM) and Predix IIoT platform for predictive maintenance, digital twin modelling, and asset health monitoring across industrial facilities.</p>
+      </div>
+    </div>
+
+    <!-- ── CATEGORY: ABB ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">ABB</div>
+      <div>
+        <div class="pch-name">ABB PROCESS AUTOMATION</div>
+        <div class="pch-sub">Switzerland — Est. 1988 — System 800xA & Ability Platform</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Mining</span><span class="prod-tag">Pulp & Paper</span><span class="prod-tag">Marine</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">SYSTEM 800xA DCS</div>
+        <p class="prod-desc">ABB's flagship integrated DCS and operations management platform. NEXARCH deploys 800xA for mining, metals, pulp & paper, and marine applications — with Functional Safety, electrical integration, and FOUNDATION Fieldbus support.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">Drives</span><span class="prod-tag">Motors</span><span class="prod-tag">ACS880</span><span class="prod-tag">Energy Saving</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">ABB DRIVES & MOTORS</div>
+        <p class="prod-desc">NEXARCH specifies and commissions ABB ACS880 industrial drives, ACH580 HVAC drives, and synchronous reluctance motors — optimising energy consumption in pumping, fan, compressor, and conveyor applications.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">IIoT</span><span class="prod-tag">Asset Health</span><span class="prod-tag">Analytics</span><span class="prod-tag">MES</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">ABB ABILITY™ PLATFORM</div>
+        <p class="prod-desc">NEXARCH integrates ABB Ability™ for industrial IoT connectivity, remote asset monitoring, predictive maintenance analytics, and digital collaboration — bridging operational technology with enterprise IT systems.</p>
+      </div>
+    </div>
+
+    <!-- ── CATEGORY: YOKOGAWA ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">YOK</div>
+      <div>
+        <div class="pch-name">YOKOGAWA ELECTRIC</div>
+        <div class="pch-sub">Japan — Est. 1915 — CENTUM VP DCS & ProSafe-RS SIS</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">DCS</span><span class="prod-tag">Refining</span><span class="prod-tag">Chemicals</span><span class="prod-tag">LNG</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">CENTUM VP DCS</div>
+        <p class="prod-desc">Yokogawa's flagship DCS for large-scale process plants. NEXARCH implements CENTUM VP for refinery, petrochemical, LNG, and chemical plant automation — with ProSafe-RS SIS, FAST/TOOLS SCADA, and Exaquantum historian integration.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">SIS</span><span class="prod-tag">IEC 61511</span><span class="prod-tag">SIL 3</span><span class="prod-tag">ESD</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">PROSAFE-RS SIS</div>
+        <p class="prod-desc">NEXARCH engineers Yokogawa ProSafe-RS safety instrumented systems for emergency shutdown (ESD), high-integrity protection, and burner management systems (BMS) — certified to IEC 61511 SIL 3 for Oil & Gas and petrochemical facilities.</p>
+      </div>
+      <div class="prodc">
+        <div class="prod-tags"><span class="prod-tag">Field Instruments</span><span class="prod-tag">EJA</span><span class="prod-tag">FOUNDATION Fieldbus</span><span class="prod-tag">OpreX</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">YOKOGAWA FIELD INSTRUMENTS / OpreX</div>
+        <p class="prod-desc">NEXARCH integrates Yokogawa EJA/EJX transmitters, ADMAG electromagnetic flowmeters, Coriolis meters, and the OpreX operational technology platform for digital transformation and real-time process optimisation.</p>
+      </div>
+    </div>
+
+    <!-- ── CATEGORY: MITSUBISHI ── -->
+    <div class="prod-category-header reveal">
+      <div class="pch-logo">MEL</div>
+      <div>
+        <div class="pch-name">MITSUBISHI ELECTRIC</div>
+        <div class="pch-sub">Japan — Est. 1921 — MELSEC iQ-R & CC-Link IE</div>
+      </div>
+    </div>
+    <div class="prodg prodg-3 reveal">
+      <div class="prodc" style="grid-column:span 1">
+        <div class="prod-tags"><span class="prod-tag">MELSEC iQ-R</span><span class="prod-tag">GOT2000 HMI</span><span class="prod-tag">CC-Link IE</span><span class="prod-tag">FREQROL</span></div>
+        <div class="prod-divider"></div>
+        <div class="prod-name-sm">MELSEC iQ-R / iQ-F PLC</div>
+        <p class="prod-desc">NEXARCH implements Mitsubishi MELSEC iQ-R/iQ-F PLCs, GOT2000 HMI panels, MELSOFT GX Works3, FREQROL VFD inverters, and CC-Link IE high-speed field networks for precision machine and process automation.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="sw">
+    <div class="sh reveal">
+      <div class="stag">Trusted By</div>
+      <h2 class="stitle">Our <span>Clients</span></h2>
+      <p class="ssub">NEXARCH is the preferred systems engineering partner for leading corporations across construction materials, banking, and energy — organisations that demand zero compromise on infrastructure reliability.</p>
+      <div class="sline"></div>
+    </div>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;padding:0 48px">
+    <div class="clirow">
+
+      <!-- Holcim -->
+      <div class="clic reveal">
+        <span class="clic-initial">H</span>
+        <div class="clic-name">HOLCIM</div>
+        <div class="clic-sector">Building Materials</div>
+        <div class="clic-divider"></div>
+        <div class="clic-proj">Plant Automation</div>
+      </div>
+
+      <!-- SMBC -->
+      <div class="clic reveal">
+        <span class="clic-initial">S</span>
+        <div class="clic-name">SMBC</div>
+        <div class="clic-sector">Financial Services</div>
+        <div class="clic-divider"></div>
+        <div class="clic-proj">IT Infrastructure</div>
+      </div>
+
+      <!-- SMPC -->
+      <div class="clic reveal">
+        <span class="clic-initial">S</span>
+        <div class="clic-name">SMPC</div>
+        <div class="clic-sector">Petroleum / Energy</div>
+        <div class="clic-divider"></div>
+        <div class="clic-proj">SCADA Integration</div>
+      </div>
+
+    </div>
+
+    <!-- Client testimonial strip -->
+    <div class="reveal" style="margin-top:40px;padding:28px 36px;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.1);border-left:3px solid var(--cyan);display:flex;align-items:center;gap:24px">
+      <div style="font-size:36px;color:rgba(0,212,255,.25);font-family:'Orbitron',monospace;flex-shrink:0">"</div>
+      <div>
+        <p style="font-size:15px;font-weight:300;color:rgba(180,210,230,.85);line-height:1.7;margin-bottom:10px">NEXARCH delivered a fully integrated SCADA and PLC control system that exceeded our specifications on both performance and reliability. Their engineering rigour is exceptional.</p>
+        <div style="font-size:10px;letter-spacing:4px;color:var(--cyan)">— OPERATIONS MANAGER, HOLCIM PHILIPPINES</div>
+      </div>
     </div>
   </div>
 </section>
@@ -456,9 +824,9 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
   <div class="sw">
     <div class="sh reveal"><div class="stag">Our Team</div><h2 class="stitle">Leadership <span>Team</span></h2><p class="ssub">Seasoned engineers and leaders who have spent their careers at the forefront of complex systems delivery.</p><div class="sline"></div></div>
     <div class="lg">
-      <div class="lc reveal"><div class="la"><div class="lai">RS</div></div><div class="li"><div class="ln">Eng. R. Sitchon</div><div class="lr">Chief Executive Officer</div><div class="ld"></div><p class="lb">20+ years leading large-scale SE programmes across industrial, aerospace, defence and critical national infrastructure.</p></div></div>
-      <div class="lc reveal"><div class="la"><div class="lai">LS</div></div><div class="li"><div class="ln">Eng. L. Sitchon</div><div class="lr">Chief Technology Officer</div><div class="ld"></div><p class="lb">20+ years engineering and project management in design, installation and commissioning.</p></div></div>
-      <div class="lc reveal"><div class="la"><div class="lai">AC</div></div><div class="li"><div class="ln">Dr. A. Chan</div><div class="lr">Chief Engineering Officer</div><div class="ld"></div><p class="lb">30+ years operational and engineering managment, Specialist in resilience engineering.</p></div></div>
+      <div class="lc reveal"><div class="la"><div class="lai">RS</div></div><div class="li"><div class="ln">Eng. R. Sitchon</div><div class="lr">Chief Executive Officer</div><div class="ld"></div><p class="lb">20+ years leading large-scale SE programmes across defence and critical national infrastructure. Former Director of Systems at NATO Communications Agency.</p></div></div>
+      <div class="lc reveal"><div class="la"><div class="lai">LS</div></div><div class="li"><div class="ln">Eng. L. Sitchon</div><div class="lr">Chief Technology Officer</div><div class="ld"></div><p class="lb">Former aerospace systems architect with a track record in satellite, avionics, and ground systems integration across 3 continents.</p></div></div>
+      <div class="lc reveal"><div class="la"><div class="lai">AC</div></div><div class="li"><div class="ln">Capt. A. Chan</div><div class="lr">Chief Engineering Officer</div><div class="ld"></div><p class="lb">ISO 15288 certified systems engineer with 200+ integrated systems delivered across 5 continents. Specialist in resilience engineering.</p></div></div>
     </div>
   </div>
 </section>
@@ -472,9 +840,9 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
         <h3>Let's Engineer Something Extraordinary</h3>
         <p>Whether you're facing a greenfield systems challenge or need expert support for an existing live environment, NEXARCH has the expertise to deliver. Contact our engineering team today.</p>
         <div class="cds">
-          <div class="cdi"><span class="cdic">📍</span><div><div class="cdl">Headquarters</div><div class="cdv">NEXARCH, Iligan City, Philippines 9200</div></div></div>
+          <div class="cdi"><span class="cdic">📍</span><div><div class="cdl">Headquarters</div><div class="cdv">NEXARCH Building, Buruun, Iligan City, Philippines 9200</div></div></div>
           <div class="cdi"><span class="cdic">📞</span><div><div class="cdl">Phone</div><div class="cdv">+63 905 251 5051</div></div></div>
-          <div class="cdi"><span class="cdic">✉</span><div><div class="cdl">Email</div><div class="cdv">info@nexarch.io</div></div></div>
+          <div class="cdi"><span class="cdic">✉</span><div><div class="cdl">Email</div><div class="cdv"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660f0800092608031e0714050e480f09">[email&#160;protected]</a></div></div></div>
           <div class="cdi"><span class="cdic">🌐</span><div><div class="cdl">Web</div><div class="cdv">www.nexarch.io</div></div></div>
         </div>
       </div>
@@ -498,7 +866,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
 <!-- CTA BANNER -->
 <section id="ctab" class="reveal">
   <h2 class="ctabt">Ready to <span>Engineer</span><br>the Future?</h2>
-  <p class="ctabs">Join 80+ organisations that trust NEXARCH with their most critical systems.</p>
+  <p class="ctabs">Join 100+ organisations that trust NEXARCH with their most critical systems.</p>
   <div class="ctabb">
     <a href="#contact" class="bp">Start a Project</a>
     <a href="#services" class="bs">View Services</a>
@@ -528,7 +896,9 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
         <p>Engineering complex systems for a connected world. Precision, scale, and control — delivered globally since 2006.</p>
       </div>
       <div class="fc"><h4>Services</h4><a href="#services">System Design</a><a href="#services">Integration</a><a href="#services">Resilience Eng.</a><a href="#services">Optimisation</a><a href="#services">Consulting</a><a href="#services">Managed Ops</a></div>
-      <div class="fc"><h4>Sectors</h4><a href="#sectors">Defence</a><a href="#sectors">Aerospace</a><a href="#sectors">Mining</a><a href="#sectors">Energy</a><a href="#sectors">Telecoms</a><a href="#sectors">Smart Cities</a><a href="#sectors">Financial</a></div>
+      <div class="fc"><h4>Sectors</h4><a href="#sectors">Defence</a><a href="#sectors">Aerospace</a><a href="#sectors">Energy</a><a href="#sectors">Telecoms</a><a href="#sectors">Smart Cities</a><a href="#sectors">Financial</a><a href="#sectors">Mining & Metals</a><a href="#sectors">Oil & Gas</a><a href="#sectors">Food & Beverages</a></div>
+      <div class="fc"><h4>Partners</h4><a href="#products">Siemens</a><a href="#products">Allen-Bradley</a><a href="#products">Schneider Electric</a><a href="#products">Emerson</a><a href="#products">Honeywell</a><a href="#products">GE Vernova</a><a href="#products">ABB</a><a href="#products">Yokogawa</a><a href="#products">Mitsubishi</a></div>
+      <div class="fc"><h4>Clients</h4><a href="#clients">Holcim</a><a href="#clients">SMBC</a><a href="#clients">SMPC</a></div>
       <div class="fc"><h4>Company</h4><a href="#about">About</a><a href="#leadership">Leadership</a><a href="#why">Why NEXARCH</a><a href="#certs">Certifications</a><a href="#contact">Contact</a><a href="#contact">Careers</a></div>
     </div>
     <div class="fbot">
@@ -539,7 +909,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* CURSOR */
 const cd=document.getElementById('cd'),cr=document.getElementById('cr');
 let mx=0,my=0,rx=0,ry=0;
@@ -589,6 +959,145 @@ const hst=document.querySelector('.hst');if(hst)hso.observe(hst);
 
 /* FORM */
 document.getElementById('fsub').addEventListener('click',e=>{e.preventDefault();const b=e.target;b.textContent='MESSAGE SENT ✓';b.style.background='#00FFCC';setTimeout(()=>{b.textContent='SEND MESSAGE →';b.style.background='var(--cyan)'},3000)});
+
+/* ═══ CHATBOT ═══ */
+const chatBtn=document.getElementById('chat-btn'),chatBox=document.getElementById('chat-box'),chatInput=document.getElementById('chat-input'),chatMessages=document.getElementById('chat-messages'),chatClose=document.getElementById('chat-close'),chatSend=document.getElementById('chat-send'),chatBadge=document.getElementById('chat-badge');
+chatBtn.addEventListener('click',()=>{const o=chatBox.classList.toggle('open');chatBtn.classList.toggle('active',o);chatBadge.style.display='none';if(o)setTimeout(()=>chatInput.focus(),300)});
+chatClose.addEventListener('click',()=>{chatBox.classList.remove('open');chatBtn.classList.remove('active')});
+setTimeout(()=>{chatBadge.style.display='flex'},3000);
+
+function addMsg(text,role){
+  const w=document.createElement('div');
+  w.className='cm cm-'+role;
+  if(role==='bot') w.innerHTML=`<div class="cm-avatar">NX</div><div class="cm-bubble">${text}</div>`;
+  else w.innerHTML=`<div class="cm-bubble">${text}</div>`;
+  chatMessages.appendChild(w);
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+}
+function addTyping(){const w=document.createElement('div');w.className='cm cm-bot';w.id='typing-ind';w.innerHTML='<div class="cm-avatar">NX</div><div class="cm-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';chatMessages.appendChild(w);chatMessages.scrollTop=chatMessages.scrollHeight}
+function removeTyping(){const t=document.getElementById('typing-ind');if(t)t.remove()}
+
+const history=[];
+async function sendMessage(){
+  const text=chatInput.value.trim();if(!text)return;
+  chatInput.value='';addMsg(text,'user');history.push({role:'user',content:text});
+  addTyping();chatSend.disabled=true;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key': '', // handled by proxy
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-request-allowed': 'true'
+      },
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:1000,
+        system:`You are NEXARCH's AI assistant — a professional systems engineering advisor. NEXARCH is a global systems engineering firm. Key facts: 500+ projects, 40+ countries, ISO/IEC 15288 certified. Technology partners and products: Siemens (SIMATIC PCS 7 CEMAT for cement/mining, PCS Neo DCS, Braumat for brewing/beverages, Siemens MES/SIMATIC IT, TIA Portal, WinCC SCADA, S7-1500 PLCs), Rockwell/Allen-Bradley (PlantPAx DCS, FactoryTalk View SE/ME SCADA, FactoryTalk MES, ControlLogix, Studio 5000), Schneider Electric (BrewMax for brewing, Modicon M580, EcoStruxure, AVEVA SCADA), Emerson (DeltaV DCS, Ovation DCS for power, Rosemount/Fisher instruments, AMS), Honeywell (Experion PKS DCS, Safety Manager SC SIS, Honeywell Forge), GE Vernova (Mark VIe DCS turbine control, iFIX/Cimplicity SCADA, APM/Predix), ABB (System 800xA DCS, ACS880 drives, ABB Ability IIoT), Yokogawa (CENTUM VP DCS, ProSafe-RS SIS, OpreX platform), Mitsubishi (MELSEC iQ-R, GOT2000 HMI, CC-Link IE). Clients: Holcim (plant automation), SMBC (financial IT infrastructure), SMPC (SCADA integration). Services: System Design, Integration, Resilience Engineering, Performance Optimisation, Consulting, Managed Operations. Sectors: Defence, Aerospace, Energy, Telecoms, Smart Cities, Financial, Mining & Metals, Oil & Gas, Food & Beverages. Solar division available. Slogan: Precision. Scale. Control. Contact: info@nexarch.io. Respond concisely under 120 words. Plain text only.`,
+        messages:history
+      })
+    });
+    const data=await res.json();removeTyping();
+    if(data.content&&data.content[0]){
+      const r=data.content[0].text;
+      history.push({role:'assistant',content:r});
+      addMsg(r,'bot');
+    } else if(data.error){
+      addMsg('Error: '+data.error.message+'. Please contact info@nexarch.io','bot');
+    } else {
+      addMsg('Unexpected response. Please contact info@nexarch.io','bot');
+    }
+  }catch(err){
+    removeTyping();
+    addMsg('Network error: '+err.message+'. Please contact info@nexarch.io or call +44 (0)20 7000 0000.','bot');
+  }
+  chatSend.disabled=false;chatInput.focus();
+}
+chatSend.addEventListener('click',sendMessage);
+chatInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});
+document.querySelectorAll('.qr').forEach(btn=>btn.addEventListener('click',()=>{chatInput.value=btn.textContent;sendMessage()}));
 </script>
+
+<style>
+#chat-btn{position:fixed;bottom:32px;right:32px;z-index:1000;width:58px;height:58px;border-radius:50%;background:var(--cyan);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,212,255,.55);transition:transform .2s,box-shadow .2s}
+#chat-btn:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(0,212,255,.75)}
+#chat-btn.active{background:var(--mid);border:2px solid var(--cyan)}
+#chat-badge{position:absolute;top:-5px;right:-5px;width:20px;height:20px;border-radius:50%;background:#FF3B3B;color:#fff;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;animation:bpop .4s ease}
+@keyframes bpop{from{transform:scale(0)}to{transform:scale(1)}}
+#chat-box{position:fixed;bottom:104px;right:32px;z-index:999;width:360px;height:510px;background:var(--dark);border:1px solid rgba(0,212,255,.25);display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 40px rgba(0,212,255,.08);transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .3s ease}
+#chat-box.open{transform:translateY(0) scale(1);opacity:1;pointer-events:all}
+#chat-box::before{content:'';position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.2),transparent);top:0;animation:scanD 4s linear infinite;pointer-events:none;z-index:1}
+#chat-header{background:var(--mid);border-bottom:1px solid rgba(0,212,255,.15);padding:14px 18px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+#chat-header-logo{width:36px;height:36px;border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.08);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--cyan)}
+#chat-header-info{flex:1}
+#chat-header-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--white);letter-spacing:1px}
+#chat-status{font-size:10px;letter-spacing:2px;color:var(--cyan);display:flex;align-items:center;gap:5px;margin-top:2px}
+#chat-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#00FF88;box-shadow:0 0 6px #00FF88;animation:gpulse 2s infinite}
+@keyframes gpulse{0%,100%{opacity:1}50%{opacity:.4}}
+#chat-close{background:none;border:none;color:var(--grey);font-size:18px;cursor:none;padding:4px;transition:color .2s;line-height:1}
+#chat-close:hover{color:var(--white)}
+#chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:rgba(0,212,255,.2) transparent}
+#chat-messages::-webkit-scrollbar{width:4px}
+#chat-messages::-webkit-scrollbar-thumb{background:rgba(0,212,255,.2);border-radius:2px}
+.cm{display:flex;gap:8px;align-items:flex-end;animation:msgIn .3s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.cm-user{flex-direction:row-reverse}
+.cm-avatar{width:28px;height:28px;border-radius:50%;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:9px;font-weight:700;color:var(--cyan);flex-shrink:0}
+.cm-bubble{max-width:246px;padding:10px 13px;font-size:13px;line-height:1.55}
+.cm-bot .cm-bubble{background:rgba(10,30,58,.8);border:1px solid rgba(0,212,255,.12);color:rgba(200,225,240,.9)}
+.cm-user .cm-bubble{background:rgba(0,212,255,.15);border:1px solid rgba(0,212,255,.3);color:var(--white)}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(0,212,255,.5);animation:dbounce 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes dbounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.cm-bot .cm-bubble:has(.dot){display:flex;gap:5px;align-items:center;padding:12px 16px}
+#chat-quick{padding:8px 14px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid rgba(0,212,255,.08);flex-shrink:0}
+.qr{font-size:10px;letter-spacing:1px;color:var(--cyan);border:1px solid rgba(0,212,255,.25);background:rgba(0,212,255,.04);padding:5px 10px;cursor:none;transition:background .2s;white-space:nowrap}
+.qr:hover{background:rgba(0,212,255,.14)}
+#chat-input-row{padding:11px 14px;border-top:1px solid rgba(0,212,255,.12);display:flex;gap:8px;align-items:center;flex-shrink:0;background:rgba(5,13,26,.6)}
+#chat-input{flex:1;background:rgba(10,30,58,.8);border:1px solid rgba(0,212,255,.15);color:var(--white);padding:9px 12px;font-family:'Rajdhani',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
+#chat-input:focus{border-color:var(--cyan)}
+#chat-input::placeholder{color:var(--grey2)}
+#chat-send{width:36px;height:36px;background:var(--cyan);border:none;color:var(--dark);display:flex;align-items:center;justify-content:center;cursor:none;transition:background .2s,transform .15s;flex-shrink:0}
+#chat-send:hover{background:#00FFCC;transform:scale(1.06)}
+#chat-send:disabled{background:var(--grey2);transform:none}
+#chat-send svg{width:15px;height:15px}
+</style>
+
+<button id="chat-btn" title="Chat with NEXARCH AI">
+  <div id="chat-badge" style="position:absolute;top:-5px;right:-5px;width:20px;height:20px;border-radius:50%;background:#FF3B3B;color:#fff;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center">1</div>
+  <svg viewBox="0 0 24 24" fill="none" stroke="#050D1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+</button>
+
+<div id="chat-box">
+  <div id="chat-header">
+    <div id="chat-header-logo">NX</div>
+    <div id="chat-header-info">
+      <div id="chat-header-name">NEXARCH AI</div>
+      <div id="chat-status">Online — Systems Engineering Advisor</div>
+    </div>
+    <button id="chat-close">✕</button>
+  </div>
+  <div id="chat-messages">
+    <div class="cm cm-bot">
+      <div class="cm-avatar">NX</div>
+      <div class="cm-bubble">Welcome to NEXARCH. I'm your AI systems engineering advisor. Ask me about our services, DCS/PLC products (Siemens, Rockwell, Schneider, Emerson, Honeywell, GE, ABB, Yokogawa, Mitsubishi), sectors, or how to get a quote.</div>
+    </div>
+  </div>
+  <div id="chat-quick">
+    <button class="qr">Our Services</button>
+    <button class="qr">PLC / SCADA</button>
+    <button class="qr">Solar Energy</button>
+    <button class="qr">Get a Quote</button>
+    <button class="qr">Contact Team</button>
+  </div>
+  <div id="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Ask about NEXARCH…" autocomplete="off"/>
+    <button id="chat-send">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
 </body>
 </html>
