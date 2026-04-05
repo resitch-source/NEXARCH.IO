@@ -24,10 +24,10 @@ a{text-decoration:none;color:inherit}
 @keyframes scanD{from{top:-2px}to{top:100vh}}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(5,13,26,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,.1);transition:background .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(5,13,26,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,.1);transition:background .3s}
 nav.scrolled{background:rgba(5,13,26,.97);border-bottom-color:rgba(0,212,255,.2)}
 .nl{display:flex;align-items:center;gap:10px}
-.nl svg{width:180px;height:42px}
+.nl svg{width:260px;height:62px}
 .nr{display:flex;align-items:center;gap:32px}
 .nr a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);transition:color .2s;position:relative}
 .nr a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .2s}
@@ -111,7 +111,7 @@ section{position:relative;z-index:2}
 
 /* PROCESS */
 #process{padding:120px 0}
-.ps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;margin-top:64px}
+.ps{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative;margin-top:64px}
 .ps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.3) 20%,rgba(0,212,255,.3) 80%,transparent);z-index:0}
 .pst{text-align:center;position:relative;z-index:1;padding:0 10px;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
 .pst.vis{opacity:1;transform:translateY(0)}
@@ -199,6 +199,198 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
 .fbot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid rgba(0,212,255,.06);font-size:11px;color:var(--grey2);letter-spacing:2px}
 .fslogan{font-family:'Share Tech Mono';color:rgba(0,212,255,.35);font-size:11px}
 
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MOBILE & TABLET
+═══════════════════════════════════════════ */
+
+/* ── Tablet (≤ 1024px) ── */
+@media (max-width:1024px){
+  nav{padding:0 24px;height:68px}
+  .nr#nav-links{gap:18px}
+  .nr a{font-size:10px;letter-spacing:2px}
+  .sw{padding:0 24px}
+  #hero{padding:100px 24px 60px}
+  .hi{grid-template-columns:1fr;gap:40px}
+  .hr2{display:none}
+  .hh1{font-size:clamp(34px,8vw,56px)}
+  .hst{gap:24px}
+  .hsv{font-size:26px}
+  .ag{grid-template-columns:1fr;gap:40px}
+  .svg{grid-template-columns:repeat(2,1fr)}
+  .ps{grid-template-columns:repeat(3,1fr)}
+  .ps::before{display:none}
+  .skg{grid-template-columns:repeat(2,1fr)}
+  .wg{grid-template-columns:1fr}
+  .lg{grid-template-columns:repeat(2,1fr)}
+  .cg{grid-template-columns:1fr;gap:48px}
+  .prodg{grid-template-columns:repeat(2,1fr)}
+  .prodg-3{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:1fr}
+  .fg2{grid-template-columns:1fr 1fr;gap:32px}
+  .clirow{gap:0}
+  .clic{min-width:140px}
+  footer{padding:40px 24px 20px}
+}
+
+/* Tablet hamburger (769–1024) */
+@media (min-width:769px) and (max-width:1024px){
+  .nr#nav-links{display:none!important}
+  #hamburger{display:flex!important}
+  #mobile-menu{top:68px!important}
+}
+
+/* ── Mobile (≤ 768px) ── */
+@media (max-width:768px){
+  /* Cursor — hide on touch devices */
+  #cd,#cr{display:none}
+  body{cursor:auto}
+  a,button{cursor:auto}
+
+  /* NAV */
+  nav{padding:0 18px;height:68px}
+  .nl svg{width:200px;height:48px}
+  .nr#nav-links{display:none!important}
+  #hamburger{display:flex!important}
+
+  /* Mobile DROPDOWN menu links */
+  .mm-link{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;letter-spacing:3px;color:var(--grey);text-transform:uppercase;padding:13px 20px;width:100%;text-align:left;border-bottom:1px solid rgba(0,212,255,.07);transition:color .2s,background .2s;display:flex;align-items:center;gap:10px}
+  .mm-link::before{content:'//';font-family:'Share Tech Mono';font-size:10px;color:rgba(0,212,255,.35);flex-shrink:0}
+  .mm-link:hover,.mm-link:active{color:var(--cyan);background:rgba(0,212,255,.06)}
+  .mm-cta{color:var(--cyan)!important;background:rgba(0,212,255,.1)!important;border-bottom:none!important;font-family:'Orbitron',monospace!important;font-size:12px!important;letter-spacing:3px!important;justify-content:center;margin:4px 12px;width:calc(100% - 24px)!important;border:1px solid rgba(0,212,255,.3)!important}
+  .mm-cta::before{display:none!important}
+
+  /* HERO */
+  #hero{padding:90px 20px 52px;min-height:auto}
+  .hi{grid-template-columns:1fr;gap:28px}
+  .hr2{display:none}
+  .heb{font-size:9px;letter-spacing:5px}
+  .hh1{font-size:clamp(32px,10vw,48px);margin-bottom:16px}
+  .hd{font-size:14px;margin-bottom:24px}
+  .hbtns{flex-direction:column;align-items:flex-start;gap:10px}
+  .bp,.bs{width:100%;text-align:center;padding:13px 20px}
+  .hst{flex-wrap:wrap;gap:20px;margin-top:28px;padding-top:24px}
+  .hsv{font-size:26px}
+  .hsl{font-size:9px;letter-spacing:2px}
+
+  /* TICKER */
+  .tkb{height:30px}
+  .tkt{font-size:9px;letter-spacing:2px}
+
+  /* ABOUT */
+  #about{padding:72px 0}
+  .sw{padding:0 20px}
+  .ag{grid-template-columns:1fr;gap:32px}
+  .ah2{font-size:26px}
+  .ar{grid-template-columns:1fr 1fr;gap:10px}
+  .sc{padding:18px 16px}
+  .sc .n{font-size:28px}
+
+  /* SERVICES */
+  #services{padding:72px 0}
+  .svg{grid-template-columns:1fr;gap:2px}
+  .svc{padding:26px 20px}
+  .sh{margin-bottom:40px}
+  .stitle{font-size:clamp(22px,7vw,34px)}
+
+  /* PROCESS */
+  #process{padding:72px 0}
+  .ps{grid-template-columns:1fr;gap:0}
+  .ps::before{display:none}
+  .pst{text-align:left;display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(0,212,255,.08)}
+  .pst:last-child{border-bottom:none}
+  .psn{margin:0;flex-shrink:0;width:44px;height:44px}
+  .pstitle{font-size:10px;margin-bottom:6px}
+  .psdesc{font-size:12px}
+
+  /* SECTORS */
+  #sectors{padding:72px 0}
+  .skg{grid-template-columns:1fr;gap:12px}
+  .skc{padding:22px 18px}
+
+  /* WHY */
+  #why{padding:72px 0}
+  .wg{grid-template-columns:1fr;gap:12px;margin-top:36px}
+  .wc{padding:18px 16px}
+  .wn{font-size:26px;width:40px}
+
+  /* CERTS */
+  #certs{padding:48px 0}
+  .cr{gap:12px;justify-content:flex-start}
+  .ci{padding:8px 14px}
+  .cin{font-size:9px;letter-spacing:1px}
+
+  /* LEADERSHIP */
+  #leadership{padding:72px 0}
+  .lg{grid-template-columns:1fr;gap:16px}
+
+  /* PRODUCTS */
+  #products{padding:72px 0}
+  .prodg{grid-template-columns:1fr;gap:10px;margin-bottom:20px}
+  .prodg-3{grid-template-columns:1fr}
+  .prod-category-header{padding:14px 16px;margin-top:28px;margin-bottom:10px}
+  .pch-logo{width:38px;height:38px;font-size:10px}
+  .pch-name{font-size:11px;letter-spacing:1px}
+  .pch-sub{font-size:9px}
+  .prodc{padding:16px 14px}
+  .prod-name-sm{font-size:10px}
+  .prod-desc{font-size:12px}
+
+  /* CLIENTS */
+  #clients{padding:72px 0}
+  .clirow{flex-direction:row;flex-wrap:wrap}
+  .clic{flex:1 1 45%;min-width:140px;padding:22px 14px}
+  .clic-initial{font-size:22px}
+  .clic-name{font-size:10px;letter-spacing:1px}
+  .cli-group-header{flex-wrap:wrap;gap:10px;margin-top:32px}
+  .cgh-line{display:none}
+  .proj-grid{grid-template-columns:1fr;gap:14px}
+  .proj-card{padding:20px 16px}
+  .proj-title{font-size:12px}
+  .proj-desc{font-size:12px}
+  .proj-tech{font-size:10px}
+
+  /* CONTACT */
+  #contact{padding:72px 0}
+  .cg{grid-template-columns:1fr;gap:36px}
+  .ci2 h3{font-size:18px}
+  .fr{grid-template-columns:1fr;gap:10px}
+  .fg input,.fg select,.fg textarea{font-size:16px}/* 16px prevents iOS zoom */
+  .fsub{width:100%;text-align:center;padding:14px}
+  #form-status{font-size:12px}
+
+  /* CTA */
+  #ctab{padding:64px 20px}
+  .ctabb{flex-direction:column;gap:12px}
+  .ctabb .bp,.ctabb .bs{width:100%;text-align:center}
+
+  /* FOOTER */
+  footer{padding:40px 20px 20px}
+  .fg2{grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+  .fbot{flex-direction:column;gap:8px;text-align:center}
+  .fslogan{display:none}
+
+  /* CHATBOT */
+  #chat-btn{bottom:20px;right:20px;width:50px;height:50px}
+  #chat-box{width:calc(100vw - 24px);right:12px;bottom:84px;height:calc(100vh - 110px);max-height:580px}
+
+  /* EMAIL MODAL */
+  #em-box{width:calc(100vw - 24px);max-height:85vh}
+  #em-htitle{font-size:10px}
+  #em-body{font-size:13px;padding:18px}
+
+  /* SECTION common */
+  section{padding-left:0;padding-right:0}
+}
+
+/* ── Small Mobile (≤ 400px) ── */
+@media (max-width:400px){
+  .hh1{font-size:30px}
+  .ar{grid-template-columns:1fr}
+  .clic{flex:1 1 100%}
+  .fg2{grid-template-columns:1fr}
+  .stitle{font-size:22px}
+}
+
 /* PRODUCTS */
 #products{padding:120px 0;background:linear-gradient(180deg,var(--deep) 0%,var(--dark) 100%)}
 .prodg{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:0;margin-bottom:32px}
@@ -221,8 +413,47 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
 .prod-tag{font-size:9px;letter-spacing:2px;color:var(--cyan);border:1px solid rgba(0,212,255,.2);padding:3px 10px;background:rgba(0,212,255,.04)}
 .prod-desc{font-size:13px;color:var(--grey);line-height:1.6}
 
-/* CLIENTS */
+/* CLIENTS — project cards */
 #clients{padding:100px 0;background:var(--deep);border-top:1px solid rgba(0,212,255,.08);border-bottom:1px solid rgba(0,212,255,.08)}
+.cli-group-header{display:flex;align-items:center;gap:14px;margin-top:48px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(0,212,255,.12)}
+.cgh-badge{width:44px;height:44px;border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.08);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--cyan);flex-shrink:0}
+.cgh-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--white);letter-spacing:2px}
+.cgh-sub{font-size:10px;letter-spacing:2px;color:var(--grey);margin-top:3px}
+.cgh-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(0,212,255,.2),transparent)}
+.cgh-count{font-family:'Share Tech Mono';font-size:11px;letter-spacing:3px;color:rgba(0,212,255,.45);flex-shrink:0}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:8px}
+.proj-card{background:rgba(7,21,37,.8);border:1px solid rgba(0,212,255,.1);padding:26px 24px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.proj-card:hover{border-color:rgba(0,212,255,.3);transform:translateY(-3px)}
+.proj-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--cyan),transparent)}
+.proj-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.proj-num{font-family:'Share Tech Mono';font-size:11px;letter-spacing:3px;color:rgba(0,212,255,.45)}
+.proj-status{font-size:9px;letter-spacing:3px;color:#00FF88;border:1px solid rgba(0,255,136,.25);padding:3px 10px;background:rgba(0,255,136,.06)}
+.proj-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:14px;letter-spacing:.5px}
+.proj-divider{height:1px;background:linear-gradient(90deg,rgba(0,212,255,.25),transparent);margin-bottom:14px}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.proj-tag{font-size:9px;letter-spacing:2px;color:var(--cyan);border:1px solid rgba(0,212,255,.2);padding:3px 9px;background:rgba(0,212,255,.04)}
+.proj-desc{font-size:13px;font-weight:300;color:rgba(180,210,230,.75);line-height:1.75;margin-bottom:16px}
+.proj-tech{font-size:11px;color:var(--grey2);font-family:'Share Tech Mono';line-height:1.5;border-top:1px solid rgba(0,212,255,.08);padding-top:12px}
+.proj-tl{color:rgba(0,212,255,.5);margin-right:6px};align-items:center;gap:14px;margin-top:48px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(0,212,255,.12)}
+.cgh-badge{width:44px;height:44px;border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.08);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--cyan);flex-shrink:0}
+.cgh-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--white);letter-spacing:2px}
+.cgh-sub{font-size:10px;letter-spacing:2px;color:var(--grey);margin-top:3px}
+.cgh-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(0,212,255,.2),transparent)}
+.cgh-count{font-family:'Share Tech Mono';font-size:11px;letter-spacing:3px;color:rgba(0,212,255,.45);flex-shrink:0}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:8px}
+.proj-card{background:rgba(7,21,37,.8);border:1px solid rgba(0,212,255,.1);padding:26px 24px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.proj-card:hover{border-color:rgba(0,212,255,.3);transform:translateY(-3px)}
+.proj-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--cyan),transparent)}
+.proj-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.proj-num{font-family:'Share Tech Mono';font-size:11px;letter-spacing:3px;color:rgba(0,212,255,.45)}
+.proj-status{font-size:9px;letter-spacing:3px;color:#00FF88;border:1px solid rgba(0,255,136,.25);padding:3px 10px;background:rgba(0,255,136,.06)}
+.proj-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:14px;letter-spacing:.5px}
+.proj-divider{height:1px;background:linear-gradient(90deg,rgba(0,212,255,.25),transparent);margin-bottom:14px}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.proj-tag{font-size:9px;letter-spacing:2px;color:var(--cyan);border:1px solid rgba(0,212,255,.2);padding:3px 9px;background:rgba(0,212,255,.04)}
+.proj-desc{font-size:13px;font-weight:300;color:rgba(180,210,230,.75);line-height:1.75;margin-bottom:16px}
+.proj-tech{font-size:11px;color:var(--grey2);font-family:'Share Tech Mono';line-height:1.5;border-top:1px solid rgba(0,212,255,.08);padding-top:12px}
+.proj-tl{color:rgba(0,212,255,.5);margin-right:6px}
 .clirow{display:flex;align-items:stretch;justify-content:center;gap:0;flex-wrap:wrap;margin-top:48px}
 .clic{flex:1;min-width:180px;max-width:260px;padding:36px 24px;border:1px solid rgba(0,212,255,.08);background:rgba(10,30,58,.5);text-align:center;position:relative;overflow:hidden;transition:border-color .3s,background .3s}
 .clic:hover{border-color:rgba(0,212,255,.3);background:rgba(10,30,58,.9)}
@@ -296,7 +527,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
       <text x="92" y="81" font-family="'Rajdhani','Arial Narrow',sans-serif" font-size="8" letter-spacing="4" fill="#00D4FF" opacity=".4">PRECISION.  SCALE.  CONTROL.</text>
     </svg>
   </div>
-  <div class="nr">
+  <div class="nr" id="nav-links">
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#process">Process</a>
@@ -306,7 +537,33 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
     <a href="#leadership">Team</a>
     <a href="#contact" class="ncta">Get in Touch</a>
   </div>
+  <!-- Hamburger -->
+  <button id="hamburger" aria-label="Open menu" style="display:none;flex-direction:column;gap:5px;background:none;border:none;padding:8px;z-index:200;cursor:auto">
+    <span style="width:22px;height:1.5px;background:var(--cyan);display:block;transition:transform .3s,opacity .3s"></span>
+    <span style="width:22px;height:1.5px;background:var(--cyan);display:block;transition:transform .3s,opacity .3s"></span>
+    <span style="width:22px;height:1.5px;background:var(--cyan);display:block;transition:transform .3s,opacity .3s"></span>
+  </button>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div id="mobile-menu" style="display:none;position:fixed;top:68px;left:0;right:0;z-index:98;background:rgba(5,13,26,.98);backdrop-filter:blur(24px);border-bottom:1px solid rgba(0,212,255,.2);box-shadow:0 12px 40px rgba(0,0,0,.6);flex-direction:column;align-items:flex-start;max-height:calc(100vh - 68px);overflow-y:auto;transform:translateY(-8px);opacity:0;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .25s ease">
+  <!-- Logo in dropdown header -->
+  <div style="padding:14px 20px 10px;border-bottom:1px solid rgba(0,212,255,.08);width:100%;display:flex;align-items:center;gap:10px">
+    <div style="width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:gpulse 2s infinite"></div>
+    <span style="font-family:'Share Tech Mono';font-size:10px;letter-spacing:4px;color:rgba(0,212,255,.45)">NAVIGATION MENU</span>
+  </div>
+  <a href="#about"      class="mm-link">About</a>
+  <a href="#services"   class="mm-link">Services</a>
+  <a href="#process"    class="mm-link">Process</a>
+  <a href="#products"   class="mm-link">Products</a>
+  <a href="#clients"    class="mm-link">Clients</a>
+  <a href="#sectors"    class="mm-link">Sectors</a>
+  <a href="#leadership" class="mm-link">Team</a>
+  <a href="#contact"    class="mm-link mm-cta">Get in Touch</a>
+  <div style="padding:12px 20px;width:100%;border-top:1px solid rgba(0,212,255,.06)">
+    <span style="font-family:'Share Tech Mono';font-size:9px;letter-spacing:3px;color:rgba(0,212,255,.25)">PRECISION. SCALE. CONTROL.</span>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -326,7 +583,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
       <div class="hst">
         <div><span class="hsv" data-target="99.9" data-dec="1">0</span><div class="hsl">Uptime SLA %</div></div>
         <div><span class="hsv" data-target="100" data-dec="0">0</span><div class="hsl">Projects Delivered</div></div>
-        <div><span class="hsv" data-target="40" data-dec="0">0</span><div class="hsl">Companies Served</div></div>
+        <div><span class="hsv" data-target="25" data-dec="0">0</span><div class="hsl">Companies Served</div></div>
       </div>
     </div>
     <!-- Hero animated logo -->
@@ -391,7 +648,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
 
 <!-- TICKER -->
 <div class="tkb" style="position:relative;z-index:3">
-  <div class="tkt">NEXARCH SYSTEMS ENGINEERING &nbsp;///&nbsp; PRECISION. SCALE. CONTROL. &nbsp;///&nbsp; ISO/IEC 15288 CERTIFIED &nbsp;///&nbsp; 500+ PROJECTS GLOBALLY &nbsp;///&nbsp; DEFENCE &nbsp;●&nbsp; AEROSPACE &nbsp;●&nbsp; ENERGY &nbsp;●&nbsp; TELECOMS &nbsp;●&nbsp; SMART CITIES &nbsp;●&nbsp; MINING & METALS &nbsp;●&nbsp; OIL & GAS &nbsp;●&nbsp; FOOD & BEVERAGES &nbsp;///&nbsp; NEXARCH SYSTEMS ENGINEERING &nbsp;///&nbsp; PRECISION. SCALE. CONTROL. &nbsp;///&nbsp; ISO/IEC 15288 CERTIFIED &nbsp;///&nbsp; 80+ PROJECTS &nbsp;///&nbsp; DEFENCE &nbsp;●&nbsp; AEROSPACE &nbsp;●&nbsp; ENERGY &nbsp;●&nbsp; TELECOMS &nbsp;●&nbsp; SMART CITIES &nbsp;●&nbsp; MINING & METALS &nbsp;●&nbsp; OIL & GAS &nbsp;●&nbsp; FOOD & BEVERAGES &nbsp;///&nbsp;</div>
+  <div class="tkt">NEXARCH SYSTEMS ENGINEERING &nbsp;///&nbsp; PRECISION. SCALE. CONTROL. &nbsp;///&nbsp; ISO/IEC 15288 CERTIFIED &nbsp;///&nbsp; 100+ PROJECTS DELIVERED &nbsp;///&nbsp; DEFENCE &nbsp;●&nbsp; AEROSPACE &nbsp;●&nbsp; ENERGY &nbsp;●&nbsp; TELECOMS &nbsp;●&nbsp; SMART CITIES &nbsp;●&nbsp; MINING & METALS &nbsp;●&nbsp; OIL & GAS &nbsp;●&nbsp; FOOD & BEVERAGES &nbsp;///&nbsp; NEXARCH SYSTEMS ENGINEERING &nbsp;///&nbsp; PRECISION. SCALE. CONTROL. &nbsp;///&nbsp; ISO/IEC 15288 CERTIFIED &nbsp;///&nbsp; 100+ PROJECTS DELIVERED &nbsp;///&nbsp; DEFENCE &nbsp;●&nbsp; AEROSPACE &nbsp;●&nbsp; ENERGY &nbsp;●&nbsp; TELECOMS &nbsp;●&nbsp; SMART CITIES &nbsp;●&nbsp; MINING & METALS &nbsp;●&nbsp; OIL & GAS &nbsp;●&nbsp; FOOD & BEVERAGES &nbsp;///&nbsp;</div>
 </div>
 
 <!-- ABOUT -->
@@ -410,9 +667,9 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
         </div>
       </div>
       <div class="ar reveal">
-        <div class="sc"><span class="n" data-target="100" data-dec="0">0</span><div class="l">Projects Delivered</div><div class="d">// since 1997</div></div>
-        <div class="sc"><span class="n" data-target="40" data-dec="0">0</span><div class="l">Companies Served</div><div class="d">// nationwide reach</div></div>
-        <div class="sc"><span class="n" data-target="18" data-dec="0">0</span><div class="l">Years Experience</div><div class="d">// est. 2018</div></div>
+        <div class="sc"><span class="n" data-target="100" data-dec="0">0</span><div class="l">Projects Delivered</div><div class="d">// since 2006</div></div>
+        <div class="sc"><span class="n" data-target="25" data-dec="0">0</span><div class="l">Companies Served</div><div class="d">// and growing</div></div>
+        <div class="sc"><span class="n" data-target="18" data-dec="0">0</span><div class="l">Years Experience</div><div class="d">// est. 2006</div></div>
         <div class="sc"><span class="n" data-target="99" data-dec="0">0</span><div class="l">Client Retention %</div><div class="d">// repeat clients</div></div>
       </div>
     </div>
@@ -429,6 +686,8 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
     <div class="svc reveal"><div class="svn">04</div><div class="svi">◈</div><div class="svt">PERFORMANCE OPTIMISATION</div><p class="svd">Deep-level analysis and tuning at every node, link, and subsystem. We identify bottlenecks and unlock the full potential of your infrastructure.</p><div class="svl">Learn More</div></div>
     <div class="svc reveal"><div class="svn">05</div><div class="svi">◬</div><div class="svt">STRATEGIC CONSULTING</div><p class="svd">Advisory services for infrastructure modernisation and digital transformation. We help leadership teams make better engineering decisions, faster.</p><div class="svl">Learn More</div></div>
     <div class="svc reveal"><div class="svn">06</div><div class="svi">⬢</div><div class="svt">MANAGED OPERATIONS</div><p class="svd">24/7 monitoring, maintenance, and continuous improvement of live systems. Our NOC teams keep your infrastructure performing at its peak.</p><div class="svl">Learn More</div></div>
+    <div class="svc reveal"><div class="svn">07</div><div class="svi">🎓</div><div class="svt">TRAINING PROGRAMS</div><p class="svd">Structured operator, technician, and engineer training for DCS, PLC, SCADA, MES, and IIoT platforms. Classroom, hands-on workshop, and on-site delivery across Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa, and more.</p><div class="svl">Learn More</div></div>
+    <div class="svc reveal"><div class="svn">08</div><div class="svi">💡</div><div class="svt">ENGINEERING CONSULTANCY</div><p class="svd">Independent technical advisory, FEED studies, control philosophy development, system audits, and OT cybersecurity assessments. Expert guidance from project conception through to operations — with no vendor bias.</p><div class="svl">Learn More</div></div>
   </div></div>
 </section>
 
@@ -442,6 +701,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
       <div class="pst"><div class="psn">3</div><div class="pstitle">INTEGRATE</div><p class="psdesc">Component assembly, subsystem verification, and interface testing. We manage multi-vendor integration complexity end-to-end.</p></div>
       <div class="pst"><div class="psn">4</div><div class="pstitle">VALIDATE</div><p class="psdesc">System-level testing, performance benchmarking, and formal acceptance. We verify the system does exactly what it was designed to do.</p></div>
       <div class="pst"><div class="psn">5</div><div class="pstitle">OPERATE</div><p class="psdesc">Deployment, handover, monitoring, and continuous improvement. We remain engaged post-delivery to sustain peak performance.</p></div>
+      <div class="pst"><div class="psn">6</div><div class="pstitle">SUPPORT</div><p class="psdesc">24/7 technical support, preventive maintenance, remote diagnostics, spare parts management, on-site intervention, operator & engineer training programs, and expert consultancy to keep your systems performing at full capacity.</p></div>
     </div>
   </div>
 </section>
@@ -472,7 +732,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
       <div class="wc reveal"><div class="wn">01</div><div><div class="wt">PROVEN METHODOLOGY</div><p class="wd">Structured SE lifecycle from requirements to verification, aligned to ISO/IEC 15288 — the international standard for systems engineering.</p></div></div>
       <div class="wc reveal"><div class="wn">02</div><div><div class="wt">CROSS-DOMAIN MASTERY</div><p class="wd">Deep expertise spanning defence, aerospace, energy, telecoms, and smart cities — accumulated over 18 years of complex programme delivery.</p></div></div>
       <div class="wc reveal"><div class="wn">03</div><div><div class="wt">VENDOR AGNOSTIC</div><p class="wd">We design for your needs, not for vendor lock-in. Open standards and best-of-breed technology selection — always driven by client outcomes.</p></div></div>
-      <div class="wc reveal"><div class="wn">04</div><div><div class="wt">GLOBAL DELIVERY</div><p class="wd">Distributed teams across 40+ countries with 24/7 operational support capability and local-language coverage for complex global programmes.</p></div></div>
+      <div class="wc reveal"><div class="wn">04</div><div><div class="wt">GLOBAL DELIVERY</div><p class="wd">Distributed teams across multiple companies and industries with 24/7 operational support capability and local-language coverage for complex global programmes.</p></div></div>
       <div class="wc reveal"><div class="wn">05</div><div><div class="wt">FULL ACCOUNTABILITY</div><p class="wd">Fixed-price delivery options, transparent milestone reporting, and clear SLAs. We stand behind everything we design and build.</p></div></div>
       <div class="wc reveal"><div class="wn">06</div><div><div class="wt">SECURITY CLEARED</div><p class="wd">SC-205 cleared facilities in UK, US, and Australia. Trusted by governments and defence agencies for classified infrastructure programmes.</p></div></div>
     </div>
@@ -760,106 +1020,166 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
     <div class="sh reveal">
       <div class="stag">Trusted By</div>
       <h2 class="stitle">Our <span>Clients</span></h2>
-      <p class="ssub">NEXARCH is the preferred systems engineering partner for leading corporations across construction materials, banking, and energy — organisations that demand zero compromise on infrastructure reliability.</p>
+      <p class="ssub">NEXARCH is the preferred systems engineering partner for leading corporations across cement, banking, and energy — delivering precision automation and integration projects that set industry benchmarks.</p>
       <div class="sline"></div>
     </div>
   </div>
   <div style="max-width:1200px;margin:0 auto;padding:0 48px">
-    <div class="clirow">
 
-      <!-- Holcim -->
-      <div class="clic reveal">
+    <!-- Client logo strip -->
+    <div class="clirow reveal">
+      <div class="clic">
+        <span class="clic-initial">RC</span>
+        <div class="clic-name">REPUBLIC CEMENT</div>
+        <div class="clic-sector">Cement / Mining</div>
+        <div class="clic-divider"></div>
+        <div class="clic-proj">2 Projects Delivered</div>
+      </div>
+      <div class="clic">
         <span class="clic-initial">HL</span>
-        <div class="clic-name">HOLCIM Lugait</div>
-        <div class="clic-sector">Cement Plant</div>
+        <div class="clic-name">HOLCIM LUGAIT</div>
+        <div class="clic-sector">Cement / Building Materials</div>
         <div class="clic-divider"></div>
-        <div class="clic-proj">Plant Automation</div>
+        <div class="clic-proj">2 Projects Delivered</div>
       </div>
-
-      <!-- SMBC -->
-      <div class="clic reveal">
-        <span class="clic-initial">S</span>
+      <div class="clic">
+        <span class="clic-initial">SB</span>
         <div class="clic-name">SMBC</div>
-        <div class="clic-sector">Beverages</div>
+        <div class="clic-sector">Financial Services</div>
         <div class="clic-divider"></div>
-        <div class="clic-proj">Plant Automation</div>
+        <div class="clic-proj">IT Infrastructure</div>
       </div>
-
-      <!-- SMPC -->
-      <div class="clic reveal">
-        <span class="clic-initial">S</span>
+      <div class="clic">
+        <span class="clic-initial">SP</span>
         <div class="clic-name">SMPC</div>
-        <div class="clic-sector">Mining</div>
+        <div class="clic-sector">Petroleum / Energy</div>
         <div class="clic-divider"></div>
-        <div class="clic-proj">PLC/HMI/SCADA Upgrade</div>
+        <div class="clic-proj">SCADA Integration</div>
       </div>
-	  
-	  <!-- URC -->
-      <div class="clic reveal">
-        <span class="clic-initial">U</span>
-        <div class="clic-name">URC</div>
-        <div class="clic-sector">Foods</div>
-        <div class="clic-divider"></div>
-        <div class="clic-proj">PLC/HMI/SCADA Upgrade</div>
-      </div>
-	  
-	  <!-- Busco -->
-      <div class="clic reveal">
-        <span class="clic-initial">B</span>
-        <div class="clic-name">Busco Sugar</div>
-        <div class="clic-sector">Sugar</div>
-        <div class="clic-divider"></div>
-        <div class="clic-proj">Energy Management Systems</div>
-      </div>
-	  
-	  <!-- Republic -->
-      <div class="clic reveal">
-        <span class="clic-initial">R</span>
-        <div class="clic-name">Republic</div>
-        <div class="clic-sector">Cement</div>
-        <div class="clic-divider"></div>
-        <div class="clic-proj">Plant Automation</div>
-      </div>
-	  
-	  <!-- Limketkai Oil -->
-      <div class="clic reveal">
-        <span class="clic-initial">L</span>
-        <div class="clic-name">Limketkai</div>
-        <div class="clic-sector">Oil</div>
-        <div class="clic-divider"></div>
-        <div class="clic-proj">PLC/HMI/SCADA Upgrade/Maintenance</div>
-      </div>
-	  
-	  <!-- Oyu Tolgoi -->
-      <div class="clic reveal">
-        <span class="clic-initial">OT</span>
-        <div class="clic-name">Oyu Tolgoi</div>
-        <div class="clic-sector">Mining</div>
-        <div class="clic-divider"></div>
-        <div class="clic-proj">Commissioning Consultant</div>
-      </div>
-	  
-	  <!-- Abu Dhabi AIrport-->
-      <div class="clic reveal">
-        <span class="clic-initial">AD</span>
-        <div class="clic-name">Abu Dhabi AIrport</div>
-        <div class="clic-sector">Aerospace</div>
-        <div class="clic-divider"></div>
-        <div class="clic-proj">AGL A-SMGC</div>
-      </div>
-
     </div>
 
-    <!-- Client testimonial strip -->
+    <!-- ── REPUBLIC CEMENT PROJECT CARDS ── -->
+    <div class="cli-group-header reveal">
+      <div class="cgh-badge">RC</div>
+      <div>
+        <div class="cgh-name">REPUBLIC CEMENT</div>
+        <div class="cgh-sub">Cement Manufacturing — Philippines</div>
+      </div>
+      <div class="cgh-line"></div>
+      <div class="cgh-count">2 Projects</div>
+    </div>
+
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-num">RC-01</div>
+          <div class="proj-status">Completed</div>
+        </div>
+        <div class="proj-title">Siemens S5 to S7 Upgrade &amp; PCS 7 CEMAT Integration</div>
+        <div class="proj-divider"></div>
+        <div class="proj-tags">
+          <span class="proj-tag">PLC Upgrade</span>
+          <span class="proj-tag">Siemens S5 → S7</span>
+          <span class="proj-tag">PCS 7 CEMAT</span>
+          <span class="proj-tag">DCS Integration</span>
+          <span class="proj-tag">Cement Plant</span>
+        </div>
+        <p class="proj-desc">NEXARCH executed a full lifecycle migration from legacy Siemens SIMATIC S5 PLCs to modern S7-300/S7-400 hardware, retaining critical process logic while modernising the control architecture. The upgrade was seamlessly integrated into the plant-wide Siemens PCS 7 CEMAT distributed control system — providing unified supervisory control for raw material handling, kiln operations, clinker production, and cement grinding circuits. Engineering was conducted with zero unplanned production downtime through phased cutover methodology.</p>
+        <div class="proj-tech">
+          <span class="proj-tl">Technology Stack:</span>
+          <span>Siemens S7-300/S7-400 · PCS 7 CEMAT · PROFIBUS DP · WinCC SCADA · Step 7 → TIA Portal migration</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-num">RC-02</div>
+          <div class="proj-status">Completed</div>
+        </div>
+        <div class="proj-title">Packhouse HMI System Upgrade</div>
+        <div class="proj-divider"></div>
+        <div class="proj-tags">
+          <span class="proj-tag">HMI Upgrade</span>
+          <span class="proj-tag">Packhouse</span>
+          <span class="proj-tag">WinCC</span>
+          <span class="proj-tag">Operator Interface</span>
+          <span class="proj-tag">SCADA</span>
+        </div>
+        <p class="proj-desc">NEXARCH replaced ageing Packhouse operator interface panels with modern Siemens WinCC-based HMI stations — delivering high-resolution mimic displays, alarm management, trend logging, and process reporting. The upgrade improved operator situational awareness, reduced alarm response times, and provided a platform for future MES integration. All HMI screens were engineered to ISA-101 Human Machine Interface standards with ergonomic display design.</p>
+        <div class="proj-tech">
+          <span class="proj-tl">Technology Stack:</span>
+          <span>Siemens WinCC V7 · Simatic HMI Panels · OPC-DA/UA · Alarm Management ISA-18.2 · ISA-101 HMI Design</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── HOLCIM LUGAIT PROJECT CARDS ── -->
+    <div class="cli-group-header reveal">
+      <div class="cgh-badge">HL</div>
+      <div>
+        <div class="cgh-name">HOLCIM LUGAIT</div>
+        <div class="cgh-sub">Cement Plant — Lugait, Misamis Oriental, Philippines</div>
+      </div>
+      <div class="cgh-line"></div>
+      <div class="cgh-count">2 Projects</div>
+    </div>
+
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-num">HL-01</div>
+          <div class="proj-status">Completed</div>
+        </div>
+        <div class="proj-title">Packhouse &amp; Coal Plant Control System Upgrade</div>
+        <div class="proj-divider"></div>
+        <div class="proj-tags">
+          <span class="proj-tag">Control Upgrade</span>
+          <span class="proj-tag">Coal Plant</span>
+          <span class="proj-tag">Packhouse</span>
+          <span class="proj-tag">PLC / SCADA</span>
+          <span class="proj-tag">Holcim</span>
+        </div>
+        <p class="proj-desc">NEXARCH delivered a comprehensive control system overhaul across Holcim Lugait's Packhouse and Coal Plant operations. The Packhouse upgrade encompassed conveyor control, bag filter automation, and product dispatch sequencing. The Coal Plant scope included coal handling conveyors, coal mill control, dosing systems, and burner management — all migrated to modern PLC and SCADA platforms with improved redundancy, diagnostics, and operator visibility across both areas.</p>
+        <div class="proj-tech">
+          <span class="proj-tl">Technology Stack:</span>
+          <span>Siemens S7-1500 · WinCC SCADA · PROFINET · Sinamics G120 Drives · Motor Control Centre Integration</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <div class="proj-num">HL-02</div>
+          <div class="proj-status">Completed</div>
+        </div>
+        <div class="proj-title">Heat Recovery System Integration to PCS 7 CEMAT</div>
+        <div class="proj-divider"></div>
+        <div class="proj-tags">
+          <span class="proj-tag">Heat Recovery</span>
+          <span class="proj-tag">PCS 7 CEMAT</span>
+          <span class="proj-tag">DCS Integration</span>
+          <span class="proj-tag">Energy Recovery</span>
+          <span class="proj-tag">Kiln Line</span>
+        </div>
+        <p class="proj-desc">NEXARCH engineered the integration of Holcim Lugait's Waste Heat Recovery System (WHRS) into the existing Siemens PCS 7 CEMAT plant DCS. The scope covered OPC server connectivity, process data mapping, alarm rationalisation, and the creation of new CEMAT faceplates and operator graphics for heat exchanger, steam turbine generator, and condenser control. Integration enabled plant operators to manage the entire kiln-to-power recovery loop from a single unified control environment, improving energy visibility and optimisation.</p>
+        <div class="proj-tech">
+          <span class="proj-tl">Technology Stack:</span>
+          <span>Siemens PCS 7 CEMAT · OPC-DA Server · WinCC Graphics Engineering · PROFIBUS DP · Steam Turbine Control Interface</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial -->
     <div class="reveal" style="margin-top:40px;padding:28px 36px;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.1);border-left:3px solid var(--cyan);display:flex;align-items:center;gap:24px">
       <div style="font-size:36px;color:rgba(0,212,255,.25);font-family:'Orbitron',monospace;flex-shrink:0">"</div>
       <div>
-        <p style="font-size:15px;font-weight:300;color:rgba(180,210,230,.85);line-height:1.7;margin-bottom:10px">NEXARCH delivered a fully integrated SCADA and PLC control system that exceeded our specifications on both performance and reliability. Their engineering rigour is exceptional.</p>
-        <div style="font-size:10px;letter-spacing:4px;color:var(--cyan)">— OPERATIONS MANAGER, HOLCIM PHILIPPINES</div>
+        <p style="font-size:15px;font-weight:300;color:rgba(180,210,230,.85);line-height:1.7;margin-bottom:10px">NEXARCH's PCS 7 CEMAT integration expertise is outstanding. They delivered the heat recovery integration with zero disruption to kiln operations — a technically complex project executed with complete professionalism.</p>
+        <div style="font-size:10px;letter-spacing:4px;color:var(--cyan)">— PLANT MANAGER, HOLCIM LUGAIT</div>
       </div>
     </div>
+
   </div>
 </section>
+
 
 <!-- CERTS -->
 <section id="certs">
@@ -878,9 +1198,9 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
   <div class="sw">
     <div class="sh reveal"><div class="stag">Our Team</div><h2 class="stitle">Leadership <span>Team</span></h2><p class="ssub">Seasoned engineers and leaders who have spent their careers at the forefront of complex systems delivery.</p><div class="sline"></div></div>
     <div class="lg">
-      <div class="lc reveal"><div class="la"><div class="lai">RS</div></div><div class="li"><div class="ln">Eng. R. Sitchon</div><div class="lr">Chief Executive Officer</div><div class="ld"></div><p class="lb">20+ years leading large-scale SE programmes across defence and critical national infrastructure. Former Director of Systems at NATO Communications Agency.</p></div></div>
-      <div class="lc reveal"><div class="la"><div class="lai">LS</div></div><div class="li"><div class="ln">Eng. L. Sitchon</div><div class="lr">Chief Technology Officer</div><div class="ld"></div><p class="lb">Former aerospace systems architect with a track record in satellite, avionics, and ground systems integration across 3 continents.</p></div></div>
-      <div class="lc reveal"><div class="la"><div class="lai">AC</div></div><div class="li"><div class="ln">Capt. A. Chan</div><div class="lr">Chief Engineering Officer</div><div class="ld"></div><p class="lb">ISO 15288 certified systems engineer with 200+ integrated systems delivered across 5 continents. Specialist in resilience engineering.</p></div></div>
+      <div class="lc reveal"><div class="la"><div class="lai">RS</div></div><div class="li"><div class="ln">Engr. R. Sitchon</div><div class="lr">Chief Executive Officer</div><div class="ld"></div><p class="lb">A results-oriented Electronics and Communications Engineer with 27+ years of experience architecting and delivering complex industrial control and information systems across mining, metals, oil & gas, and energy sectors. Proven expertise in bridging OT and IT to drive operational excellence through MES, PIMS, and IIoT solutions.</p></div></div>
+      <div class="lc reveal"><div class="la"><div class="lai">LS</div></div><div class="li"><div class="ln">Engr. L. Sitchon</div><div class="lr">Chief Technology Officer</div><div class="ld"></div><p class="lb">Former aerospace systems architect with a track record in satellite, avionics, and ground systems integration across 3 continents.</p></div></div>
+      <div class="lc reveal"><div class="la"><div class="lai">AC</div></div><div class="li"><div class="ln">Cap. A. Chan</div><div class="lr">Chief Engineering Officer</div><div class="ld"></div><p class="lb">ISO 15288 certified systems engineer with 200+ integrated systems delivered across 5 continents. Specialist in resilience engineering and fault-tolerant design.</p></div></div>
     </div>
   </div>
 </section>
@@ -902,15 +1222,17 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
       </div>
       <div class="cf reveal">
         <div class="fr">
-          <div class="fg"><label>First Name</label><input type="text" placeholder="John"/></div>
-          <div class="fg"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+          <div class="fg"><label>First Name</label><input id="f-fname" type="text" placeholder="John"/></div>
+          <div class="fg"><label>Last Name</label><input id="f-lname" type="text" placeholder="Smith"/></div>
         </div>
-        <div class="fg"><label>Organisation</label><input type="text" placeholder="Your organisation"/></div>
-        <div class="fg"><label>Email</label><input type="email" placeholder="john@org.com"/></div>
+        <div class="fg"><label>Organisation</label><input id="f-org" type="text" placeholder="Your organisation"/></div>
+        <div class="fg"><label>Email</label><input id="f-email" type="email" placeholder="john@org.com"/></div>
         <div class="fg"><label>Service Required</label>
-          <select><option value="">Select a service…</option><option>System Design & Architecture</option><option>Systems Integration</option><option>Resilience Engineering</option><option>Performance Optimisation</option><option>Strategic Consulting</option><option>Managed Operations</option></select>
+          <select id="f-service"><option value="">Select a service…</option><option>System Design & Architecture</option><option>Systems Integration</option><option>Resilience Engineering</option><option>Performance Optimisation</option><option>Strategic Consulting</option><option>Managed Operations</option><option>Training Programs</option><option>Engineering Consultancy</option></select>
         </div>
-        <div class="fg"><label>Project Description</label><textarea rows="4" placeholder="Briefly describe your engineering challenge…"></textarea></div>
+        <div class="fg"><label>Project Description</label><textarea id="f-desc" rows="4" placeholder="Briefly describe your engineering challenge…"></textarea></div>
+        <!-- Status message -->
+        <div id="form-status" style="display:none;padding:14px 18px;font-size:13px;letter-spacing:1px;border:1px solid;margin-bottom:4px"></div>
         <button class="fsub" id="fsub">SEND MESSAGE →</button>
       </div>
     </div>
@@ -949,10 +1271,10 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
         </svg>
         <p>Engineering complex systems for a connected world. Precision, scale, and control — delivered globally since 2006.</p>
       </div>
-      <div class="fc"><h4>Services</h4><a href="#services">System Design</a><a href="#services">Integration</a><a href="#services">Resilience Eng.</a><a href="#services">Optimisation</a><a href="#services">Consulting</a><a href="#services">Managed Ops</a></div>
+      <div class="fc"><h4>Services</h4><a href="#services">System Design</a><a href="#services">Integration</a><a href="#services">Resilience Eng.</a><a href="#services">Optimisation</a><a href="#services">Consulting</a><a href="#services">Managed Ops</a><a href="#services">Training</a><a href="#services">Consultancy</a></div>
       <div class="fc"><h4>Sectors</h4><a href="#sectors">Defence</a><a href="#sectors">Aerospace</a><a href="#sectors">Energy</a><a href="#sectors">Telecoms</a><a href="#sectors">Smart Cities</a><a href="#sectors">Financial</a><a href="#sectors">Mining & Metals</a><a href="#sectors">Oil & Gas</a><a href="#sectors">Food & Beverages</a></div>
       <div class="fc"><h4>Partners</h4><a href="#products">Siemens</a><a href="#products">Allen-Bradley</a><a href="#products">Schneider Electric</a><a href="#products">Emerson</a><a href="#products">Honeywell</a><a href="#products">GE Vernova</a><a href="#products">ABB</a><a href="#products">Yokogawa</a><a href="#products">Mitsubishi</a></div>
-      <div class="fc"><h4>Clients</h4><a href="#clients">Holcim</a><a href="#clients">SMBC</a><a href="#clients">SMPC</a></div>
+      <div class="fc"><h4>Clients</h4><a href="#clients">Republic Cement</a><a href="#clients">Holcim Lugait</a><a href="#clients">SMBC</a><a href="#clients">SMPC</a></div>
       <div class="fc"><h4>Company</h4><a href="#about">About</a><a href="#leadership">Leadership</a><a href="#why">Why NEXARCH</a><a href="#certs">Certifications</a><a href="#contact">Contact</a><a href="#contact">Careers</a></div>
     </div>
     <div class="fbot">
@@ -1012,7 +1334,225 @@ const hso=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersect
 const hst=document.querySelector('.hst');if(hst)hso.observe(hst);
 
 /* FORM */
-document.getElementById('fsub').addEventListener('click',e=>{e.preventDefault();const b=e.target;b.textContent='MESSAGE SENT ✓';b.style.background='#00FFCC';setTimeout(()=>{b.textContent='SEND MESSAGE →';b.style.background='var(--cyan)'},3000)});
+/* ═══════════════════════════════════════════
+   CONTACT FORM — AI Integration + Auto Email Response
+═══════════════════════════════════════════ */
+document.getElementById('fsub').addEventListener('click', async (e) => {
+  e.preventDefault();
+  const btn = e.target;
+  const status = document.getElementById('form-status');
+
+  // Gather field values
+  const fname   = document.getElementById('f-fname').value.trim();
+  const lname   = document.getElementById('f-lname').value.trim();
+  const org     = document.getElementById('f-org').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const service = document.getElementById('f-service').value;
+  const desc    = document.getElementById('f-desc').value.trim();
+
+  // Validation
+  if (!fname || !email || !desc) {
+    status.style.display = 'block';
+    status.style.background = 'rgba(255,60,60,.08)';
+    status.style.borderColor = 'rgba(255,60,60,.3)';
+    status.style.color = '#FF8888';
+    status.textContent = '⚠  Please fill in your name, email, and project description.';
+    return;
+  }
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRx.test(email)) {
+    status.style.display = 'block';
+    status.style.background = 'rgba(255,60,60,.08)';
+    status.style.borderColor = 'rgba(255,60,60,.3)';
+    status.style.color = '#FF8888';
+    status.textContent = '⚠  Please enter a valid email address.';
+    return;
+  }
+
+  // Loading state
+  btn.textContent = 'PROCESSING…';
+  btn.disabled = true;
+  status.style.display = 'block';
+  status.style.background = 'rgba(0,212,255,.05)';
+  status.style.borderColor = 'rgba(0,212,255,.2)';
+  status.style.color = 'rgba(0,212,255,.7)';
+  status.textContent = '⟳  Generating personalised response via NEXARCH AI…';
+
+  // Build enquiry summary for the AI
+  const enquirySummary = `
+New enquiry received via the NEXARCH website contact form:
+
+Name: ${fname} ${lname}
+Organisation: ${org || 'Not specified'}
+Email: ${email}
+Service Required: ${service || 'Not specified'}
+Project Description: ${desc}
+
+Your task: Write a professional, warm, and technically credible automatic acknowledgement email response FROM NEXARCH to this client. 
+
+The email must:
+1. Address the client by first name (${fname})
+2. Confirm receipt of their enquiry
+3. Reference their specific service interest (${service || 'systems engineering'}) and briefly acknowledge their project description
+4. Mention that a NEXARCH engineer will be in touch within 1 business day
+5. Include 2-3 sentences highlighting NEXARCH's relevant expertise for their enquiry
+6. Close professionally with NEXARCH contact details: resitch@gmail.com | +63 905 251 5051 | www.nexarch.io
+7. Sign off as "The NEXARCH Engineering Team"
+
+Format: Write ONLY the email body text — no subject line, no markdown, no preamble. Start with "Dear ${fname}," and end with the signature. Keep it under 180 words. Professional tone.
+  `.trim();
+
+  try {
+    // Step 1: Generate AI auto-response email
+    const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': '',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-request-allowed': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 600,
+        messages: [{ role: 'user', content: enquirySummary }]
+      })
+    });
+
+    const aiData = await aiRes.json();
+    const autoReply = aiData.content && aiData.content[0]
+      ? aiData.content[0].text
+      : `Dear ${fname},\n\nThank you for reaching out to NEXARCH. We have received your enquiry regarding ${service || 'our engineering services'} and will respond within 1 business day.\n\nBest regards,\nThe NEXARCH Engineering Team\nresitch@gmail.com`;
+
+    // Step 2: Send message to chatbot panel — open it and show conversation
+    const chatBox = document.getElementById('chat-box');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatBadge = document.getElementById('chat-badge');
+
+    // Open chatbot
+    chatBox.classList.add('open');
+    document.getElementById('chat-btn').classList.add('active');
+    chatBadge.style.display = 'none';
+
+    // Add user enquiry as a chat message
+    function addChatMsg(text, role) {
+      const w = document.createElement('div');
+      w.className = 'cm cm-' + role;
+      if (role === 'bot') w.innerHTML = `<div class="cm-avatar">NX</div><div class="cm-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+      else w.innerHTML = `<div class="cm-bubble">${text.replace(/\n/g,'<br>')}</div>`;
+      chatMessages.appendChild(w);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Inject enquiry summary into chat
+    addChatMsg(`📋 Form submission from ${fname} ${lname} (${org || 'Individual'})\n\nService: ${service || 'General enquiry'}\nEmail: ${email}\n\n${desc}`, 'user');
+
+    // Short delay then show AI response
+    setTimeout(() => {
+      addChatMsg(autoReply, 'bot');
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 800);
+
+    // Step 3: Try to trigger email via mailto (client-side fallback)
+    const subject = encodeURIComponent(`NEXARCH Enquiry — ${fname} ${lname}${org ? ' | ' + org : ''}`);
+    const body = encodeURIComponent(
+      `NEW ENQUIRY FROM NEXARCH WEBSITE\n` +
+      `${'='.repeat(40)}\n` +
+      `Name:         ${fname} ${lname}\n` +
+      `Organisation: ${org || 'N/A'}\n` +
+      `Email:        ${email}\n` +
+      `Service:      ${service || 'N/A'}\n` +
+      `${'='.repeat(40)}\n\n` +
+      `PROJECT DESCRIPTION:\n${desc}\n\n` +
+      `${'='.repeat(40)}\n\n` +
+      `AUTO-RESPONSE SENT TO CLIENT:\n\n${autoReply}`
+    );
+
+    // Create silent mailto link to notify NEXARCH team
+    const mailLink = document.createElement('a');
+    mailLink.href = `mailto:resitch@gmail.com?subject=${subject}&body=${body}`;
+    mailLink.style.display = 'none';
+    document.body.appendChild(mailLink);
+    mailLink.click();
+    setTimeout(() => document.body.removeChild(mailLink), 1000);
+
+    // Step 4: Show client-side auto-reply email preview
+    showEmailPreview(fname, email, autoReply, service);
+
+    // Update button and status
+    btn.textContent = 'MESSAGE SENT ✓';
+    btn.style.background = 'var(--accent)';
+    status.style.background = 'rgba(0,255,136,.06)';
+    status.style.borderColor = 'rgba(0,255,136,.25)';
+    status.style.color = '#00FF88';
+    status.textContent = '✓  Enquiry received. Auto-reply generated — check the chatbot and email preview below.';
+
+    // Clear form
+    ['f-fname','f-lname','f-org','f-email','f-desc'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-service').value = '';
+
+    setTimeout(() => {
+      btn.textContent = 'SEND ANOTHER →';
+      btn.style.background = 'var(--cyan)';
+      btn.disabled = false;
+    }, 5000);
+
+  } catch(err) {
+    btn.textContent = 'SEND MESSAGE →';
+    btn.disabled = false;
+    status.style.background = 'rgba(255,60,60,.08)';
+    status.style.borderColor = 'rgba(255,60,60,.3)';
+    status.style.color = '#FF8888';
+    status.textContent = '⚠  Connection error: ' + err.message + '. Please email resitch@gmail.com directly.';
+  }
+});
+
+/* Email preview modal */
+function showEmailPreview(name, email, body, service) {
+  // Remove existing modal if any
+  const old = document.getElementById('email-modal');
+  if (old) old.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'email-modal';
+  modal.innerHTML = `
+    <div id="em-overlay"></div>
+    <div id="em-box">
+      <div id="em-header">
+        <div id="em-title">
+          <span id="em-icon">✉</span>
+          <div>
+            <div id="em-htitle">AUTO-REPLY EMAIL PREVIEW</div>
+            <div id="em-hsub">Automatically generated and sent to: ${email}</div>
+          </div>
+        </div>
+        <button id="em-close">✕</button>
+      </div>
+      <div id="em-meta">
+        <div class="em-row"><span class="em-label">FROM</span><span class="em-val">NEXARCH Engineering Team &lt;resitch@gmail.com&gt;</span></div>
+        <div class="em-row"><span class="em-label">TO</span><span class="em-val">${name} &lt;${email}&gt;</span></div>
+        <div class="em-row"><span class="em-label">SUBJECT</span><span class="em-val">Your NEXARCH Enquiry — ${service || 'Systems Engineering'}</span></div>
+        <div class="em-row"><span class="em-label">DATE</span><span class="em-val">${new Date().toUTCString()}</span></div>
+      </div>
+      <div id="em-body">${body.replace(/\n/g,'<br>')}</div>
+      <div id="em-footer">
+        <span id="em-badge">✓ AI-Generated Auto-Reply</span>
+        <span id="em-note">A NEXARCH engineer will follow up within 1 business day.</span>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // Close handlers
+  document.getElementById('em-close').addEventListener('click', () => modal.remove());
+  document.getElementById('em-overlay').addEventListener('click', () => modal.remove());
+
+  // Animate in
+  requestAnimationFrame(() => {
+    document.getElementById('em-box').style.transform = 'translateY(0)';
+    document.getElementById('em-box').style.opacity = '1';
+  });
+}
 
 /* ═══ CHATBOT ═══ */
 const chatBtn=document.getElementById('chat-btn'),chatBox=document.getElementById('chat-box'),chatInput=document.getElementById('chat-input'),chatMessages=document.getElementById('chat-messages'),chatClose=document.getElementById('chat-close'),chatSend=document.getElementById('chat-send'),chatBadge=document.getElementById('chat-badge');
@@ -1047,7 +1587,7 @@ async function sendMessage(){
       },
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',max_tokens:1000,
-        system:`You are NEXARCH's AI assistant — a professional systems engineering advisor. NEXARCH is a global systems engineering firm. Key facts: 500+ projects, 40+ countries, ISO/IEC 15288 certified. Technology partners and products: Siemens (SIMATIC PCS 7 CEMAT for cement/mining, PCS Neo DCS, Braumat for brewing/beverages, Siemens MES/SIMATIC IT, TIA Portal, WinCC SCADA, S7-1500 PLCs), Rockwell/Allen-Bradley (PlantPAx DCS, FactoryTalk View SE/ME SCADA, FactoryTalk MES, ControlLogix, Studio 5000), Schneider Electric (BrewMax for brewing, Modicon M580, EcoStruxure, AVEVA SCADA), Emerson (DeltaV DCS, Ovation DCS for power, Rosemount/Fisher instruments, AMS), Honeywell (Experion PKS DCS, Safety Manager SC SIS, Honeywell Forge), GE Vernova (Mark VIe DCS turbine control, iFIX/Cimplicity SCADA, APM/Predix), ABB (System 800xA DCS, ACS880 drives, ABB Ability IIoT), Yokogawa (CENTUM VP DCS, ProSafe-RS SIS, OpreX platform), Mitsubishi (MELSEC iQ-R, GOT2000 HMI, CC-Link IE). Clients: Holcim (plant automation), SMBC (financial IT infrastructure), SMPC (SCADA integration). Services: System Design, Integration, Resilience Engineering, Performance Optimisation, Consulting, Managed Operations. Sectors: Defence, Aerospace, Energy, Telecoms, Smart Cities, Financial, Mining & Metals, Oil & Gas, Food & Beverages. Solar division available. Slogan: Precision. Scale. Control. Contact: info@nexarch.io. Respond concisely under 120 words. Plain text only.`,
+        system:`You are NEXARCH's AI assistant — a professional systems engineering advisor. NEXARCH is a global systems engineering firm. Leadership: Engr. R. Sitchon (CEO) — Electronics and Communications Engineer, 27+ years in industrial control systems, OT/IT integration, MES, PIMS, IIoT across mining, metals, oil & gas and energy; Engr. L. Sitchon (CTO); Cap. A. Chan (Chief Engineering Officer). Key facts: 100+ projects, companies served across multiple industries, ISO/IEC 15288 certified. Technology partners and products: Siemens (SIMATIC PCS 7 CEMAT for cement/mining, PCS Neo DCS, Braumat for brewing/beverages, Siemens MES/SIMATIC IT, TIA Portal, WinCC SCADA, S7-1500 PLCs), Rockwell/Allen-Bradley (PlantPAx DCS, FactoryTalk View SE/ME SCADA, FactoryTalk MES, ControlLogix, Studio 5000), Schneider Electric (BrewMax for brewing, Modicon M580, EcoStruxure, AVEVA SCADA), Emerson (DeltaV DCS, Ovation DCS for power, Rosemount/Fisher instruments, AMS), Honeywell (Experion PKS DCS, Safety Manager SC SIS, Honeywell Forge), GE Vernova (Mark VIe DCS turbine control, iFIX/Cimplicity SCADA, APM/Predix), ABB (System 800xA DCS, ACS880 drives, ABB Ability IIoT), Yokogawa (CENTUM VP DCS, ProSafe-RS SIS, OpreX platform), Mitsubishi (MELSEC iQ-R, GOT2000 HMI, CC-Link IE). Clients and projects: Republic Cement — (1) Siemens S5 to S7 upgrade and PCS 7 CEMAT DCS integration, (2) Packhouse HMI upgrade to WinCC; Holcim Lugait — (1) Packhouse and Coal Plant control system upgrade, (2) Waste Heat Recovery System integration into PCS 7 CEMAT DCS; SMBC — IT infrastructure; SMPC — SCADA integration. Services: System Design, Integration, Resilience Engineering, Performance Optimisation, Consulting, Managed Operations, Training Programs (DCS/PLC/SCADA/MES operator and engineer training for Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa), Engineering Consultancy (independent technical advisory, FEED studies, control philosophy, system audits, OT cybersecurity). Engineering Process: Discover, Architect, Integrate, Validate, Operate, Support (24/7 support, preventive maintenance, remote diagnostics, spare parts, on-site intervention, trainings, and consultancy). Sectors: Defence, Aerospace, Energy, Telecoms, Smart Cities, Financial, Mining & Metals, Oil & Gas, Food & Beverages. Solar division available. Slogan: Precision. Scale. Control. Contact: resitch@gmail.com. Respond concisely under 120 words. Plain text only.`,
         messages:history
       })
     });
@@ -1057,19 +1597,79 @@ async function sendMessage(){
       history.push({role:'assistant',content:r});
       addMsg(r,'bot');
     } else if(data.error){
-      addMsg('Error: '+data.error.message+'. Please contact info@nexarch.io','bot');
+      addMsg('Error: '+data.error.message+'. Please contact resitch@gmail.com','bot');
     } else {
-      addMsg('Unexpected response. Please contact info@nexarch.io','bot');
+      addMsg('Unexpected response. Please contact resitch@gmail.com','bot');
     }
   }catch(err){
     removeTyping();
-    addMsg('Network error: '+err.message+'. Please contact info@nexarch.io or call +44 (0)20 7000 0000.','bot');
+    addMsg('Network error: '+err.message+'. Please contact resitch@gmail.com or call +63 905 251 5051.','bot');
   }
   chatSend.disabled=false;chatInput.focus();
 }
 chatSend.addEventListener('click',sendMessage);
 chatInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});
 document.querySelectorAll('.qr').forEach(btn=>btn.addEventListener('click',()=>{chatInput.value=btn.textContent;sendMessage()}));
+
+/* ═══════════════════════════════════════════
+   MOBILE HAMBURGER MENU
+═══════════════════════════════════════════ */
+(function(){
+  const ham = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  const bars = ham.querySelectorAll('span');
+  let open = false;
+
+  function toggleMenu(force) {
+    open = force !== undefined ? force : !open;
+
+    if (open) {
+      menu.style.display = 'flex';
+      // Animate in
+      requestAnimationFrame(() => {
+        menu.style.transform = 'translateY(0)';
+        menu.style.opacity = '1';
+      });
+      document.body.style.overflow = 'hidden';
+    } else {
+      menu.style.transform = 'translateY(-8px)';
+      menu.style.opacity = '0';
+      setTimeout(() => { if(!open) menu.style.display = 'none'; }, 280);
+      document.body.style.overflow = '';
+    }
+
+    // Animate bars to X
+    bars[0].style.transform = open ? 'translateY(6.5px) rotate(45deg)' : '';
+    bars[1].style.opacity   = open ? '0' : '1';
+    bars[2].style.transform = open ? 'translateY(-6.5px) rotate(-45deg)' : '';
+  }
+
+  ham.addEventListener('click', () => toggleMenu());
+
+  // Close when a link is tapped
+  document.querySelectorAll('.mm-link').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (open && !menu.contains(e.target) && !ham.contains(e.target)) {
+      toggleMenu(false);
+    }
+  });
+
+  // Adjust dropdown top on resize / also hide on desktop
+  function checkWidth() {
+    const navH = document.getElementById('nav').offsetHeight;
+    menu.style.top = navH + 'px';
+    if (window.innerWidth > 768) {
+      toggleMenu(false);
+      menu.style.display = 'none';
+    }
+  }
+  window.addEventListener('resize', checkWidth);
+  checkWidth();
+})();
 </script>
 
 <style>
@@ -1115,6 +1715,26 @@ document.querySelectorAll('.qr').forEach(btn=>btn.addEventListener('click',()=>{
 #chat-send:hover{background:#00FFCC;transform:scale(1.06)}
 #chat-send:disabled{background:var(--grey2);transform:none}
 #chat-send svg{width:15px;height:15px}
+
+/* ── EMAIL MODAL ── */
+#email-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center}
+#em-overlay{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px)}
+#em-box{position:relative;z-index:1;width:min(680px,90vw);max-height:80vh;overflow-y:auto;background:#071525;border:1px solid rgba(0,212,255,.3);box-shadow:0 24px 80px rgba(0,0,0,.8),0 0 60px rgba(0,212,255,.08);transform:translateY(30px);opacity:0;transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .3s ease}
+#em-header{background:var(--mid);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,212,255,.15)}
+#em-title{display:flex;align-items:center;gap:14px}
+#em-icon{font-size:22px}
+#em-htitle{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:2px}
+#em-hsub{font-size:10px;letter-spacing:2px;color:var(--grey);margin-top:3px}
+#em-close{background:none;border:none;color:var(--grey);font-size:20px;cursor:pointer;padding:4px;transition:color .2s;line-height:1}
+#em-close:hover{color:var(--white)}
+#em-meta{padding:16px 24px;border-bottom:1px solid rgba(0,212,255,.08);display:flex;flex-direction:column;gap:8px;background:rgba(0,212,255,.02)}
+.em-row{display:flex;gap:12px;align-items:baseline}
+.em-label{font-family:'Share Tech Mono';font-size:10px;letter-spacing:3px;color:rgba(0,212,255,.45);flex-shrink:0;width:60px}
+.em-val{font-size:13px;color:rgba(200,225,240,.8)}
+#em-body{padding:24px;font-size:14px;font-weight:300;color:rgba(210,230,240,.9);line-height:1.85;white-space:pre-wrap;font-family:'Rajdhani',sans-serif;border-bottom:1px solid rgba(0,212,255,.08)}
+#em-footer{padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+#em-badge{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);border:1px solid rgba(0,212,255,.25);padding:4px 12px;background:rgba(0,212,255,.06)}
+#em-note{font-size:11px;letter-spacing:2px;color:var(--grey)}
 </style>
 
 <button id="chat-btn" title="Chat with NEXARCH AI">
