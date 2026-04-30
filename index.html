@@ -489,6 +489,56 @@ async function loadBookings() {
   showToast('OK Loaded ' + allBookings.length + ' bookings', 'gold');
 }
 
+// -- HELPERS -- format Google Sheets ISO dates/times
+function formatDate(val) {
+  if (!val) return '--';
+  const s = String(val);
+  // ISO format: 2026-04-13T16:00:00.000Z
+  if (s.includes('T')) {
+    const d = new Date(s);
+    if (!isNaN(d)) return (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+  }
+  return s;
+}
+function formatTime(val) {
+  if (!val) return '--';
+  const s = String(val);
+  if (s.includes('T')) {
+    const d = new Date(s);
+    if (!isNaN(d)) {
+      let h = d.getUTCHours(), m = d.getUTCMinutes();
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return h + ':' + String(m).padStart(2,'0') + ' ' + ampm;
+    }
+  }
+  // Already formatted HH:mm
+  if (/^\d{1,2}:\d{2}/.test(s)) {
+    const [hh, mm] = s.split(':');
+    const h = parseInt(hh), ampm = h >= 12 ? 'PM' : 'AM';
+    return (h%12||12) + ':' + mm + ' ' + ampm;
+  }
+  return s;
+}
+function str(val) { return String(val == null ? '' : val); }
+function parseSheetDate(val) {
+  if (!val) return '';
+  const s = String(val);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(s);
+  if (!isNaN(d)) return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  return s;
+}
+function parseSheetTime(val) {
+  if (!val) return '';
+  const s = String(val);
+  if (s.includes('T')) {
+    const d = new Date(s);
+    if (!isNaN(d)) return String(d.getUTCHours()).padStart(2,'0')+':'+String(d.getUTCMinutes()).padStart(2,'0');
+  }
+  return s.substring(0,5);
+}
+
 // -- STATS ------------------------------------------------------
 function updateStats() {
   const tot  = allBookings.length;
@@ -545,17 +595,17 @@ function renderTable(rows) {
          </div>`
       : `<span class="no-receipt">--</span>`;
     return `<tr data-idx="${i}" style="cursor:pointer;">
-      <td><span class="td-ref">${b['Booking Ref']||'--'}</span></td>
+      <td><span class="td-ref">${str(b['Booking Ref'])||'--'}</span></td>
       <td><span class="status-badge s-${st}">${st}</span></td>
-      <td><div class="td-name">${b['Client Name']||'--'}</div><div class="td-muted" style="font-size:0.75rem;">${b['Contact']||''}</div></td>
-      <td class="td-date">${b['Event Date']||'--'}</td>
-      <td class="td-muted">${b['Event Type']||'--'}</td>
+      <td><div class="td-name">${str(b['Client Name'])||'--'}</div><div class="td-muted" style="font-size:0.75rem;">${str(b['Contact'])||''}</div></td>
+      <td class="td-date">${formatDate(b['Event Date'])}</td>
+      <td class="td-muted">${str(b['Event Type'])||'--'}</td>
       <td class="td-muted">${b['No. of Pax']||'--'}</td>
       <td class="td-price">\u20b1${total.toLocaleString()}</td>
       <td style="color:#ff6b6b;font-weight:600;">\u20b1${down.toLocaleString()}</td>
       <td class="td-muted">\u20b1${bal.toLocaleString()}</td>
       <td>${receiptHtml}</td>
-      <td class="td-muted" style="font-size:0.75rem;">${(b['Timestamp']||'').split(',')[0]||'--'}</td>
+      <td class="td-muted" style="font-size:0.75rem;">${str(b['Timestamp']||'').split(',')[0]||'--'}</td>
     </tr>`;
   }).join('');
 
@@ -619,9 +669,9 @@ function openModal(idx) {
         <button class="save-edits-btn" onclick="saveEdits()">\ud83d\udcbe Save Changes</button>
       </div>
       <div class="detail-grid">
-        <div class="detail-item"><label>Name</label><input class="edit-field" id="edit_clientName" value="${(b['Client Name']||'').replace(/"/g,'&quot;')}"/></div>
-        <div class="detail-item"><label>Contact</label><input class="edit-field" id="edit_contact" value="${(b['Contact']||'').replace(/"/g,'&quot;')}"/></div>
-        <div class="detail-item"><label>Email</label><input class="edit-field" id="edit_email" value="${(b['Email']||'').replace(/"/g,'&quot;')}"/></div>
+        <div class="detail-item"><label>Name</label><input class="edit-field" id="edit_clientName" value="${String(b['Client Name']||'').replace(/"/g,'&quot;')}"/></div>
+        <div class="detail-item"><label>Contact</label><input class="edit-field" id="edit_contact" value="${String(b['Contact']||'').replace(/"/g,'&quot;')}"/></div>
+        <div class="detail-item"><label>Email</label><input class="edit-field" id="edit_email" value="${String(b['Email']||'').replace(/"/g,'&quot;')}"/></div>
         <div class="detail-item"><label>Submitted</label><span>${b['Timestamp']||'--'}</span></div>
       </div>
     </div>
@@ -630,11 +680,11 @@ function openModal(idx) {
       <div class="detail-grid">
         <div class="detail-item"><label>Event Type</label><span>${b['Event Type']||'--'}</span></div>
         <div class="detail-item"><label>Occasion</label><span>${b['Occasion']||'--'}</span></div>
-        <div class="detail-item"><label>Date</label><input class="edit-field" id="edit_date" type="date" value="${b['Event Date']||''}"/></div>
-        <div class="detail-item"><label>Time</label><input class="edit-field" id="edit_time" type="time" value="${b['Event Time']||''}"/></div>
+        <div class="detail-item"><label>Date</label><input class="edit-field" id="edit_date" type="date" value="${parseSheetDate(b['Event Date'])}"/></div>
+        <div class="detail-item"><label>Time</label><input class="edit-field" id="edit_time" type="time" value="${parseSheetTime(b['Event Time'])}"/></div>
         <div class="detail-item" style="grid-column:1/-1">
           <label>Venue</label>
-          <input class="edit-field" id="edit_venue" value="${(b['Venue']||'').replace(/"/g,'&quot;')}" style="width:100%;margin-bottom:0.5rem;"/>
+          <input class="edit-field" id="edit_venue" value="${String(b['Venue']||'').replace(/"/g,'&quot;')}" style="width:100%;margin-bottom:0.5rem;"/>
           ${b['Venue'] ? `
           <div class="venue-map-wrap" id="venueMap_${currentRef}">
             <div class="venue-map-loading">
