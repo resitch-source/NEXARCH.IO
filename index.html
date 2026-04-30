@@ -438,8 +438,8 @@ function doLogin() {
     sessionPass = p;
     const loginEl = document.getElementById('loginScreen');
     const appEl   = document.getElementById('app');
-    if (loginEl) loginEl.style.display = 'none';
-    if (appEl)   { appEl.style.display = 'block'; appEl.style.pointerEvents = ''; }
+    if (loginEl) loginEl.remove();
+    if (appEl)   appEl.style.display = 'block';
     loadBookings();
   } else {
     if (errEl)  errEl.textContent  = 'Incorrect password.';
@@ -454,10 +454,8 @@ function logout() {
   const loginEl = document.getElementById('loginScreen');
   const passEl  = document.getElementById('passInput');
   const errEl   = document.getElementById('loginErr');
-  if (appEl)   { appEl.style.display = 'none'; appEl.style.pointerEvents = ''; }
-  if (loginEl) loginEl.style.display = 'flex';
-  if (passEl)  passEl.value = '';
-  if (errEl)   errEl.textContent = '';
+  if (appEl)   appEl.style.display = 'none';
+  window.location.reload();
 }
 
 // Attach login events after DOM is ready
@@ -567,14 +565,17 @@ function renderTable(rows) {
   // Attach click handler via event delegation - more reliable on mobile than inline onclick
   const tbody = document.getElementById('tableBody');
   if (tbody) {
-    tbody.onclick = function(e) {
-      // Find the closest tr with data-idx
+    const handleRowTap = function(e) {
       const tr = e.target.closest('tr[data-idx]');
       if (!tr) return;
-      // Don't open modal if clicking a link or image directly
       if (e.target.tagName === 'A' || e.target.tagName === 'IMG') return;
       const idx = parseInt(tr.getAttribute('data-idx'), 10);
       openModal(idx);
+    };
+    tbody.onclick    = handleRowTap;
+    tbody.ontouchend = function(e) {
+      // Only fire if it was a tap (not a scroll)
+      handleRowTap(e);
     };
   }
 }
