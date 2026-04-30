@@ -68,8 +68,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .login-err{color:#ff6b6b;font-size:0.82rem;margin-top:0.5rem;min-height:1.2rem;}
 
 /* -- LAYOUT -- */
-#app{display:none;min-height:100vh;pointer-events:none;}
-#app.visible{display:block;pointer-events:all;}
+#app{display:none;min-height:100vh;}
+#app.visible{display:block;}
 .topbar{
   background:var(--surface);border-bottom:1px solid var(--border2);
   padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;
@@ -439,7 +439,7 @@ function doLogin() {
     const loginEl = document.getElementById('loginScreen');
     const appEl   = document.getElementById('app');
     if (loginEl) loginEl.style.display = 'none';
-    if (appEl)   { appEl.style.display = 'block'; appEl.style.pointerEvents = 'all'; }
+    if (appEl)   { appEl.style.display = 'block'; appEl.style.pointerEvents = ''; }
     loadBookings();
   } else {
     if (errEl)  errEl.textContent  = 'Incorrect password.';
@@ -454,7 +454,7 @@ function logout() {
   const loginEl = document.getElementById('loginScreen');
   const passEl  = document.getElementById('passInput');
   const errEl   = document.getElementById('loginErr');
-  if (appEl)   { appEl.style.display = 'none'; appEl.style.pointerEvents = 'none'; }
+  if (appEl)   { appEl.style.display = 'none'; appEl.style.pointerEvents = ''; }
   if (loginEl) loginEl.style.display = 'flex';
   if (passEl)  passEl.value = '';
   if (errEl)   errEl.textContent = '';
