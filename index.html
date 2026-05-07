@@ -1712,10 +1712,6 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
           <select id="f-service"><option value="">Select a service…</option><option>System Design & Architecture</option><option>Systems Integration</option><option>Resilience Engineering</option><option>Performance Optimisation</option><option>Strategic Consulting</option><option>Managed Operations</option><option>Training Programs</option><option>Engineering Consultancy</option></select>
         </div>
         <div class="fg"><label>Project Description</label><textarea id="f-desc" rows="4" placeholder="Briefly describe your engineering challenge…"></textarea></div>
-        <!-- SETUP NOTICE: Remove after configuring Apps Script URL -->
-        <div id="setup-notice" style="padding:12px 16px;background:rgba(255,200,0,.06);border:1px solid rgba(255,200,0,.25);color:#FFD700;font-size:11px;letter-spacing:1px;margin-bottom:4px">
-          <strong>⚙ SETUP REQUIRED:</strong> Replace <code>APPS_SCRIPT_URL</code> in the JS with your Google Apps Script Web App URL to enable Google Sheets logging. The chatbot and AI reply work immediately.
-        </div>
         <!-- Status message -->
         <div id="form-status" style="display:none;padding:14px 18px;font-size:13px;letter-spacing:1px;border:1px solid;margin-bottom:4px"></div>
         <button class="fsub" id="fsub">SEND MESSAGE →</button>
@@ -2012,44 +2008,187 @@ function addMsg(text,role){
 function addTyping(){const w=document.createElement('div');w.className='cm cm-bot';w.id='typing-ind';w.innerHTML='<div class="cm-avatar">NX</div><div class="cm-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';chatMessages.appendChild(w);chatMessages.scrollTop=chatMessages.scrollHeight}
 function removeTyping(){const t=document.getElementById('typing-ind');if(t)t.remove()}
 
-const history=[];
+/* ═══════════════════════════════════════════════════════════════
+   CHATBOT KNOWLEDGE — loaded from Google Sheets at startup
+   ═══════════════════════════════════════════════════════════════
+   Your Google Sheet should have TWO tabs:
+
+   Tab 1 — "Knowledge" (chatbot training data)
+   ┌────────────────┬──────────────────────────────────────────────────────┐
+   │  A: Topic      │  B: Answer                                           │
+   ├────────────────┼──────────────────────────────────────────────────────┤
+   │  Services      │  NEXARCH offers: System Design & Architecture,       │
+   │                │  Systems Integration, Resilience Engineering, …      │
+   ├────────────────┼──────────────────────────────────────────────────────┤
+   │  Pricing       │  Pricing depends on project scope. Contact us for …  │
+   ├────────────────┼──────────────────────────────────────────────────────┤
+   │  Training      │  We offer DCS/PLC/SCADA training for Siemens, …      │
+   └────────────────┴──────────────────────────────────────────────────────┘
+
+   Tab 2 — "Inquiries" (auto-filled by contact form — no changes needed)
+
+   To publish the Knowledge sheet as CSV:
+   File → Share → Publish to web → Tab: Knowledge → CSV → Publish
+   Copy the URL and paste it into KNOWLEDGE_SHEET_CSV_URL below.
+   ════════════════════════════════════════════════════════════════ */
+
+// TODO: Paste your Google Sheet "Knowledge" tab CSV published URL here
+// File → Share → Publish to web → Sheet: Knowledge → CSV format → Publish → Copy URL
+const KNOWLEDGE_SHEET_CSV_URL = 'YOUR_KNOWLEDGE_SHEET_CSV_URL';
+
+// Base system prompt — always active
+const BASE_SYSTEM_PROMPT = `You are NEXARCH's AI assistant — a professional, friendly systems engineering advisor embedded on the NEXARCH company website.
+
+COMPANY: NEXARCH Systems Engineering, Iligan City, Philippines. Est. 2006.
+SLOGAN: Precision. Scale. Control.
+CONTACT: resitch@gmail.com | +63 905 251 5051 | www.nexarch.io
+HEADQUARTERS: NEXARCH Building, Buruun, Iligan City, Philippines 9200
+
+LEADERSHIP:
+- Engr. R. Sitchon — CEO. Electronics & Communications Engineer, 27+ years in industrial control systems, OT/IT integration, MES, PIMS, IIoT across mining, metals, oil & gas, energy.
+- Engr. L. Sitchon — CTO. Aerospace systems architect, satellite/avionics/ground systems integration.
+- Cap. A. Chan — Chief Engineering Officer. ISO 15288 certified, 200+ integrated systems across 5 continents.
+
+KEY FACTS: 100+ projects delivered, 25+ companies served, 99% client retention, ISO/IEC 15288 certified.
+
+SERVICES:
+1. System Design & Architecture — end-to-end architecture for mission-critical infrastructure (ISO/IEC 15288)
+2. Systems Integration — multi-vendor, multi-platform hardware/software/network integration
+3. Resilience Engineering — fault-tolerant frameworks, redundancy, failover architecture
+4. Performance Optimisation — deep-level analysis and tuning across nodes, links, subsystems
+5. Strategic Consulting — advisory for infrastructure modernisation and digital transformation
+6. Managed Operations — 24/7 monitoring, maintenance, continuous improvement
+7. Training Programs — DCS/PLC/SCADA/MES/IIoT operator and engineer training: Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa, Mitsubishi
+8. Engineering Consultancy — independent technical advisory, FEED studies, control philosophy, system audits, OT cybersecurity
+
+ENGINEERING PROCESS: Discover → Architect → Integrate → Validate → Operate → Support (24/7 support, preventive maintenance, remote diagnostics, spare parts, on-site intervention)
+
+TECHNOLOGY PARTNERS & PRODUCTS:
+- Siemens: SIMATIC PCS 7 CEMAT (cement/mining), PCS Neo DCS, Braumat (brewing/beverages), SIMATIC IT MES, TIA Portal, WinCC SCADA, S7-1500/S7-300 PLCs, SINAMICS drives
+- Rockwell/Allen-Bradley: PlantPAx DCS, FactoryTalk View SE/ME SCADA, FactoryTalk MES, ControlLogix/CompactLogix, Studio 5000, EtherNet/IP
+- Schneider Electric: BrewMax (brewing), Modicon M580/M340, EcoStruxure, AVEVA/Wonderware SCADA
+- Emerson: DeltaV DCS, Ovation DCS (power), Rosemount/Fisher instruments, AMS Device Manager
+- Honeywell: Experion PKS DCS, Safety Manager SC SIS (SIL 3), Honeywell Forge IIoT
+- GE Vernova: Mark VIe DCS (turbine control), iFIX/Cimplicity SCADA, GE APM/Predix
+- ABB: System 800xA DCS, ACS880 drives, ABB Ability IIoT platform
+- Yokogawa: CENTUM VP DCS, ProSafe-RS SIS, OpreX platform, EJA transmitters
+- Mitsubishi Electric: MELSEC iQ-R/iQ-F PLCs, GOT2000 HMI, MELSOFT GX Works3, CC-Link IE, FREQROL drives
+
+CLIENTS & PROJECTS DELIVERED:
+- Republic Cement: (1) Siemens S5→S7 upgrade + PCS 7 CEMAT DCS integration, (2) Packhouse HMI upgrade to WinCC
+- Holcim Lugait: (1) Packhouse & Coal Plant control system upgrade, (2) Waste Heat Recovery integration into PCS 7 CEMAT DCS
+- SMBC (Beverages, Pampanga): Siemens Braumat DCS upgrade
+- SMPC (Mining): (1) Bucket Well Wireless Automation, (2) Coal Line 1 CSU, (3) Stacker/Reclaimer CSU
+- Busco Sugar Milling: Energy Management Systems
+- NGCP (Power Distribution): (1) TIA Portal Training & RTU Integration, (2) Power Distribution Enterprise Control Systems Design
+- Wilmar Edible Oil: PLC/HMI/VFD troubleshooting
+- Limkitkai Refinery: PLC/SCADA troubleshooting
+- LGU Region 8: Public Safety & Security Systems Design
+- Asia Brewery: (1) Brewery Control Systems Upgrade Design, (2) Brewmaxx troubleshooting & recovery
+- URC: Nova Extruder PLC/HMI upgrade (relay → PLC)
+- NPC: (1) Pulangi IV Hydro IT/OT Systems Design, (2) Hydro Power Plant Enterprise Control Systems Design
+- Pilmico: MES Design (ISA-95)
+- Roxas City IT-Park: Smart City conceptual design
+- Kings Energy: Smart Enterprise SCADA design
+- Iligan City Waterworks: Smart Enterprise SCADA design
+- Roxas City Water District: Smart Enterprise SCADA design
+
+SECTORS: Mining & Metals, Cement, Beverages/Brewing, Food Manufacturing, Oil & Gas, Power Generation, Water & Utilities, Defence & Security, Smart Cities, Telecoms
+
+SOLAR: NEXARCH also has a Solar Energy division offering solar PV system design and integration.
+
+RULES FOR YOUR RESPONSES:
+- Be professional, warm, and technically credible. Never robotic.
+- Keep answers concise — under 150 words unless a detailed list is genuinely needed.
+- If someone asks to get a quote or contact NEXARCH, give: resitch@gmail.com | +63 905 251 5051
+- If you don't know something specific, say "Our team can provide more details — please reach out to resitch@gmail.com"
+- Never make up project details, prices, or certifications not listed above.
+- Plain text only — no markdown, no bullet symbols, no asterisks.`;
+
+// Will hold extra knowledge loaded from Google Sheets
+let sheetKnowledge = '';
+let knowledgeLoaded = false;
+
+// Load knowledge from Google Sheets CSV on startup
+async function loadSheetKnowledge() {
+  if (!KNOWLEDGE_SHEET_CSV_URL || KNOWLEDGE_SHEET_CSV_URL === 'YOUR_KNOWLEDGE_SHEET_CSV_URL') return;
+  try {
+    const res = await fetch(KNOWLEDGE_SHEET_CSV_URL);
+    const csv = await res.text();
+    const rows = csv.split('\n').slice(1); // skip header row
+    const entries = rows
+      .map(row => {
+        // Handle CSV: split on first comma, handle quoted fields
+        const match = row.match(/^"?([^",]+)"?,\s*"?(.*?)"?\s*$/s);
+        if (!match || !match[1] || !match[2]) return null;
+        return match[1].trim() + ': ' + match[2].trim();
+      })
+      .filter(Boolean);
+    if (entries.length > 0) {
+      sheetKnowledge = '\n\nADDITIONAL KNOWLEDGE FROM KNOWLEDGE BASE:\n' + entries.join('\n');
+      knowledgeLoaded = true;
+      console.log('NEXARCH chatbot: loaded', entries.length, 'knowledge entries from Google Sheets');
+    }
+  } catch(e) {
+    console.log('NEXARCH chatbot: could not load sheet knowledge:', e.message);
+  }
+}
+
+// Build the full system prompt (base + sheet knowledge)
+function getSystemPrompt() {
+  return BASE_SYSTEM_PROMPT + sheetKnowledge;
+}
+
+const history = [];
+
 async function sendMessage(){
-  const text=chatInput.value.trim();if(!text)return;
-  chatInput.value='';addMsg(text,'user');history.push({role:'user',content:text});
-  addTyping();chatSend.disabled=true;
+  const text = chatInput.value.trim();
+  if(!text) return;
+  chatInput.value = '';
+  addMsg(text, 'user');
+  history.push({role:'user', content:text});
+  addTyping();
+  chatSend.disabled = true;
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
         'anthropic-version': '2023-06-01',
         'anthropic-dangerous-request-allowed': 'true'
       },
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:1000,
-        system:`You are NEXARCH's AI assistant — a professional systems engineering advisor. NEXARCH is a global systems engineering firm. Leadership: Engr. R. Sitchon (CEO) — Electronics and Communications Engineer, 27+ years in industrial control systems, OT/IT integration, MES, PIMS, IIoT across mining, metals, oil & gas and energy; Engr. L. Sitchon (CTO); Cap. A. Chan (Chief Engineering Officer). Key facts: 100+ projects, companies served across multiple industries, ISO/IEC 15288 certified. Technology partners and products: Siemens (SIMATIC PCS 7 CEMAT for cement/mining, PCS Neo DCS, Braumat for brewing/beverages, Siemens MES/SIMATIC IT, TIA Portal, WinCC SCADA, S7-1500 PLCs), Rockwell/Allen-Bradley (PlantPAx DCS, FactoryTalk View SE/ME SCADA, FactoryTalk MES, ControlLogix, Studio 5000), Schneider Electric (BrewMax for brewing, Modicon M580, EcoStruxure, AVEVA SCADA), Emerson (DeltaV DCS, Ovation DCS for power, Rosemount/Fisher instruments, AMS), Honeywell (Experion PKS DCS, Safety Manager SC SIS, Honeywell Forge), GE Vernova (Mark VIe DCS turbine control, iFIX/Cimplicity SCADA, APM/Predix), ABB (System 800xA DCS, ACS880 drives, ABB Ability IIoT), Yokogawa (CENTUM VP DCS, ProSafe-RS SIS, OpreX platform), Mitsubishi (MELSEC iQ-R, GOT2000 HMI, CC-Link IE). Clients and projects: Republic Cement — (1) Siemens S5 to S7 upgrade and PCS 7 CEMAT DCS integration, (2) Packhouse HMI upgrade to WinCC; Holcim Lugait — (1) Packhouse and Coal Plant control system upgrade, (2) Waste Heat Recovery System integration into PCS 7 CEMAT DCS; SMBC — Beverages, Pampanga Plant Braumat DCS upgrade; SMPC — Mining (Bucket Well Wireless Automation, Coal Line 1 CSU, Stacker/Reclaimer CSU); Busco Sugar Milling — Energy Management Systems; NGCP — TIA Portal Training & RTU Integration, Power Distribution Enterprise Control Systems Design; Wilmar Edible Oil — PLC/HMI/VFD Troubleshooting; Limkitkai Refinery — PLC/SCADA Troubleshooting; LGU Region 8 — Public Safety & Security Systems Design; Asia Brewery — Brewery Control Systems Upgrade Design, Brewmaxx Troubleshooting & Recovery; URC — Nova Extruder PLC/HMI Upgrade; NPC — Pulangi IV Hydro IT/OT Systems Design, Hydro Power Plant Enterprise Control Systems Design; Pilmico — MES Design; Roxas City IT-Park — Smart City conceptual design; Kings Energy — Smart Enterprise SCADA design; Iligan City Waterworks — Smart Enterprise SCADA design; Roxas City Water District — Smart Enterprise SCADA design. Services: System Design, Integration, Resilience Engineering, Performance Optimisation, Consulting, Managed Operations, Training Programs (DCS/PLC/SCADA/MES operator and engineer training for Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa), Engineering Consultancy (independent technical advisory, FEED studies, control philosophy, system audits, OT cybersecurity). Engineering Process: Discover, Architect, Integrate, Validate, Operate, Support (24/7 support, preventive maintenance, remote diagnostics, spare parts, on-site intervention, trainings, and consultancy). Sectors: Defence, Aerospace, Energy, Telecoms, Smart Cities, Financial, Mining & Metals, Oil & Gas, Food & Beverages. Solar division available. Slogan: Precision. Scale. Control. Contact: resitch@gmail.com. Respond concisely under 120 words. Plain text only.`,
-        messages:history
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 500,
+        system: getSystemPrompt(),
+        messages: history
       })
     });
-    const data=await res.json();removeTyping();
-    if(data.content&&data.content[0]){
-      const r=data.content[0].text;
-      history.push({role:'assistant',content:r});
-      addMsg(r,'bot');
-    } else if(data.error){
-      addMsg('Error: '+data.error.message+'. Please contact resitch@gmail.com','bot');
-    } else {
-      addMsg('Unexpected response. Please contact resitch@gmail.com','bot');
-    }
-  }catch(err){
+    const data = await res.json();
     removeTyping();
-    addMsg('Network error: '+err.message+'. Please contact resitch@gmail.com or call +63 905 251 5051.','bot');
+    if(data.content && data.content[0]){
+      const r = data.content[0].text;
+      history.push({role:'assistant', content:r});
+      addMsg(r, 'bot');
+    } else if(data.error){
+      addMsg('Sorry, I ran into an issue: ' + data.error.message + '. Please contact resitch@gmail.com', 'bot');
+    } else {
+      addMsg('Sorry, I could not get a response. Please contact resitch@gmail.com', 'bot');
+    }
+  } catch(err){
+    removeTyping();
+    addMsg('Network error. Please try again or contact resitch@gmail.com / +63 905 251 5051', 'bot');
   }
-  chatSend.disabled=false;chatInput.focus();
+  chatSend.disabled = false;
+  chatInput.focus();
 }
-chatSend.addEventListener('click',sendMessage);
-chatInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});
+chatSend.addEventListener('click', sendMessage);
+chatInput.addEventListener('keydown', e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});
 document.querySelectorAll('.qr').forEach(btn=>btn.addEventListener('click',()=>{chatInput.value=btn.textContent;sendMessage()}));
+
+// Load sheet knowledge in background (non-blocking)
+loadSheetKnowledge();
+
 } // end initChatbot
 // Run after DOM loads
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initChatbot);}else{initChatbot();}
