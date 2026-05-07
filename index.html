@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+  <!-- GitHub Pages + SEO Meta -->
+  <meta name="description" content="NEXARCH Systems Engineering — Industrial automation, OT/IT integration, DCS/PLC/SCADA solutions. Precision. Scale. Control."/>
+  <meta name="keywords" content="systems engineering, industrial automation, DCS, PLC, SCADA, MES, IIoT, OT IT integration, Philippines"/>
+  <meta property="og:title" content="NEXARCH Systems Engineering"/>
+  <meta property="og:description" content="Engineering complex systems for mission-critical infrastructure. Precision. Scale. Control."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://nexarch.github.io/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>NEXARCH — Systems Engineering Solutions</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
@@ -1689,7 +1697,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
         <div class="cds">
           <div class="cdi"><span class="cdic">📍</span><div><div class="cdl">Headquarters</div><div class="cdv">NEXARCH Building, Buruun, Iligan City, Philippines 9200</div></div></div>
           <div class="cdi"><span class="cdic">📞</span><div><div class="cdl">Phone</div><div class="cdv">+63 905 251 5051</div></div></div>
-          <div class="cdi"><span class="cdic">✉</span><div><div class="cdl">Email</div><div class="cdv"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660f0800092608031e0714050e480f09">[email&#160;protected]</a></div></div></div>
+          <div class="cdi"><span class="cdic">✉</span><div><div class="cdl">Email</div><div class="cdv">resitch@gmail.com</div></div></div>
           <div class="cdi"><span class="cdic">🌐</span><div><div class="cdl">Web</div><div class="cdv">www.nexarch.io</div></div></div>
         </div>
       </div>
@@ -1704,6 +1712,10 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
           <select id="f-service"><option value="">Select a service…</option><option>System Design & Architecture</option><option>Systems Integration</option><option>Resilience Engineering</option><option>Performance Optimisation</option><option>Strategic Consulting</option><option>Managed Operations</option><option>Training Programs</option><option>Engineering Consultancy</option></select>
         </div>
         <div class="fg"><label>Project Description</label><textarea id="f-desc" rows="4" placeholder="Briefly describe your engineering challenge…"></textarea></div>
+        <!-- SETUP NOTICE: Remove after configuring Apps Script URL -->
+        <div id="setup-notice" style="padding:12px 16px;background:rgba(255,200,0,.06);border:1px solid rgba(255,200,0,.25);color:#FFD700;font-size:11px;letter-spacing:1px;margin-bottom:4px">
+          <strong>⚙ SETUP REQUIRED:</strong> Replace <code>APPS_SCRIPT_URL</code> in the JS with your Google Apps Script Web App URL to enable Google Sheets logging. The chatbot and AI reply work immediately.
+        </div>
         <!-- Status message -->
         <div id="form-status" style="display:none;padding:14px 18px;font-size:13px;letter-spacing:1px;border:1px solid;margin-bottom:4px"></div>
         <button class="fsub" id="fsub">SEND MESSAGE →</button>
@@ -1758,7 +1770,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* CURSOR */
 const cd=document.getElementById('cd'),cr=document.getElementById('cr');
 let mx=0,my=0,rx=0,ry=0;
@@ -1806,226 +1818,179 @@ document.querySelectorAll('#hero,.ar,#about .ar').forEach(el=>co.observe(el));
 const hso=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.hsv').forEach((el,i)=>animC(el,parseFloat(el.dataset.target),parseInt(el.dataset.dec)||0,1600+i*200));hso.disconnect()}}),{threshold:.5});
 const hst=document.querySelector('.hst');if(hst)hso.observe(hst);
 
-/* FORM */
-/* ═══════════════════════════════════════════
-   CONTACT FORM — AI Integration + Auto Email Response
-═══════════════════════════════════════════ */
-document.getElementById('fsub').addEventListener('click', async (e) => {
+/* FORM — Google Apps Script → Google Sheets */
+/* ─────────────────────────────────────────────────────────────────
+   SETUP INSTRUCTIONS:
+   1. Create a new Google Sheet
+   2. Go to Extensions → Apps Script
+   3. Paste the doPost() function from the comment below
+   4. Click Deploy → New Deployment → Web App
+      - Execute as: Me
+      - Who has access: Anyone
+   5. Copy the Web App URL and paste it into APPS_SCRIPT_URL below
+   ───────────────────────────────────────────────────────────────── */
+
+/*
+  ── PASTE THIS IN GOOGLE APPS SCRIPT ─────────────────────────────
+  function doPost(e) {
+    try {
+      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+      var data = JSON.parse(e.postData.contents);
+      sheet.appendRow([
+        new Date(),
+        data.fname + ' ' + data.lname,
+        data.org || '',
+        data.email,
+        data.service || '',
+        data.desc
+      ]);
+      MailApp.sendEmail({
+        to: 'resitch@gmail.com',
+        subject: 'NEXARCH Website Inquiry: ' + data.fname + ' ' + data.lname,
+        body: 'New inquiry received from the NEXARCH website.\n\n' +
+              'Name: ' + data.fname + ' ' + data.lname + '\n' +
+              'Organisation: ' + (data.org || 'N/A') + '\n' +
+              'Email: ' + data.email + '\n' +
+              'Service: ' + (data.service || 'N/A') + '\n\n' +
+              'Description:\n' + data.desc
+      });
+      return ContentService
+        .createTextOutput(JSON.stringify({status: 'ok'}))
+        .setMimeType(ContentService.MimeType.JSON);
+    } catch(err) {
+      return ContentService
+        .createTextOutput(JSON.stringify({status: 'error', message: err.toString()}))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+  ─────────────────────────────────────────────────────────────── */
+
+// TODO: Replace with your deployed Google Apps Script Web App URL
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec';
+
+document.getElementById('fsub').addEventListener('click', async function(e) {
   e.preventDefault();
-  const btn = e.target;
-  const status = document.getElementById('form-status');
+  var btn = document.getElementById('fsub');
+  var status = document.getElementById('form-status');
 
-  // Gather field values
-  const fname   = document.getElementById('f-fname').value.trim();
-  const lname   = document.getElementById('f-lname').value.trim();
-  const org     = document.getElementById('f-org').value.trim();
-  const email   = document.getElementById('f-email').value.trim();
-  const service = document.getElementById('f-service').value;
-  const desc    = document.getElementById('f-desc').value.trim();
+  var fname   = document.getElementById('f-fname').value.trim();
+  var lname   = document.getElementById('f-lname').value.trim();
+  var org     = document.getElementById('f-org').value.trim();
+  var email   = document.getElementById('f-email').value.trim();
+  var service = document.getElementById('f-service').value;
+  var desc    = document.getElementById('f-desc').value.trim();
 
-  // Validation
   if (!fname || !email || !desc) {
     status.style.display = 'block';
     status.style.background = 'rgba(255,60,60,.08)';
     status.style.borderColor = 'rgba(255,60,60,.3)';
     status.style.color = '#FF8888';
-    status.textContent = '⚠  Please fill in your name, email, and project description.';
+    status.textContent = 'Please fill in your name, email, and project description.';
     return;
   }
-  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRx.test(email)) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     status.style.display = 'block';
     status.style.background = 'rgba(255,60,60,.08)';
     status.style.borderColor = 'rgba(255,60,60,.3)';
     status.style.color = '#FF8888';
-    status.textContent = '⚠  Please enter a valid email address.';
+    status.textContent = 'Please enter a valid email address.';
     return;
   }
 
-  // Loading state
-  btn.textContent = 'PROCESSING…';
+  btn.textContent = 'SUBMITTING\u2026';
   btn.disabled = true;
   status.style.display = 'block';
   status.style.background = 'rgba(0,212,255,.05)';
   status.style.borderColor = 'rgba(0,212,255,.2)';
   status.style.color = 'rgba(0,212,255,.7)';
-  status.textContent = '⟳  Generating personalised response via NEXARCH AI…';
+  status.textContent = 'Sending your enquiry\u2026';
 
-  // Build enquiry summary for the AI
-  const enquirySummary = `
-New enquiry received via the NEXARCH website contact form:
+  // Submit to Google Sheets via Apps Script
+  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL') {
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ fname: fname, lname: lname, org: org, email: email, service: service, desc: desc })
+      });
+    } catch(sheetErr) {
+      console.warn('Google Sheets submission failed:', sheetErr.message);
+    }
+  }
 
-Name: ${fname} ${lname}
-Organisation: ${org || 'Not specified'}
-Email: ${email}
-Service Required: ${service || 'Not specified'}
-Project Description: ${desc}
+  // Open chatbot and generate AI acknowledgement
+  var chatBox = document.getElementById('chat-box');
+  var chatMessages = document.getElementById('chat-messages');
+  chatBox.classList.add('open');
+  document.getElementById('chat-btn').classList.add('active');
+  document.getElementById('chat-badge').style.display = 'none';
 
-Your task: Write a professional, warm, and technically credible automatic acknowledgement email response FROM NEXARCH to this client. 
+  function addCM(text, role) {
+    var w = document.createElement('div');
+    w.className = 'cm cm-' + role;
+    if (role === 'bot') {
+      w.innerHTML = '<div class="cm-avatar">NX</div><div class="cm-bubble">' + text.replace(/\n/g,'<br>') + '</div>';
+    } else {
+      w.innerHTML = '<div class="cm-bubble">' + text.replace(/\n/g,'<br>') + '</div>';
+    }
+    chatMessages.appendChild(w);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
 
-The email must:
-1. Address the client by first name (${fname})
-2. Confirm receipt of their enquiry
-3. Reference their specific service interest (${service || 'systems engineering'}) and briefly acknowledge their project description
-4. Mention that a NEXARCH engineer will be in touch within 1 business day
-5. Include 2-3 sentences highlighting NEXARCH's relevant expertise for their enquiry
-6. Close professionally with NEXARCH contact details: resitch@gmail.com | +63 905 251 5051 | www.nexarch.io
-7. Sign off as "The NEXARCH Engineering Team"
+  addCM('Enquiry from ' + fname + ' ' + lname + (org ? ' \u00b7 ' + org : '') + '\nService: ' + (service || 'General enquiry') + '\n\n' + desc, 'user');
 
-Format: Write ONLY the email body text — no subject line, no markdown, no preamble. Start with "Dear ${fname}," and end with the signature. Keep it under 180 words. Professional tone.
-  `.trim();
+  var ti = document.createElement('div');
+  ti.className = 'cm cm-bot'; ti.id = 'form-typing';
+  ti.innerHTML = '<div class="cm-avatar">NX</div><div class="cm-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+  chatMessages.appendChild(ti);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
-    // Step 1: Generate AI auto-response email
-    const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
+    var aiRes = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': '',
         'anthropic-version': '2023-06-01',
         'anthropic-dangerous-request-allowed': 'true'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 600,
-        messages: [{ role: 'user', content: enquirySummary }]
+        max_tokens: 350,
+        messages: [{
+          role: 'user',
+          content: 'A client submitted an inquiry on the NEXARCH website.\nName: ' + fname + ' ' + lname + '\nOrganisation: ' + (org || 'Not specified') + '\nEmail: ' + email + '\nService: ' + (service || 'Not specified') + '\nDescription: ' + desc + '\n\nWrite a professional warm acknowledgement in under 120 words. Address them by first name. Confirm receipt. Reference their specific interest. Say a NEXARCH engineer will follow up within 1 business day. Sign as "The NEXARCH Engineering Team". Plain text only.'
+        }]
       })
     });
-
-    const aiData = await aiRes.json();
-    const autoReply = aiData.content && aiData.content[0]
-      ? aiData.content[0].text
-      : `Dear ${fname},\n\nThank you for reaching out to NEXARCH. We have received your enquiry regarding ${service || 'our engineering services'} and will respond within 1 business day.\n\nBest regards,\nThe NEXARCH Engineering Team\nresitch@gmail.com`;
-
-    // Step 2: Send message to chatbot panel — open it and show conversation
-    const chatBox = document.getElementById('chat-box');
-    const chatMessages = document.getElementById('chat-messages');
-    const chatBadge = document.getElementById('chat-badge');
-
-    // Open chatbot
-    chatBox.classList.add('open');
-    document.getElementById('chat-btn').classList.add('active');
-    chatBadge.style.display = 'none';
-
-    // Add user enquiry as a chat message
-    function addChatMsg(text, role) {
-      const w = document.createElement('div');
-      w.className = 'cm cm-' + role;
-      if (role === 'bot') w.innerHTML = `<div class="cm-avatar">NX</div><div class="cm-bubble">${text.replace(/\n/g,'<br>')}</div>`;
-      else w.innerHTML = `<div class="cm-bubble">${text.replace(/\n/g,'<br>')}</div>`;
-      chatMessages.appendChild(w);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    // Inject enquiry summary into chat
-    addChatMsg(`📋 Form submission from ${fname} ${lname} (${org || 'Individual'})\n\nService: ${service || 'General enquiry'}\nEmail: ${email}\n\n${desc}`, 'user');
-
-    // Short delay then show AI response
-    setTimeout(() => {
-      addChatMsg(autoReply, 'bot');
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 800);
-
-    // Step 3: Try to trigger email via mailto (client-side fallback)
-    const subject = encodeURIComponent(`NEXARCH Enquiry — ${fname} ${lname}${org ? ' | ' + org : ''}`);
-    const body = encodeURIComponent(
-      `NEW ENQUIRY FROM NEXARCH WEBSITE\n` +
-      `${'='.repeat(40)}\n` +
-      `Name:         ${fname} ${lname}\n` +
-      `Organisation: ${org || 'N/A'}\n` +
-      `Email:        ${email}\n` +
-      `Service:      ${service || 'N/A'}\n` +
-      `${'='.repeat(40)}\n\n` +
-      `PROJECT DESCRIPTION:\n${desc}\n\n` +
-      `${'='.repeat(40)}\n\n` +
-      `AUTO-RESPONSE SENT TO CLIENT:\n\n${autoReply}`
-    );
-
-    // Create silent mailto link to notify NEXARCH team
-    const mailLink = document.createElement('a');
-    mailLink.href = `mailto:resitch@gmail.com?subject=${subject}&body=${body}`;
-    mailLink.style.display = 'none';
-    document.body.appendChild(mailLink);
-    mailLink.click();
-    setTimeout(() => document.body.removeChild(mailLink), 1000);
-
-    // Step 4: Show client-side auto-reply email preview
-    showEmailPreview(fname, email, autoReply, service);
-
-    // Update button and status
-    btn.textContent = 'MESSAGE SENT ✓';
-    btn.style.background = 'var(--accent)';
-    status.style.background = 'rgba(0,255,136,.06)';
-    status.style.borderColor = 'rgba(0,255,136,.25)';
-    status.style.color = '#00FF88';
-    status.textContent = '✓  Enquiry received. Auto-reply generated — check the chatbot and email preview below.';
-
-    // Clear form
-    ['f-fname','f-lname','f-org','f-email','f-desc'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('f-service').value = '';
-
-    setTimeout(() => {
-      btn.textContent = 'SEND ANOTHER →';
-      btn.style.background = 'var(--cyan)';
-      btn.disabled = false;
-    }, 5000);
-
-  } catch(err) {
-    btn.textContent = 'SEND MESSAGE →';
-    btn.disabled = false;
-    status.style.background = 'rgba(255,60,60,.08)';
-    status.style.borderColor = 'rgba(255,60,60,.3)';
-    status.style.color = '#FF8888';
-    status.textContent = '⚠  Connection error: ' + err.message + '. Please email resitch@gmail.com directly.';
+    var aiData = await aiRes.json();
+    var reply = (aiData.content && aiData.content[0]) ? aiData.content[0].text : 'Dear ' + fname + ',\n\nThank you for reaching out to NEXARCH. We have received your enquiry and will respond within 1 business day.\n\n\u2014 The NEXARCH Engineering Team';
+    var ft = document.getElementById('form-typing');
+    if (ft) ft.remove();
+    addCM(reply, 'bot');
+  } catch(aiErr) {
+    var ft = document.getElementById('form-typing');
+    if (ft) ft.remove();
+    addCM('Dear ' + fname + ',\n\nThank you for your enquiry! We have received your message regarding ' + (service || 'our engineering services') + ' and a NEXARCH engineer will be in touch within 1 business day.\n\n\u2014 The NEXARCH Engineering Team', 'bot');
   }
-});
 
-/* Email preview modal */
-function showEmailPreview(name, email, body, service) {
-  // Remove existing modal if any
-  const old = document.getElementById('email-modal');
-  if (old) old.remove();
-
-  const modal = document.createElement('div');
-  modal.id = 'email-modal';
-  modal.innerHTML = `
-    <div id="em-overlay"></div>
-    <div id="em-box">
-      <div id="em-header">
-        <div id="em-title">
-          <span id="em-icon">✉</span>
-          <div>
-            <div id="em-htitle">AUTO-REPLY EMAIL PREVIEW</div>
-            <div id="em-hsub">Automatically generated and sent to: ${email}</div>
-          </div>
-        </div>
-        <button id="em-close">✕</button>
-      </div>
-      <div id="em-meta">
-        <div class="em-row"><span class="em-label">FROM</span><span class="em-val">NEXARCH Engineering Team &lt;resitch@gmail.com&gt;</span></div>
-        <div class="em-row"><span class="em-label">TO</span><span class="em-val">${name} &lt;${email}&gt;</span></div>
-        <div class="em-row"><span class="em-label">SUBJECT</span><span class="em-val">Your NEXARCH Enquiry — ${service || 'Systems Engineering'}</span></div>
-        <div class="em-row"><span class="em-label">DATE</span><span class="em-val">${new Date().toUTCString()}</span></div>
-      </div>
-      <div id="em-body">${body.replace(/\n/g,'<br>')}</div>
-      <div id="em-footer">
-        <span id="em-badge">✓ AI-Generated Auto-Reply</span>
-        <span id="em-note">A NEXARCH engineer will follow up within 1 business day.</span>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(modal);
-
-  // Close handlers
-  document.getElementById('em-close').addEventListener('click', () => modal.remove());
-  document.getElementById('em-overlay').addEventListener('click', () => modal.remove());
-
-  // Animate in
-  requestAnimationFrame(() => {
-    document.getElementById('em-box').style.transform = 'translateY(0)';
-    document.getElementById('em-box').style.opacity = '1';
+  btn.textContent = 'ENQUIRY SENT \u2713';
+  btn.style.background = 'var(--accent)';
+  status.style.background = 'rgba(0,255,136,.06)';
+  status.style.borderColor = 'rgba(0,255,136,.25)';
+  status.style.color = '#00FF88';
+  status.textContent = '\u2713 Enquiry logged in Google Sheets. Check the chatbot for your acknowledgement.';
+  ['f-fname','f-lname','f-org','f-email','f-desc'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = '';
   });
-}
+  document.getElementById('f-service').value = '';
+
+  setTimeout(function() {
+    btn.textContent = 'SEND ANOTHER \u2192';
+    btn.style.background = 'var(--cyan)';
+    btn.disabled = false;
+  }, 5000);
+});
 
 /* ═══ CHATBOT ═══ */
 const chatBtn=document.getElementById('chat-btn'),chatBox=document.getElementById('chat-box'),chatInput=document.getElementById('chat-input'),chatMessages=document.getElementById('chat-messages'),chatClose=document.getElementById('chat-close'),chatSend=document.getElementById('chat-send'),chatBadge=document.getElementById('chat-badge');
@@ -2054,7 +2019,6 @@ async function sendMessage(){
       method:'POST',
       headers:{
         'Content-Type':'application/json',
-        'x-api-key': '', // handled by proxy
         'anthropic-version': '2023-06-01',
         'anthropic-dangerous-request-allowed': 'true'
       },
