@@ -1862,7 +1862,7 @@ const hst=document.querySelector('.hst');if(hst)hso.observe(hst);
   ─────────────────────────────────────────────────────────────── */
 
 // TODO: Replace with your deployed Google Apps Script Web App URL
-const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec';
 
 document.getElementById('fsub').addEventListener('click', async function(e) {
   e.preventDefault();
@@ -1902,7 +1902,7 @@ document.getElementById('fsub').addEventListener('click', async function(e) {
   status.textContent = 'Sending your enquiry\u2026';
 
   // Submit to Google Sheets via Apps Script
-  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL') {
+  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec') {
     try {
       await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
@@ -1943,7 +1943,7 @@ document.getElementById('fsub').addEventListener('click', async function(e) {
 
   try {
     var replyMsg = 'Dear ' + fname + ',\n\nThank you for reaching out to NEXARCH. We have received your enquiry regarding ' + (service || 'our engineering services') + ' and a NEXARCH engineer will be in touch within 1 business day.\n\n\u2014 The NEXARCH Engineering Team';
-    if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL') {
+    if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec') {
       try {
         var aiRes = await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
@@ -2036,7 +2036,7 @@ function removeTyping(){const t=document.getElementById('typing-ind');if(t)t.rem
 
 // TODO: Paste your Google Sheet "Knowledge" tab CSV published URL here
 // File → Share → Publish to web → Sheet: Knowledge → CSV format → Publish → Copy URL
-const KNOWLEDGE_SHEET_CSV_URL = 'YOUR_KNOWLEDGE_SHEET_CSV_URL';
+const KNOWLEDGE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2CeGrcq-UbB6dcl8LZEGAldR3gDf3gyagVzmfr-vVeorzfXQX04ZZWct2oRsR9nvXph0dd2Yuzdsx/pub?gid=356240878&single=true&output=csv';
 
 // Base system prompt — always active
 const BASE_SYSTEM_PROMPT = `You are NEXARCH's AI assistant — a professional, friendly systems engineering advisor embedded on the NEXARCH company website.
@@ -2113,7 +2113,7 @@ let knowledgeLoaded = false;
 
 // Load knowledge from Google Sheets CSV on startup
 async function loadSheetKnowledge() {
-  if (!KNOWLEDGE_SHEET_CSV_URL || KNOWLEDGE_SHEET_CSV_URL === 'YOUR_KNOWLEDGE_SHEET_CSV_URL') return;
+  if (!KNOWLEDGE_SHEET_CSV_URL || KNOWLEDGE_SHEET_CSV_URL === 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2CeGrcq-UbB6dcl8LZEGAldR3gDf3gyagVzmfr-vVeorzfXQX04ZZWct2oRsR9nvXph0dd2Yuzdsx/pub?gid=356240878&single=true&output=csv') return;
   try {
     const res = await fetch(KNOWLEDGE_SHEET_CSV_URL);
     const csv = await res.text();
@@ -2151,7 +2151,7 @@ async function sendMessageText(text){
   chatSend.disabled = true;
   // Chatbot uses Apps Script as AI proxy (works on GitHub Pages — no CORS issues)
   // The Apps Script calls Anthropic server-side with your API key stored in Script Properties
-  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL') {
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec') {
     removeTyping();
     addMsg('Chatbot not yet configured. Please contact resitch@gmail.com or call +63 905 251 5051.', 'bot');
     chatSend.disabled = false;
