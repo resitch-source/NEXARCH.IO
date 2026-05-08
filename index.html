@@ -1868,12 +1868,12 @@ const hst=document.querySelector('.hst');if(hst)hso.observe(hst);
 
 // 1. Your Google Apps Script Web App URL (for contact form → Google Sheets)
 //    Deploy → New Deployment → Web App → Execute as Me → Anyone → Copy URL
-const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec';
 
 
 // 3. (Optional) Google Sheet "Knowledge" tab published as CSV
 //    File → Share → Publish to web → Sheet: Knowledge → CSV → Copy URL
-const KNOWLEDGE_SHEET_CSV_URL = 'YOUR_KNOWLEDGE_SHEET_CSV_URL';
+const KNOWLEDGE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2CeGrcq-UbB6dcl8LZEGAldR3gDf3gyagVzmfr-vVeorzfXQX04ZZWct2oRsR9nvXph0dd2Yuzdsx/pub?gid=356240878&single=true&output=csv';
 // ─────────────────────────────────────────────────────────────────────────────
 
 document.getElementById('fsub').addEventListener('click', async function(e) {
@@ -1914,7 +1914,7 @@ document.getElementById('fsub').addEventListener('click', async function(e) {
   status.textContent = 'Sending your enquiry\u2026';
 
   // Submit to Google Sheets via hidden iframe form POST (CORS-free, reliable)
-  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL') {
+  if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec') {
     try {
       var uid = 'nx' + Date.now();
       var ifrm = document.createElement('iframe');
@@ -2038,7 +2038,7 @@ function removeTyping(){const t=document.getElementById('typing-ind');if(t)t.rem
 
 // TODO: Paste your Google Sheet "Knowledge" tab CSV published URL here
 // File → Share → Publish to web → Sheet: Knowledge → CSV format → Publish → Copy URL
-const KNOWLEDGE_SHEET_CSV_URL = 'YOUR_KNOWLEDGE_SHEET_CSV_URL';
+const KNOWLEDGE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2CeGrcq-UbB6dcl8LZEGAldR3gDf3gyagVzmfr-vVeorzfXQX04ZZWct2oRsR9nvXph0dd2Yuzdsx/pub?gid=356240878&single=true&output=csv';
 
 // Base system prompt — always active
 // ══════════════════════════════════════════════════════════════════════
@@ -2166,7 +2166,7 @@ var sheetKB = []; // array of {k, a} entries loaded from sheet
 
 // Load Knowledge Sheet CSV on startup (non-blocking)
 async function loadSheetKnowledge() {
-  if (!KNOWLEDGE_SHEET_CSV_URL || KNOWLEDGE_SHEET_CSV_URL === 'YOUR_KNOWLEDGE_SHEET_CSV_URL') return;
+  if (!KNOWLEDGE_SHEET_CSV_URL || KNOWLEDGE_SHEET_CSV_URL === 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2CeGrcq-UbB6dcl8LZEGAldR3gDf3gyagVzmfr-vVeorzfXQX04ZZWct2oRsR9nvXph0dd2Yuzdsx/pub?gid=356240878&single=true&output=csv') return;
   try {
     var res = await fetch(KNOWLEDGE_SHEET_CSV_URL);
     var csv = await res.text();
