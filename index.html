@@ -1699,7 +1699,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
         <p>Whether you're facing a greenfield systems challenge or need expert support for an existing live environment, NEXARCH has the expertise to deliver. Contact our engineering team today.</p>
         <div class="cds">
           <div class="cdi"><span class="cdic">📍</span><div><div class="cdl">Headquarters</div><div class="cdv">NEXARCH Building, Buruun, Iligan City, Philippines 9200</div></div></div>
-          <div class="cdi"><span class="cdic">📞</span><div><div class="cdl">Phone</div><div class="cdv">+63 905 251 5051</div></div></div>
+          <div class="cdi"><span class="cdic">📞</span><div><div class="cdl">Phone</div><div class="cdv">+63 991 669 9189</div></div></div>
           <div class="cdi"><span class="cdic">✉</span><div><div class="cdl">Email</div><div class="cdv">nexarchses@gmail.com</div></div></div>
           <div class="cdi"><span class="cdic">🌐</span><div><div class="cdl">Web</div><div class="cdv">www.nexarch.io</div></div></div>
         </div>
@@ -1876,7 +1876,7 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIa
 
 // 3. (Optional) Google Sheet "Knowledge" tab published as CSV
 //    File → Share → Publish to web → Sheet: Knowledge → CSV → Copy URL
-const KNOWLEDGE_SHEET_CSV_URL = 'YOUR_KNOWLEDGE_SHEET_CSV_URL';
+const KNOWLEDGE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2CeGrcq-UbB6dcl8LZEGAldR3gDf3gyagVzmfr-vVeorzfXQX04ZZWct2oRsR9nvXph0dd2Yuzdsx/pub?gid=356240878&single=true&output=csv';
 // ─────────────────────────────────────────────────────────────────────────────
 
 document.getElementById('fsub').addEventListener('click', async function(e) {
@@ -1960,7 +1960,7 @@ document.getElementById('fsub').addEventListener('click', async function(e) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
-    var reply = 'Dear ' + fname + ',\n\nThank you for contacting NEXARCH Systems Engineering. We have received your enquiry' + (service ? ' regarding ' + service : '') + ' and our engineering team will get back to you within 1 business day.\n\nFor urgent matters, call us at +63 905 251 5051.\n\n— The NEXARCH Engineering Team';
+    var reply = 'Dear ' + fname + ',\n\nThank you for contacting NEXARCH Systems Engineering. We have received your enquiry' + (service ? ' regarding ' + service : '') + ' and our engineering team will get back to you within 1 business day.\n\nFor urgent matters, call us at +63 991 669 9189.\n\n— The NEXARCH Engineering Team';
     var ft = document.getElementById('form-typing');
     if (ft) ft.remove();
     addCM(reply, 'bot');
@@ -2074,13 +2074,13 @@ var KB = [
     a:'NEXARCH has a dedicated Solar Energy Division offering solar PV design, procurement, installation, and SCADA integration for industrial and commercial facilities.\n\nContact nexarchses@gmail.com for a site assessment and quotation.' },
 
   { k:['price','pricing','cost','quote','quotation','rate','fee','how much','budget','proposal'],
-    a:'Our pricing is tailored to project scope, complexity, and duration. We offer both project-based and retainer arrangements.\n\nTo request a quotation:\nEmail: nexarchses@gmail.com\nPhone: +63 905 251 5051\n\nWe respond within 1 business day.' },
+    a:'Our pricing is tailored to project scope, complexity, and duration. We offer both project-based and retainer arrangements.\n\nTo request a quotation:\nEmail: nexarchses@gmail.com\nPhone: +63 991 669 9189\n\nWe respond within 1 business day.' },
 
   { k:['payment','term','milestone','deposit','mode of payment','bank','transfer'],
     a:'Payment terms are typically milestone-based:\n- 30% mobilisation upon contract signing\n- 40% upon system delivery\n- 30% upon commissioning and acceptance\n\nBank transfer and manager\'s cheque are accepted.' },
 
   { k:['contact','reach','email','phone','call','number','address','location','office','headquarter','where'],
-    a:'You can reach NEXARCH at:\n\nEmail: nexarchses@gmail.com\nPhone: +63 905 251 5051\nAddress: NEXARCH Building, Buruun, Iligan City, Philippines 9200\nWebsite: www.nexarch.io\n\nOur engineers respond within 1 business day.' },
+    a:'You can reach NEXARCH at:\n\nEmail: nexarchses@gmail.com\nPhone: +63 991 669 9189\nAddress: NEXARCH Building, Buruun, Iligan City, Philippines 9200\nWebsite: www.nexarch.io\n\nOur engineers respond within 1 business day.' },
 
   { k:['siemens','pcs 7','cemat','braumat','wincc','tia portal','simatic','s7-','s7 '],
     a:'NEXARCH is a certified Siemens integrator. We implement:\n- PCS 7 CEMAT DCS (cement & mining)\n- PCS Neo DCS\n- Braumat (brewing & beverages)\n- SIMATIC IT MES\n- TIA Portal & WinCC SCADA\n- S7-1500/S7-300 PLCs & SINAMICS drives' },
@@ -2155,7 +2155,7 @@ var KB = [
     a:'Hello! Welcome to NEXARCH Systems Engineering — Precision. Scale. Control.\n\nI\'m the NEXARCH AI assistant. You can ask me about our services, technology partners, past projects, training programs, or how to get in touch.\n\nHow can I help you today?' },
 
   { k:['thank','thanks','salamat','appreciate'],
-    a:'You\'re welcome! If you have any more questions about NEXARCH\'s engineering services or would like to get in touch, we\'re always ready to help.\n\nEmail: nexarchses@gmail.com | Phone: +63 905 251 5051' },
+    a:'You\'re welcome! If you have any more questions about NEXARCH\'s engineering services or would like to get in touch, we\'re always ready to help.\n\nEmail: nexarchses@gmail.com | Phone: +63 991 669 9189' },
 ];
 
 // Sheet knowledge loaded from Google Sheets Knowledge tab (optional)
@@ -2207,7 +2207,7 @@ function findAnswer(text) {
   if (bestBuiltin && bestScore >= 1) return bestBuiltin.a;
 
   // No match
-  return 'Thank you for your question. For detailed information on that topic, please contact our engineering team directly:\n\nEmail: nexarchses@gmail.com\nPhone: +63 905 251 5051\n\nWe respond within 1 business day.';
+  return 'Thank you for your question. For detailed information on that topic, please contact our engineering team directly:\n\nEmail: nexarchses@gmail.com\nPhone: +63 991 669 9189\n\nWe respond within 1 business day.';
 }
 
 function sendMessageText(text) {
