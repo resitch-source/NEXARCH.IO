@@ -474,6 +474,9 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
 .clic-divider{width:32px;height:1px;background:var(--cyan);margin:0 auto 12px;opacity:.4}
 .clic-proj{font-size:11px;color:rgba(0,212,255,.5);font-family:'Share Tech Mono';letter-spacing:2px}
 </style>
+  <!-- Inline favicon — no external file needed -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A1E3A'/><text x='16' y='22' font-family='Arial Black,sans-serif' font-size='13' font-weight='900' fill='%2300D4FF' text-anchor='middle'>NX</text></svg>"/>
+  <link rel="shortcut icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A1E3A'/><text x='16' y='22' font-family='Arial Black,sans-serif' font-size='13' font-weight='900' fill='%2300D4FF' text-anchor='middle'>NX</text></svg>"/>
 </head>
 <body>
 <div id="cd"></div><div id="cr"></div>
@@ -1697,7 +1700,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
         <div class="cds">
           <div class="cdi"><span class="cdic">📍</span><div><div class="cdl">Headquarters</div><div class="cdv">NEXARCH Building, Buruun, Iligan City, Philippines 9200</div></div></div>
           <div class="cdi"><span class="cdic">📞</span><div><div class="cdl">Phone</div><div class="cdv">+63 905 251 5051</div></div></div>
-          <div class="cdi"><span class="cdic">✉</span><div><div class="cdl">Email</div><div class="cdv">resitch@gmail.com</div></div></div>
+          <div class="cdi"><span class="cdic">✉</span><div><div class="cdl">Email</div><div class="cdv">nexarchses@gmail.com</div></div></div>
           <div class="cdi"><span class="cdic">🌐</span><div><div class="cdl">Web</div><div class="cdv">www.nexarch.io</div></div></div>
         </div>
       </div>
@@ -1841,7 +1844,7 @@ const hst=document.querySelector('.hst');if(hst)hso.observe(hst);
         data.desc
       ]);
       MailApp.sendEmail({
-        to: 'resitch@gmail.com',
+        to: 'nexarchses@gmail.com',
         subject: 'NEXARCH Website Inquiry: ' + data.fname + ' ' + data.lname,
         body: 'New inquiry received from the NEXARCH website.\n\n' +
               'Name: ' + data.fname + ' ' + data.lname + '\n' +
@@ -1868,7 +1871,7 @@ const hst=document.querySelector('.hst');if(hst)hso.observe(hst);
 
 // 1. Your Google Apps Script Web App URL (for contact form → Google Sheets)
 //    Deploy → New Deployment → Web App → Execute as Me → Anyone → Copy URL
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec';
+const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL';
 
 
 // 3. (Optional) Google Sheet "Knowledge" tab published as CSV
@@ -2065,19 +2068,19 @@ var KB = [
     a:'Managed Operations provides 24/7 system monitoring, preventive maintenance, remote diagnostics, spare parts management, and on-site intervention — keeping your plant running around the clock.' },
 
   { k:['train','training','course','learn','program','certif','seminar','workshop'],
-    a:'NEXARCH Training Programs cover DCS, PLC, SCADA, MES, and IIoT for operators and engineers — on Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa, and Mitsubishi platforms.\n\nSessions are held in Iligan City and online. Email resitch@gmail.com to reserve a slot.' },
+    a:'NEXARCH Training Programs cover DCS, PLC, SCADA, MES, and IIoT for operators and engineers — on Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa, and Mitsubishi platforms.\n\nSessions are held in Iligan City and online. Email nexarchses@gmail.com to reserve a slot.' },
 
   { k:['solar','renewable','photovoltaic','pv panel','solar panel','solar energy'],
-    a:'NEXARCH has a dedicated Solar Energy Division offering solar PV design, procurement, installation, and SCADA integration for industrial and commercial facilities.\n\nContact resitch@gmail.com for a site assessment and quotation.' },
+    a:'NEXARCH has a dedicated Solar Energy Division offering solar PV design, procurement, installation, and SCADA integration for industrial and commercial facilities.\n\nContact nexarchses@gmail.com for a site assessment and quotation.' },
 
   { k:['price','pricing','cost','quote','quotation','rate','fee','how much','budget','proposal'],
-    a:'Our pricing is tailored to project scope, complexity, and duration. We offer both project-based and retainer arrangements.\n\nTo request a quotation:\nEmail: resitch@gmail.com\nPhone: +63 905 251 5051\n\nWe respond within 1 business day.' },
+    a:'Our pricing is tailored to project scope, complexity, and duration. We offer both project-based and retainer arrangements.\n\nTo request a quotation:\nEmail: nexarchses@gmail.com\nPhone: +63 905 251 5051\n\nWe respond within 1 business day.' },
 
   { k:['payment','term','milestone','deposit','mode of payment','bank','transfer'],
     a:'Payment terms are typically milestone-based:\n- 30% mobilisation upon contract signing\n- 40% upon system delivery\n- 30% upon commissioning and acceptance\n\nBank transfer and manager\'s cheque are accepted.' },
 
   { k:['contact','reach','email','phone','call','number','address','location','office','headquarter','where'],
-    a:'You can reach NEXARCH at:\n\nEmail: resitch@gmail.com\nPhone: +63 905 251 5051\nAddress: NEXARCH Building, Buruun, Iligan City, Philippines 9200\nWebsite: www.nexarch.io\n\nOur engineers respond within 1 business day.' },
+    a:'You can reach NEXARCH at:\n\nEmail: nexarchses@gmail.com\nPhone: +63 905 251 5051\nAddress: NEXARCH Building, Buruun, Iligan City, Philippines 9200\nWebsite: www.nexarch.io\n\nOur engineers respond within 1 business day.' },
 
   { k:['siemens','pcs 7','cemat','braumat','wincc','tia portal','simatic','s7-','s7 '],
     a:'NEXARCH is a certified Siemens integrator. We implement:\n- PCS 7 CEMAT DCS (cement & mining)\n- PCS Neo DCS\n- Braumat (brewing & beverages)\n- SIMATIC IT MES\n- TIA Portal & WinCC SCADA\n- S7-1500/S7-300 PLCs & SINAMICS drives' },
@@ -2127,7 +2130,7 @@ var KB = [
   { k:['beverage','brewing','beer','brewery','braumat','brewmaxx','smbc','asia brewery'],
     a:'NEXARCH has delivered brewery automation projects including Siemens Braumat DCS upgrade at SMBC Pampanga, and Brewery Control Systems design and Brewmaxx recovery at Asia Brewery.' },
 
-  { k:['power','hydro','hydroelectric','turbine','generator','ngcp','npc','pulangi'],
+  { k:['power','hydro','hydroelectric','turbine','g enerator','ngcp','npc','pulangi'],
     a:'Our power generation projects include Pulangi IV Hydro IT/OT Systems Design, Hydro Power Plant Enterprise Control Systems, and NGCP Power Distribution Enterprise Control Systems and TIA Portal RTU integration.' },
 
   { k:['water','waterworks','water district','utility','utilities'],
@@ -2152,7 +2155,7 @@ var KB = [
     a:'Hello! Welcome to NEXARCH Systems Engineering — Precision. Scale. Control.\n\nI\'m the NEXARCH AI assistant. You can ask me about our services, technology partners, past projects, training programs, or how to get in touch.\n\nHow can I help you today?' },
 
   { k:['thank','thanks','salamat','appreciate'],
-    a:'You\'re welcome! If you have any more questions about NEXARCH\'s engineering services or would like to get in touch, we\'re always ready to help.\n\nEmail: resitch@gmail.com | Phone: +63 905 251 5051' },
+    a:'You\'re welcome! If you have any more questions about NEXARCH\'s engineering services or would like to get in touch, we\'re always ready to help.\n\nEmail: nexarchses@gmail.com | Phone: +63 905 251 5051' },
 ];
 
 // Sheet knowledge loaded from Google Sheets Knowledge tab (optional)
@@ -2204,7 +2207,7 @@ function findAnswer(text) {
   if (bestBuiltin && bestScore >= 1) return bestBuiltin.a;
 
   // No match
-  return 'Thank you for your question. For detailed information on that topic, please contact our engineering team directly:\n\nEmail: resitch@gmail.com\nPhone: +63 905 251 5051\n\nWe respond within 1 business day.';
+  return 'Thank you for your question. For detailed information on that topic, please contact our engineering team directly:\n\nEmail: nexarchses@gmail.com\nPhone: +63 905 251 5051\n\nWe respond within 1 business day.';
 }
 
 function sendMessageText(text) {
