@@ -1868,16 +1868,12 @@ const hst=document.querySelector('.hst');if(hst)hso.observe(hst);
 
 // 1. Your Google Apps Script Web App URL (for contact form → Google Sheets)
 //    Deploy → New Deployment → Web App → Execute as Me → Anyone → Copy URL
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3D60nBuPgTQIayH-VLcRuQwo1d1Z_vXn3mWgC7dCYBqpk2qi8WfgNOEMznDxIYb4u/exec';
+const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL';
 
-// 2. Gemini API key (FREE — no credit card needed)
-//    Go to: https://aistudio.google.com/app/apikey
-//    Click "Create API Key" → Copy → paste below
-const GEMINI_API_KEY = 'AIzaSyDpUx6CoBjKJhAX94F5hUdFXqZGQu1lBDM';
 
 // 3. (Optional) Google Sheet "Knowledge" tab published as CSV
 //    File → Share → Publish to web → Sheet: Knowledge → CSV → Copy URL
-const KNOWLEDGE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2CeGrcq-UbB6dcl8LZEGAldR3gDf3gyagVzmfr-vVeorzfXQX04ZZWct2oRsR9nvXph0dd2Yuzdsx/pub?gid=356240878&single=true&output=csv';
+const KNOWLEDGE_SHEET_CSV_URL = 'YOUR_KNOWLEDGE_SHEET_CSV_URL';
 // ─────────────────────────────────────────────────────────────────────────────
 
 document.getElementById('fsub').addEventListener('click', async function(e) {
@@ -1917,19 +1913,26 @@ document.getElementById('fsub').addEventListener('click', async function(e) {
   status.style.color = 'rgba(0,212,255,.7)';
   status.textContent = 'Sending your enquiry\u2026';
 
-  // Submit to Google Sheets via Apps Script
+  // Submit to Google Sheets via hidden iframe form POST (CORS-free, reliable)
   if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_DEPLOYMENT_URL') {
     try {
-      // mode: 'no-cors' bypasses CORS preflight — Apps Script still receives and saves the data
-      await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ fname: fname, lname: lname, org: org, email: email, service: service, desc: desc })
+      var uid = 'nx' + Date.now();
+      var ifrm = document.createElement('iframe');
+      ifrm.name = uid; ifrm.style.display = 'none';
+      document.body.appendChild(ifrm);
+      var frm = document.createElement('form');
+      frm.method = 'POST'; frm.action = APPS_SCRIPT_URL;
+      frm.target = uid; frm.style.display = 'none';
+      ['fname','lname','org','email','service','desc'].forEach(function(key) {
+        var inp = document.createElement('input');
+        inp.type = 'hidden'; inp.name = key;
+        inp.value = ({fname:fname,lname:lname,org:org,email:email,service:service,desc:desc})[key] || '';
+        frm.appendChild(inp);
       });
-    } catch(sheetErr) {
-      console.warn('Google Sheets submission failed:', sheetErr.message);
-    }
+      document.body.appendChild(frm);
+      frm.submit();
+      setTimeout(function(){ frm.remove(); ifrm.remove(); }, 5000);
+    } catch(sheetErr) { console.warn('Sheet submit error:', sheetErr.message); }
   }
 
   // Open chatbot and generate AI acknowledgement
@@ -1960,28 +1963,7 @@ document.getElementById('fsub').addEventListener('click', async function(e) {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
   try {
-    var replyMsg = 'Dear ' + fname + ',\n\nThank you for reaching out to NEXARCH. We have received your enquiry regarding ' + (service || 'our engineering services') + ' and a NEXARCH engineer will be in touch within 1 business day.\n\n— The NEXARCH Engineering Team';
-    if (GEMINI_API_KEY && GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY') {
-      try {
-        var aiRes = await fetch(
-          'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              system_instruction: { parts: [{ text: 'You are NEXARCH AI. Write professional acknowledgement messages. Plain text only, no markdown, no asterisks.' }] },
-              contents: [{ role: 'user', parts: [{ text: 'Client inquiry received.\nName: ' + fname + ' ' + lname + '\nOrg: ' + (org||'N/A') + '\nService: ' + (service||'N/A') + '\nDescription: ' + desc + '\n\nWrite a warm professional acknowledgement under 100 words. Address by first name. Confirm receipt. Reference their interest. Say a NEXARCH engineer will follow up within 1 business day. Sign as The NEXARCH Engineering Team. Plain text only.' }] }],
-              generationConfig: { maxOutputTokens: 200, temperature: 0.7 }
-            })
-          }
-        );
-        var aiData = await aiRes.json();
-        if (aiData.candidates && aiData.candidates[0] && aiData.candidates[0].content) {
-          replyMsg = aiData.candidates[0].content.parts[0].text;
-        }
-      } catch(aiErr) { /* use default reply */ }
-    }
-    var reply = replyMsg;
+    var reply = 'Dear ' + fname + ',\n\nThank you for contacting NEXARCH Systems Engineering. We have received your enquiry' + (service ? ' regarding ' + service : '') + ' and our engineering team will get back to you within 1 business day.\n\nFor urgent matters, call us at +63 905 251 5051.\n\n— The NEXARCH Engineering Team';
     var ft = document.getElementById('form-typing');
     if (ft) ft.remove();
     addCM(reply, 'bot');
@@ -2059,178 +2041,201 @@ function removeTyping(){const t=document.getElementById('typing-ind');if(t)t.rem
 const KNOWLEDGE_SHEET_CSV_URL = 'YOUR_KNOWLEDGE_SHEET_CSV_URL';
 
 // Base system prompt — always active
-const BASE_SYSTEM_PROMPT = `You are NEXARCH's AI assistant — a professional, friendly systems engineering advisor embedded on the NEXARCH company website.
+// ══════════════════════════════════════════════════════════════════════
+// NEXARCH CHATBOT — Zero-cost FAQ engine
+// No API key needed. Answers from built-in knowledge + your Knowledge Sheet.
+// To add answers: edit the Knowledge tab in Google Sheets (auto-loads on page open).
+// ══════════════════════════════════════════════════════════════════════
 
-COMPANY: NEXARCH Systems Engineering, Iligan City, Philippines. Est. 2006.
-SLOGAN: Precision. Scale. Control.
-CONTACT: resitch@gmail.com | +63 905 251 5051 | www.nexarch.io
-HEADQUARTERS: NEXARCH Building, Buruun, Iligan City, Philippines 9200
+// Built-in knowledge entries — each has keywords and a response
+var KB = [
+  { k:['service','offer','provide','what do','what can','capabilities','help with','do you'],
+    a:'NEXARCH offers 8 core engineering services:\n\n1. System Design & Architecture\n2. Systems Integration\n3. Resilience Engineering\n4. Performance Optimisation\n5. Strategic Consulting\n6. Managed Operations (24/7)\n7. Training Programs\n8. Engineering Consultancy\n\nWhich service would you like to know more about?' },
 
-LEADERSHIP:
-- Engr. R. Sitchon — CEO. Electronics & Communications Engineer, 27+ years in industrial control systems, OT/IT integration, MES, PIMS, IIoT across mining, metals, oil & gas, energy.
-- Engr. L. Sitchon — CTO. Aerospace systems architect, satellite/avionics/ground systems integration.
-- Cap. A. Chan — Chief Engineering Officer. ISO 15288 certified, 200+ integrated systems across 5 continents.
+  { k:['system design','architect','architecture','iso 15288'],
+    a:'Our System Design & Architecture service covers end-to-end design for mission-critical industrial systems — following ISO/IEC 15288. We handle DCS, PLC, SCADA, MES, IIoT, and OT/IT integration from concept through commissioning.' },
 
-KEY FACTS: 100+ projects delivered, 25+ companies served, 99% client retention, ISO/IEC 15288 certified.
+  { k:['integrat','multi-vendor','multi vendor','platform'],
+    a:'Systems Integration is our core expertise — connecting multi-vendor hardware, software, and networks into a unified, reliable system. We work with Siemens, Rockwell, Schneider, Emerson, Honeywell, ABB, Yokogawa, Mitsubishi, and more.' },
 
-SERVICES:
-1. System Design & Architecture — end-to-end architecture for mission-critical infrastructure (ISO/IEC 15288)
-2. Systems Integration — multi-vendor, multi-platform hardware/software/network integration
-3. Resilience Engineering — fault-tolerant frameworks, redundancy, failover architecture
-4. Performance Optimisation — deep-level analysis and tuning across nodes, links, subsystems
-5. Strategic Consulting — advisory for infrastructure modernisation and digital transformation
-6. Managed Operations — 24/7 monitoring, maintenance, continuous improvement
-7. Training Programs — DCS/PLC/SCADA/MES/IIoT operator and engineer training: Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa, Mitsubishi
-8. Engineering Consultancy — independent technical advisory, FEED studies, control philosophy, system audits, OT cybersecurity
+  { k:['resilience','resilient','redundan','failover','fault tolerant','backup'],
+    a:'Resilience Engineering designs fault-tolerant systems with full redundancy and automatic failover — so your operations keep running even during hardware or network failures.' },
 
-ENGINEERING PROCESS: Discover → Architect → Integrate → Validate → Operate → Support (24/7 support, preventive maintenance, remote diagnostics, spare parts, on-site intervention)
+  { k:['performance','optimis','optim','tuning','bottleneck','throughput'],
+    a:'Performance Optimisation delivers deep analysis and tuning across all system nodes, communication links, and subsystems — maximising efficiency and reliability of your existing infrastructure.' },
 
-TECHNOLOGY PARTNERS & PRODUCTS:
-- Siemens: SIMATIC PCS 7 CEMAT (cement/mining), PCS Neo DCS, Braumat (brewing/beverages), SIMATIC IT MES, TIA Portal, WinCC SCADA, S7-1500/S7-300 PLCs, SINAMICS drives
-- Rockwell/Allen-Bradley: PlantPAx DCS, FactoryTalk View SE/ME SCADA, FactoryTalk MES, ControlLogix/CompactLogix, Studio 5000, EtherNet/IP
-- Schneider Electric: BrewMax (brewing), Modicon M580/M340, EcoStruxure, AVEVA/Wonderware SCADA
-- Emerson: DeltaV DCS, Ovation DCS (power), Rosemount/Fisher instruments, AMS Device Manager
-- Honeywell: Experion PKS DCS, Safety Manager SC SIS (SIL 3), Honeywell Forge IIoT
-- GE Vernova: Mark VIe DCS (turbine control), iFIX/Cimplicity SCADA, GE APM/Predix
-- ABB: System 800xA DCS, ACS880 drives, ABB Ability IIoT platform
-- Yokogawa: CENTUM VP DCS, ProSafe-RS SIS, OpreX platform, EJA transmitters
-- Mitsubishi Electric: MELSEC iQ-R/iQ-F PLCs, GOT2000 HMI, MELSOFT GX Works3, CC-Link IE, FREQROL drives
+  { k:['consult','advisory','strategic','strategy','feed','cybersecur','audit'],
+    a:'Our Strategic Consulting and Engineering Consultancy services cover infrastructure modernisation, digital transformation roadmaps, FEED studies, control philosophy development, system audits, and OT cybersecurity assessments.' },
 
-CLIENTS & PROJECTS DELIVERED:
-- Republic Cement: (1) Siemens S5→S7 upgrade + PCS 7 CEMAT DCS integration, (2) Packhouse HMI upgrade to WinCC
-- Holcim Lugait: (1) Packhouse & Coal Plant control system upgrade, (2) Waste Heat Recovery integration into PCS 7 CEMAT DCS
-- SMBC (Beverages, Pampanga): Siemens Braumat DCS upgrade
-- SMPC (Mining): (1) Bucket Well Wireless Automation, (2) Coal Line 1 CSU, (3) Stacker/Reclaimer CSU
-- Busco Sugar Milling: Energy Management Systems
-- NGCP (Power Distribution): (1) TIA Portal Training & RTU Integration, (2) Power Distribution Enterprise Control Systems Design
-- Wilmar Edible Oil: PLC/HMI/VFD troubleshooting
-- Limkitkai Refinery: PLC/SCADA troubleshooting
-- LGU Region 8: Public Safety & Security Systems Design
-- Asia Brewery: (1) Brewery Control Systems Upgrade Design, (2) Brewmaxx troubleshooting & recovery
-- URC: Nova Extruder PLC/HMI upgrade (relay → PLC)
-- NPC: (1) Pulangi IV Hydro IT/OT Systems Design, (2) Hydro Power Plant Enterprise Control Systems Design
-- Pilmico: MES Design (ISA-95)
-- Roxas City IT-Park: Smart City conceptual design
-- Kings Energy: Smart Enterprise SCADA design
-- Iligan City Waterworks: Smart Enterprise SCADA design
-- Roxas City Water District: Smart Enterprise SCADA design
+  { k:['managed','24/7','monitoring','maintenance','support','remote','diagnostic','spare'],
+    a:'Managed Operations provides 24/7 system monitoring, preventive maintenance, remote diagnostics, spare parts management, and on-site intervention — keeping your plant running around the clock.' },
 
-SECTORS: Mining & Metals, Cement, Beverages/Brewing, Food Manufacturing, Oil & Gas, Power Generation, Water & Utilities, Defence & Security, Smart Cities, Telecoms
+  { k:['train','training','course','learn','program','certif','seminar','workshop'],
+    a:'NEXARCH Training Programs cover DCS, PLC, SCADA, MES, and IIoT for operators and engineers — on Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa, and Mitsubishi platforms.\n\nSessions are held in Iligan City and online. Email resitch@gmail.com to reserve a slot.' },
 
-SOLAR: NEXARCH also has a Solar Energy division offering solar PV system design and integration.
+  { k:['solar','renewable','photovoltaic','pv panel','solar panel','solar energy'],
+    a:'NEXARCH has a dedicated Solar Energy Division offering solar PV design, procurement, installation, and SCADA integration for industrial and commercial facilities.\n\nContact resitch@gmail.com for a site assessment and quotation.' },
 
-RULES FOR YOUR RESPONSES:
-- Be professional, warm, and technically credible. Never robotic.
-- Keep answers concise — under 150 words unless a detailed list is genuinely needed.
-- If someone asks to get a quote or contact NEXARCH, give: resitch@gmail.com | +63 905 251 5051
-- If you don't know something specific, say "Our team can provide more details — please reach out to resitch@gmail.com"
-- Never make up project details, prices, or certifications not listed above.
-- Plain text only — no markdown, no bullet symbols, no asterisks.`;
+  { k:['price','pricing','cost','quote','quotation','rate','fee','how much','budget','proposal'],
+    a:'Our pricing is tailored to project scope, complexity, and duration. We offer both project-based and retainer arrangements.\n\nTo request a quotation:\nEmail: resitch@gmail.com\nPhone: +63 905 251 5051\n\nWe respond within 1 business day.' },
 
-// Will hold extra knowledge loaded from Google Sheets
-let sheetKnowledge = '';
-let knowledgeLoaded = false;
+  { k:['payment','term','milestone','deposit','mode of payment','bank','transfer'],
+    a:'Payment terms are typically milestone-based:\n- 30% mobilisation upon contract signing\n- 40% upon system delivery\n- 30% upon commissioning and acceptance\n\nBank transfer and manager\'s cheque are accepted.' },
 
-// Load knowledge from Google Sheets CSV on startup
+  { k:['contact','reach','email','phone','call','number','address','location','office','headquarter','where'],
+    a:'You can reach NEXARCH at:\n\nEmail: resitch@gmail.com\nPhone: +63 905 251 5051\nAddress: NEXARCH Building, Buruun, Iligan City, Philippines 9200\nWebsite: www.nexarch.io\n\nOur engineers respond within 1 business day.' },
+
+  { k:['siemens','pcs 7','cemat','braumat','wincc','tia portal','simatic','s7-','s7 '],
+    a:'NEXARCH is a certified Siemens integrator. We implement:\n- PCS 7 CEMAT DCS (cement & mining)\n- PCS Neo DCS\n- Braumat (brewing & beverages)\n- SIMATIC IT MES\n- TIA Portal & WinCC SCADA\n- S7-1500/S7-300 PLCs & SINAMICS drives' },
+
+  { k:['rockwell','allen','plantpax','factorytalk','controllogix','compactlogix','studio 5000'],
+    a:'NEXARCH implements Rockwell Automation systems including PlantPAx DCS, FactoryTalk View SCADA, FactoryTalk MES, ControlLogix/CompactLogix PLCs, and EtherNet/IP networks.' },
+
+  { k:['schneider','modicon','ecostruxure','wonderware','aveva','brewmax'],
+    a:'We integrate Schneider Electric platforms: Modicon M580/M340 PLCs, EcoStruxure, AVEVA/Wonderware SCADA, and BrewMax for beverage manufacturing.' },
+
+  { k:['emerson','deltav','ovation','rosemount','fisher','ams'],
+    a:'Our Emerson expertise covers DeltaV DCS, Ovation DCS (power generation), Rosemount/Fisher instrumentation, and AMS Device Manager.' },
+
+  { k:['honeywell','experion','pks','safety manager','sil','forge'],
+    a:'NEXARCH implements Honeywell systems including Experion PKS DCS, Safety Manager SC SIS (SIL 3 certified), and Honeywell Forge IIoT platform.' },
+
+  { k:['abb','800xa','acs880','ability'],
+    a:'We work with ABB System 800xA DCS, ACS880 variable frequency drives, and ABB Ability IIoT platform.' },
+
+  { k:['yokogawa','centum','prosafe','oprex','eja'],
+    a:'NEXARCH implements Yokogawa CENTUM VP DCS, ProSafe-RS Safety Instrumented System, OpreX platform, and EJA field transmitters.' },
+
+  { k:['mitsubishi','melsec','iq-r','iq-f','got2000','gx works','cc-link','freqrol'],
+    a:'We integrate Mitsubishi Electric systems: MELSEC iQ-R/iQ-F PLCs, GOT2000 HMI, GX Works3 programming, CC-Link IE fieldbus, and FREQROL drives.' },
+
+  { k:['dcs','distributed control','process control'],
+    a:'NEXARCH designs and integrates DCS solutions from all major vendors — Siemens PCS 7/Neo, Rockwell PlantPAx, Emerson DeltaV, Honeywell Experion, ABB 800xA, Yokogawa CENTUM VP, and GE Vernova Mark VIe. We handle migration, upgrade, and greenfield installations.' },
+
+  { k:['plc','programmable logic','ladder','function block'],
+    a:'Our PLC expertise covers Siemens S7, Rockwell ControlLogix/CompactLogix, Schneider Modicon, Mitsubishi MELSEC, and more. We handle programming, commissioning, migration, and troubleshooting.' },
+
+  { k:['scada','supervisory','hmi','historian','wincc','factorytalk view','wonderware'],
+    a:'NEXARCH delivers SCADA and HMI solutions using WinCC, FactoryTalk View, AVEVA Wonderware, iFIX/Cimplicity, and Cimplicity — with full historian, alarm management, and reporting integration.' },
+
+  { k:['mes','manufacturing execution','isa-95','production','scheduling','oee'],
+    a:'We design and implement MES solutions following ISA-95 standards — covering production scheduling, OEE tracking, quality management, and integration with ERP and DCS layers. Project reference: Pilmico MES Design.' },
+
+  { k:['iiot','industry 4.0','digital twin','cloud','mqtt','edge','iot'],
+    a:'NEXARCH delivers IIoT and Industry 4.0 solutions — connecting OT and IT layers using MQTT, OPC-UA, edge computing, and cloud platforms. We integrate with Honeywell Forge, ABB Ability, GE Predix, and custom IIoT architectures.' },
+
+  { k:['mining','mine','mineral','ore','coal','stacker','reclaimer'],
+    a:'NEXARCH has extensive mining sector experience. Projects include SMPC Coal Bucket Well Wireless Automation, Coal Line CSU, and Stacker/Reclaimer control system integration.' },
+
+  { k:['cement','clinker','kiln','preheater','raw mill'],
+    a:'We are specialists in cement plant automation — delivering PCS 7 CEMAT DCS integration for Republic Cement (S5→S7 upgrade + Packhouse HMI) and Holcim Lugait (Packhouse, Coal Plant, and Waste Heat Recovery integration).' },
+
+  { k:['beverage','brewing','beer','brewery','braumat','brewmaxx','smbc','asia brewery'],
+    a:'NEXARCH has delivered brewery automation projects including Siemens Braumat DCS upgrade at SMBC Pampanga, and Brewery Control Systems design and Brewmaxx recovery at Asia Brewery.' },
+
+  { k:['power','hydro','hydroelectric','turbine','generator','ngcp','npc','pulangi'],
+    a:'Our power generation projects include Pulangi IV Hydro IT/OT Systems Design, Hydro Power Plant Enterprise Control Systems, and NGCP Power Distribution Enterprise Control Systems and TIA Portal RTU integration.' },
+
+  { k:['water','waterworks','water district','utility','utilities'],
+    a:'NEXARCH has designed Smart Enterprise SCADA systems for Iligan City Waterworks and Roxas City Water District — covering remote monitoring, telemetry, and centralised control.' },
+
+  { k:['oil','gas','refinery','petroleum','limkitkai','wilmar'],
+    a:'Our oil and gas sector experience includes PLC/SCADA troubleshooting at Limkitkai Refinery and PLC/HMI/VFD troubleshooting at Wilmar Edible Oil.' },
+
+  { k:['client','project','portfolio','reference','case study','past work','experience'],
+    a:'NEXARCH has completed 100+ projects for 25+ companies with 99% client retention. Key clients include Republic Cement, Holcim, SMPC, SMBC, Asia Brewery, NGCP, NPC, Pilmico, URC, Wilmar, Limkitkai, Busco Sugar, and LGU Region 8.\n\nWhich sector or project type would you like to know more about?' },
+
+  { k:['about','company','nexarch','history','founded','established','background'],
+    a:'NEXARCH Systems Engineering was established in Iligan City, Philippines. We are a specialist systems integrator focused on industrial automation, OT/IT integration, and process control across mining, cement, beverages, food, oil & gas, power, and utilities.\n\nSlogan: Precision. Scale. Control.\n\n100+ projects | 25+ clients | 99% retention | ISO/IEC 15288 certified' },
+
+  { k:['ceo','sitchon','leadership','management','team','engineer','founder'],
+    a:'NEXARCH Leadership:\n\nEngr. R. Sitchon — CEO\nElectronics & Communications Engineer, 27+ years in industrial control, OT/IT integration, MES, IIoT.\n\nEngr. L. Sitchon — CTO\nAerospace systems architect specialising in satellite, avionics, and ground systems.\n\nCap. A. Chan — Chief Engineering Officer\nISO 15288 certified, 200+ integrated systems across 5 continents.' },
+
+  { k:['iso','certified','certification','standard','compliance'],
+    a:'NEXARCH is ISO/IEC 15288 certified — the international standard for systems and software engineering lifecycle processes. All our projects follow this framework from architecture through validation and support.' },
+
+  { k:['hello','hi','hey','good morning','good afternoon','good evening','greet'],
+    a:'Hello! Welcome to NEXARCH Systems Engineering — Precision. Scale. Control.\n\nI\'m the NEXARCH AI assistant. You can ask me about our services, technology partners, past projects, training programs, or how to get in touch.\n\nHow can I help you today?' },
+
+  { k:['thank','thanks','salamat','appreciate'],
+    a:'You\'re welcome! If you have any more questions about NEXARCH\'s engineering services or would like to get in touch, we\'re always ready to help.\n\nEmail: resitch@gmail.com | Phone: +63 905 251 5051' },
+];
+
+// Sheet knowledge loaded from Google Sheets Knowledge tab (optional)
+var sheetKB = []; // array of {k, a} entries loaded from sheet
+
+// Load Knowledge Sheet CSV on startup (non-blocking)
 async function loadSheetKnowledge() {
   if (!KNOWLEDGE_SHEET_CSV_URL || KNOWLEDGE_SHEET_CSV_URL === 'YOUR_KNOWLEDGE_SHEET_CSV_URL') return;
   try {
-    const res = await fetch(KNOWLEDGE_SHEET_CSV_URL);
-    const csv = await res.text();
-    const rows = csv.split('\n').slice(1); // skip header row
-    const entries = rows
-      .map(row => {
-        // Handle CSV: split on first comma, handle quoted fields
-        const match = row.match(/^"?([^",]+)"?,\s*"?(.*?)"?\s*$/s);
-        if (!match || !match[1] || !match[2]) return null;
-        return match[1].trim() + ': ' + match[2].trim();
-      })
-      .filter(Boolean);
-    if (entries.length > 0) {
-      sheetKnowledge = '\n\nADDITIONAL KNOWLEDGE FROM KNOWLEDGE BASE:\n' + entries.join('\n');
-      knowledgeLoaded = true;
-      console.log('NEXARCH chatbot: loaded', entries.length, 'knowledge entries from Google Sheets');
-    }
-  } catch(e) {
-    console.log('NEXARCH chatbot: could not load sheet knowledge:', e.message);
-  }
+    var res = await fetch(KNOWLEDGE_SHEET_CSV_URL);
+    var csv = await res.text();
+    var rows = csv.split('\n').slice(1);
+    sheetKB = rows.map(function(row) {
+      var m = row.match(/^"?([^",\r]+)"?,\s*"?([\s\S]*?)"?\s*[\r]?$/);
+      if (!m || !m[1] || !m[2]) return null;
+      var topic = m[1].trim().toLowerCase();
+      var answer = m[2].trim().replace(/\\n/g,'\n');
+      return { k: topic.split(/[\s\/]+/), a: answer, full: topic };
+    }).filter(Boolean);
+    if (sheetKB.length) console.log('NEXARCH chatbot: loaded', sheetKB.length, 'sheet entries');
+  } catch(e) { console.log('Sheet knowledge load failed:', e.message); }
 }
 
-// Build the full system prompt (base + sheet knowledge)
-function getSystemPrompt() {
-  return BASE_SYSTEM_PROMPT + sheetKnowledge;
+// Find best matching answer for user text
+function findAnswer(text) {
+  var q = text.toLowerCase().replace(/[?!.,]/g,'');
+  var words = q.split(/\s+/);
+
+  // Check sheet entries first (user-defined = higher priority)
+  var bestSheet = null, bestSheetScore = 0;
+  sheetKB.forEach(function(entry) {
+    var score = 0;
+    // Check if query contains the full topic
+    if (q.includes(entry.full)) score += 10;
+    entry.k.forEach(function(kw) { if (q.includes(kw)) score += 3; });
+    if (score > bestSheetScore) { bestSheetScore = score; bestSheet = entry; }
+  });
+  if (bestSheet && bestSheetScore >= 3) return bestSheet.a;
+
+  // Check built-in KB
+  var bestBuiltin = null, bestScore = 0;
+  KB.forEach(function(entry) {
+    var score = 0;
+    entry.k.forEach(function(kw) {
+      if (q.includes(kw)) score += kw.length > 5 ? 3 : 1;
+    });
+    if (score > bestScore) { bestScore = score; bestBuiltin = entry; }
+  });
+  if (bestBuiltin && bestScore >= 1) return bestBuiltin.a;
+
+  // No match
+  return 'Thank you for your question. For detailed information on that topic, please contact our engineering team directly:\n\nEmail: resitch@gmail.com\nPhone: +63 905 251 5051\n\nWe respond within 1 business day.';
 }
 
-const history = [];
-
-async function sendMessageText(text){
-  if(!text||!text.trim()) return;
+function sendMessageText(text) {
+  if (!text || !text.trim()) return;
   addMsg(text, 'user');
-  history.push({role:'user', content:text});
+  // Slight delay so the typing indicator feels natural
   addTyping();
-  chatSend.disabled = true;
-
-  // Check Gemini key configured
-  if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
+  setTimeout(function() {
     removeTyping();
-    addMsg('Our AI assistant is being configured. For immediate assistance, contact resitch@gmail.com or call +63 905 251 5051.', 'bot');
-    chatSend.disabled = false;
-    chatInput.focus();
-    return;
-  }
-
-  // Build Gemini contents array from history
-  // Gemini uses 'user' and 'model' roles
-  const geminiContents = history.map(m => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.content }]
-  }));
-
-  try{
-    const res = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: getSystemPrompt() }] },
-          contents: geminiContents,
-          generationConfig: { maxOutputTokens: 500, temperature: 0.7 }
-        })
-      }
-    );
-    const data = await res.json();
-    removeTyping();
-    if(data.candidates && data.candidates[0] && data.candidates[0].content){
-      const reply = data.candidates[0].content.parts[0].text;
-      history.push({role:'assistant', content:reply});
-      addMsg(reply, 'bot');
-    } else if(data.error){
-      addMsg('Sorry, AI error: ' + data.error.message + '. Contact resitch@gmail.com', 'bot');
-      console.error('Gemini error:', data.error);
-    } else {
-      addMsg('No response received. Contact resitch@gmail.com', 'bot');
-    }
-  } catch(err){
-    removeTyping();
-    addMsg('Connection error. Please try again or contact resitch@gmail.com / +63 905 251 5051.', 'bot');
-    console.error('NEXARCH chatbot error:', err);
-  }
-  chatSend.disabled = false;
-  chatInput.focus();
+    var answer = findAnswer(text);
+    addMsg(answer, 'bot');
+  }, 600);
 }
-async function sendMessage(){
-  const text = chatInput.value.trim();
-  if(!text) return;
+
+function sendMessage() {
+  var text = chatInput.value.trim();
+  if (!text) return;
   chatInput.value = '';
-  await sendMessageText(text);
+  sendMessageText(text);
 }
 chatSend.addEventListener('click', sendMessage);
 chatInput.addEventListener('keydown', e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});
 document.querySelectorAll('.qr').forEach(btn=>btn.addEventListener('click',()=>{
-  const txt=btn.textContent.trim();
+  var txt=btn.textContent.trim();
   if(!txt)return;
-  // Open chat if not open
   if(!chatBox.classList.contains('open')){
     chatBox.classList.add('open');
     chatBtn.classList.add('active');
@@ -2239,10 +2244,12 @@ document.querySelectorAll('.qr').forEach(btn=>btn.addEventListener('click',()=>{
   sendMessageText(txt);
 }));
 
-// Load sheet knowledge in background (non-blocking)
+// Load sheet knowledge in background
 loadSheetKnowledge();
 
 } // end initChatbot
+// Run after DOM loads
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initChatbot);}else{initChatbot();}
 // Run after DOM loads
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initChatbot);}else{initChatbot();}
 
