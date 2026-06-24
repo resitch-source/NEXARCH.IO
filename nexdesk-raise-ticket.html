@@ -8,12 +8,11 @@
 <title>NEXDESK · Raise a Support Ticket</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230B0E14'/><path d='M30 70V30h8l24 26V30h8v40h-8L38 44v26z' fill='%232DE2C0'/></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   NEXDESK — Public Ticket Intake
-   Phosphor-teal signature on deep slate.
+   NEXDESK — Raise a Support Ticket (public intake)
+   Operations Console design language — consistent with the app
 ============================================================ */
 :root{
   --void:#0B0E14; --panel:#131822; --panel-2:#1A2130; --panel-3:#222B3B;
@@ -31,7 +30,7 @@
 html{-webkit-text-size-adjust:100%}
 body{
   font-family:var(--f-body);background:var(--void);color:var(--ink);
-  font-size:14px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh;
+  font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;
   background-image:
     radial-gradient(900px 500px at 100% -10%, rgba(45,226,192,.06), transparent 60%),
     radial-gradient(700px 500px at -10% 110%, rgba(91,140,255,.05), transparent 60%);
@@ -45,531 +44,618 @@ a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:20px;border:2px solid var(--void)}
 ::-webkit-scrollbar-track{background:transparent}
 
-/* ---------- Top bar ---------- */
-.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:14px;
-  padding:14px 26px;background:rgba(11,14,20,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:12px}
-.brand .logo{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,#16201d,#0f1318);
+/* ---------- Topbar ---------- */
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;
+  padding:14px 22px;background:rgba(11,14,20,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(150deg,#16201d,#0f1318);
   border:1px solid var(--line-2);display:grid;place-items:center;flex:none;box-shadow:0 0 22px var(--teal-glow)}
-.brand .logo svg{width:23px;height:23px}
-.brand h1{font-family:var(--f-disp);font-size:19px;font-weight:700;letter-spacing:.5px;line-height:1}
+.brand .logo svg{width:22px;height:22px}
+.brand h1{font-family:var(--f-disp);font-size:18px;font-weight:700;letter-spacing:.5px;line-height:1}
 .brand .sub{font-family:var(--f-mono);font-size:9.5px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
-.top-spacer{flex:1}
-.conn{display:flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:11px;color:var(--muted);
-  padding:7px 12px;border:1px solid var(--line);border-radius:20px;background:var(--panel)}
-.conn .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
-.back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);
-  padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);transition:.15s}
-.back-link:hover{border-color:var(--line-2);color:var(--ink)}
-.back-link svg{width:16px;height:16px}
-
-/* ---------- View ---------- */
-.view{padding:30px 26px 60px;max-width:1180px;width:100%;margin:0 auto;animation:fade .35s ease}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.view-head{margin-bottom:26px}
-.view-head .eyebrow{font-family:var(--f-mono);font-size:10.5px;letter-spacing:2.5px;color:var(--teal);
-  text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.view-head .eyebrow::before{content:"";width:18px;height:1px;background:var(--teal)}
-.view-head h2{font-family:var(--f-disp);font-size:30px;font-weight:700;letter-spacing:.3px;line-height:1.1}
-.view-head p{color:var(--muted);font-size:14px;margin-top:7px;max-width:620px}
+.intake-pill{margin-left:6px;font-family:var(--f-mono);font-size:10px;letter-spacing:1.5px;color:var(--teal);
+  border:1px solid var(--teal-dim);background:var(--teal-glow);padding:4px 10px;border-radius:20px;text-transform:uppercase}
+.back-link{margin-left:auto;display:flex;align-items:center;gap:7px;color:var(--muted);font-size:13px;font-weight:500;
+  padding:8px 13px;border:1px solid var(--line);border-radius:var(--r-sm);transition:.16s}
+.back-link:hover{color:var(--ink);border-color:var(--line-2);background:var(--panel)}
+.back-link svg{width:15px;height:15px}
 
 /* ---------- Layout ---------- */
-.intake-grid{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+.wrap{max-width:1180px;margin:0 auto;padding:30px 22px 70px}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:2px;color:var(--teal);text-transform:uppercase;
+  display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--teal)}
+.page-title{font-family:var(--f-disp);font-size:30px;font-weight:700;letter-spacing:.3px}
+.page-sub{color:var(--muted);margin-top:7px;max-width:640px}
+.grid{display:grid;grid-template-columns:1fr 372px;gap:22px;margin-top:26px;align-items:start}
 
-/* ---------- Panel ---------- */
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:16px 20px;border-bottom:1px solid var(--line)}
-.panel-head h3{font-family:var(--f-disp);font-size:15.5px;font-weight:600;letter-spacing:.3px;display:flex;align-items:center;gap:9px}
-.panel-head h3 svg{width:17px;height:17px;color:var(--teal)}
-.panel-head .step{font-family:var(--f-mono);font-size:10.5px;letter-spacing:1.5px;color:var(--faint);text-transform:uppercase}
-.panel-body{padding:20px}
-
-/* ---------- Form ---------- */
-.form-grid{display:grid;gap:18px}
-.section-label{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--teal);display:flex;align-items:center;gap:9px;margin-top:4px}
-.section-label::after{content:"";flex:1;height:1px;background:var(--line)}
-.field label{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;
-  color:var(--muted);margin-bottom:7px}
-.field label .req{color:var(--teal)}
-.field input,.field select,.field textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);
-  border-radius:10px;padding:11px 13px;color:var(--ink);outline:none;transition:.15s;resize:vertical}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal-dim);box-shadow:0 0 0 3px var(--teal-glow);background:var(--panel)}
+/* ---------- Form panel ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.form-panel{padding:8px 0}
+.fset{padding:22px 24px;border-bottom:1px solid var(--line)}
+.fset:last-child{border-bottom:none}
+.fset-title{font-family:var(--f-mono);font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--teal);margin-bottom:16px;display:flex;align-items:center;gap:9px}
+.fset-title svg{width:15px;height:15px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.2px}
+.field label .req{color:var(--teal);margin-left:2px}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--void);border:1px solid var(--line-2);border-radius:var(--r-sm);
+  color:var(--ink);padding:11px 13px;transition:.15s;outline:none}
 .field input::placeholder,.field textarea::placeholder{color:var(--faint)}
-.field textarea{min-height:120px;line-height:1.6}
-.field select{cursor:pointer}
-.field select option{background:var(--panel-2)}
-.field select optgroup{background:var(--void);color:var(--teal);font-family:var(--f-mono)}
-.row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal-dim);box-shadow:0 0 0 3px var(--teal-glow)}
+.field textarea{resize:vertical;min-height:96px;line-height:1.55}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238B97AB' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+.field select optgroup{background:var(--panel-2);color:var(--teal);font-family:var(--f-mono);font-size:11px}
+.field select option{background:var(--panel-2);color:var(--ink);font-family:var(--f-body)}
+.field .hint{font-size:11px;color:var(--faint)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--crit);box-shadow:0 0 0 3px var(--crit-bg)}
 
-/* Priority selector */
+/* ---------- Priority selector ---------- */
 .pri-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.pri-opt{position:relative;border:1px solid var(--line);border-radius:10px;padding:13px 8px;text-align:center;
-  cursor:pointer;transition:.16s;background:var(--panel-2)}
-.pri-opt input{position:absolute;opacity:0;width:0;height:0}
-.pri-opt .pip{width:9px;height:9px;border-radius:50%;margin:0 auto 8px;background:currentColor;box-shadow:0 0 9px currentColor}
-.pri-opt .pl{font-family:var(--f-mono);font-size:10px;letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
-.pri-opt .pd{font-size:10px;color:var(--faint);margin-top:4px}
-.pri-opt.low{color:var(--low)} .pri-opt.medium{color:var(--med)}
-.pri-opt.high{color:var(--high)} .pri-opt.critical{color:var(--crit)}
-.pri-opt:hover{transform:translateY(-2px);border-color:currentColor}
-.pri-opt.on{border-color:currentColor;background:rgba(45,226,192,.04);box-shadow:0 0 0 2px currentColor inset}
+.pri-opt{border:1px solid var(--line-2);border-radius:var(--r-sm);padding:13px 10px;text-align:center;
+  background:var(--void);transition:.15s;position:relative;overflow:hidden}
+.pri-opt:hover{border-color:var(--line-2);background:var(--panel-2)}
+.pri-opt .dot{width:9px;height:9px;border-radius:50%;margin:0 auto 8px}
+.pri-opt .lvl{font-family:var(--f-disp);font-size:14px;font-weight:600;letter-spacing:.4px}
+.pri-opt .sla{font-family:var(--f-mono);font-size:9.5px;color:var(--muted);margin-top:3px;letter-spacing:.5px}
+.pri-opt[data-p="low"] .dot{background:var(--low);box-shadow:0 0 10px var(--low)}
+.pri-opt[data-p="medium"] .dot{background:var(--med);box-shadow:0 0 10px var(--med)}
+.pri-opt[data-p="high"] .dot{background:var(--high);box-shadow:0 0 10px var(--high)}
+.pri-opt[data-p="critical"] .dot{background:var(--crit);box-shadow:0 0 10px var(--crit)}
+.pri-opt.sel[data-p="low"]{border-color:var(--low);background:var(--low-bg)}
+.pri-opt.sel[data-p="medium"]{border-color:var(--med);background:var(--med-bg)}
+.pri-opt.sel[data-p="high"]{border-color:var(--high);background:var(--high-bg)}
+.pri-opt.sel[data-p="critical"]{border-color:var(--crit);background:var(--crit-bg)}
+.pri-opt.ai-pick::after{content:"AI";position:absolute;top:5px;right:6px;font-family:var(--f-mono);
+  font-size:8px;letter-spacing:.5px;color:var(--teal);border:1px solid var(--teal-dim);border-radius:4px;padding:1px 4px}
 
-/* ---------- Triage console (signature) ---------- */
-.triage{background:linear-gradient(165deg,#10171f,#0c1117);border:1px solid var(--line-2);
-  border-radius:var(--r);overflow:hidden;position:relative;position:sticky;top:84px}
-.triage::before{content:"";position:absolute;inset:0;background:
-  repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(45,226,192,.012) 3px,transparent 4px);
-  pointer-events:none}
-.triage-head{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line)}
+/* ---------- Submit bar ---------- */
+.submitbar{display:flex;align-items:center;gap:16px;padding:18px 24px;flex-wrap:wrap}
+.secure{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}
+.secure svg{width:14px;height:14px;color:var(--teal)}
+.btn-submit{margin-left:auto;display:flex;align-items:center;gap:9px;background:var(--teal);color:#06281f;
+  font-weight:700;font-size:14px;padding:13px 24px;border-radius:var(--r-sm);transition:.16s;letter-spacing:.3px}
+.btn-submit:hover{filter:brightness(1.08);box-shadow:0 0 24px var(--teal-glow)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed}
+.btn-submit svg{width:17px;height:17px}
+
+/* ---------- Live AI Triage panel ---------- */
+.triage{position:sticky;top:86px}
+.triage-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
 .triage-head>svg{width:16px;height:16px;flex:0 0 auto;color:var(--teal)}
-.triage-head .ttl{font-family:var(--f-disp);font-size:14px;font-weight:600;letter-spacing:.5px}
-.triage-head .live{margin-left:auto;font-family:var(--f-mono);font-size:9.5px;letter-spacing:1.5px;
-  color:var(--teal);display:flex;align-items:center;gap:6px}
-.triage-head .live .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);
-  box-shadow:0 0 9px var(--teal);animation:pulse 1.4s infinite}
-@keyframes pulse{50%{opacity:.35}}
-.readout{padding:16px 18px;display:flex;flex-direction:column;gap:15px}
-.gauge .gl{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10.5px;
-  letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
-.gauge .gv{font-weight:700;color:var(--ink)}
-.gauge .track{height:8px;background:#0a0e14;border:1px solid var(--line);border-radius:6px;overflow:hidden;position:relative}
-.gauge .fill{height:100%;border-radius:6px;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1);
-  background:linear-gradient(90deg,var(--teal-dim),var(--teal));box-shadow:0 0 12px var(--teal-glow)}
-.conf-row{display:flex;gap:8px;flex-wrap:wrap}
-.conf-tag{font-family:var(--f-mono);font-size:11px;padding:5px 10px;border-radius:7px;
-  background:var(--panel-2);border:1px solid var(--line);color:var(--muted)}
-.conf-tag b{color:var(--teal)}
-.sim-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
-.sim-item .id{font-family:var(--f-mono);font-size:11px;color:var(--teal)}
-.sim-item .mt{font-size:12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+.triage-head h3{font-family:var(--f-disp);font-size:15px;font-weight:600}
+.triage-status{margin-left:auto;display:flex;align-items:center;gap:6px;font-family:var(--f-mono);
+  font-size:9.5px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.triage-status .pulse{width:7px;height:7px;border-radius:50%;background:var(--faint)}
+.triage-status.ready{color:var(--teal)}
+.triage-status.ready .pulse{background:var(--teal);box-shadow:0 0 8px var(--teal);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.triage-body{padding:18px}
+.triage-empty{color:var(--faint);font-size:13px;line-height:1.6;text-align:center;padding:22px 6px}
+.triage-empty svg{width:30px;height:30px;color:var(--line-2);margin-bottom:12px}
+.tlabel{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-mono);
+  font-size:10px;letter-spacing:1.3px;color:var(--muted);text-transform:uppercase;margin:16px 0 8px}
+.tlabel:first-child{margin-top:0}
+.tlabel b{font-size:12px;color:var(--ink)}
+.tlabel b.crit{color:var(--crit)} .tlabel b.high{color:var(--high)}
+.tlabel b.medium{color:var(--med)} .tlabel b.low{color:var(--low)}
+.conf-bar{height:5px;border-radius:3px;background:var(--void);overflow:hidden;margin-bottom:4px}
+.conf-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal-dim),var(--teal));border-radius:3px;transition:width .4s}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--f-mono);font-size:11px;background:var(--panel-2);border:1px solid var(--line-2);
+  border-radius:6px;padding:5px 9px;color:var(--muted)}
+.chip b{color:var(--ink)} .chip.lead{border-color:var(--teal-dim);background:var(--teal-glow);color:var(--ink)}
+.chip.lead b{color:var(--teal)}
+.sigbar{height:5px;border-radius:3px;background:var(--void);overflow:hidden}
+.sigbar i{display:block;height:100%;border-radius:3px;transition:width .4s}
+.rel{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.rel:first-of-type{border-top:none}
+.rel .rid{font-family:var(--f-mono);font-size:11px;color:var(--teal);flex:none}
+.rel .rlabel{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.rel .rpct{font-family:var(--f-mono);font-size:11px;color:var(--ink);flex:none}
+.divider{height:1px;background:var(--line);margin:16px 0}
 
-/* ---------- Buttons ---------- */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:11px;
-  font-weight:600;font-size:13.5px;transition:.16s;white-space:nowrap}
-.btn svg{width:17px;height:17px;stroke-width:2.1}
-.btn-primary{background:var(--teal);color:#04130f;box-shadow:0 6px 18px var(--teal-glow)}
-.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.btn-ghost{background:var(--panel);border:1px solid var(--line);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--line-2);background:var(--panel-2)}
-.form-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px;
-  padding-top:18px;border-top:1px solid var(--line)}
-.foot-note{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);letter-spacing:.5px}
+/* ---------- Success state ---------- */
+.success{text-align:center;padding:46px 26px}
+.success .ok-ic{width:66px;height:66px;border-radius:50%;background:var(--ok-bg);border:1px solid var(--ok);
+  display:grid;place-items:center;margin:0 auto 20px;box-shadow:0 0 30px rgba(54,211,153,.25)}
+.success .ok-ic svg{width:32px;height:32px;color:var(--ok)}
+.success h2{font-family:var(--f-disp);font-size:24px;font-weight:700}
+.success p{color:var(--muted);margin-top:9px;max-width:440px;margin-inline:auto}
+.success .refbox{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--void);
+  border:1px solid var(--line-2);border-radius:var(--r-sm);padding:13px 18px}
+.success .refbox .k{font-family:var(--f-mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+.success .refbox .v{font-family:var(--f-mono);font-size:18px;font-weight:600;color:var(--teal);letter-spacing:1px}
+.success .summary{margin:24px auto 0;max-width:480px;text-align:left;background:var(--void);
+  border:1px solid var(--line);border-radius:var(--r-sm);padding:16px 18px}
+.success .summary .sr{display:flex;justify-content:space-between;gap:14px;padding:6px 0;font-size:13px}
+.success .summary .sr .sk{color:var(--muted)} .success .summary .sr .sv{color:var(--ink);text-align:right}
+.success .actions{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.success .actions a,.success .actions button{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;
+  border-radius:var(--r-sm);font-weight:600;font-size:13px;transition:.16s}
+.success .actions .primary{background:var(--teal);color:#06281f}
+.success .actions .primary:hover{filter:brightness(1.08)}
+.success .actions .ghost{border:1px solid var(--line-2);color:var(--muted)}
+.success .actions .ghost:hover{color:var(--ink);background:var(--panel-2)}
 
-/* ---------- Status ---------- */
-.form-status{padding:13px 16px;border-radius:11px;font-size:13.5px;border:1px solid;display:none;align-items:flex-start;gap:10px}
-.form-status.err{background:var(--crit-bg);border-color:rgba(255,77,94,.3);color:#ffb3ba}
-.form-status.ok{background:var(--ok-bg);border-color:rgba(54,211,153,.3);color:#a8edcf}
-.ticket-ref{font-family:var(--f-mono);font-weight:700;letter-spacing:2px;color:var(--teal)}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);z-index:90;
+  background:var(--panel-3);border:1px solid var(--line-2);border-radius:var(--r-sm);padding:13px 20px;
+  box-shadow:var(--sh);display:flex;align-items:center;gap:10px;font-size:13.5px;transition:transform .3s;max-width:90vw}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast svg{width:17px;height:17px;flex:none}
+.toast.err svg{color:var(--crit)} .toast.ok svg{color:var(--ok)} .toast.warn svg{color:var(--high)}
 
-/* ---------- Success card ---------- */
-.success-card{text-align:center;padding:40px 28px}
-.success-card .sicon{width:72px;height:72px;border-radius:20px;background:var(--ok-bg);
-  display:grid;place-items:center;margin:0 auto 20px;border:1px solid rgba(54,211,153,.3)}
-.success-card .sicon svg{width:38px;height:38px;color:var(--ok)}
-.success-card h3{font-family:var(--f-disp);font-size:22px;font-weight:700;margin-bottom:8px}
-.success-card .big-ref{font-family:var(--f-mono);font-size:24px;font-weight:700;color:var(--teal);
-  letter-spacing:3px;margin:16px 0;padding:14px;background:var(--panel-2);border:1px dashed var(--teal-dim);border-radius:12px}
-.success-card p{color:var(--muted);font-size:14px;line-height:1.7;max-width:420px;margin:0 auto 8px}
-.success-meta{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px 0}
-
-/* ---------- Footer ---------- */
-.foot{text-align:center;padding:30px 20px;color:var(--faint);font-family:var(--f-mono);font-size:11px;letter-spacing:1px;
-  border-top:1px solid var(--line);margin-top:20px}
+.pagefoot{text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--faint);
+  text-transform:uppercase;margin-top:46px;padding-top:24px;border-top:1px solid var(--line)}
 
 /* ---------- Responsive ---------- */
-@media(max-width:880px){
-  .intake-grid{grid-template-columns:1fr}
-  .triage{position:relative;top:0}
-  .view{padding:24px 16px 50px}
-  .view-head h2{font-size:24px}
-  .row-2{grid-template-columns:1fr}
-  .pri-grid{grid-template-columns:repeat(2,1fr)}
+@media(max-width:920px){
+  .grid{grid-template-columns:1fr}
+  .triage{position:static}
 }
-@media(max-width:520px){
-  .topbar{padding:12px 16px}
-  .brand h1{font-size:16px}
+@media(max-width:560px){
+  .wrap{padding:22px 14px 60px}
+  .frow{grid-template-columns:1fr}
+  .pri-grid{grid-template-columns:1fr 1fr}
+  .page-title{font-size:24px}
+  .fset{padding:18px 16px}
+  .topbar{padding:12px 14px}
   .back-link span{display:none}
+  .btn-submit{width:100%;justify-content:center;margin-left:0}
+  .submitbar .secure{order:2}
 }
 </style>
 </head>
 <body>
 
-<!-- Top bar -->
-<div class="topbar">
+<header class="topbar">
   <div class="brand">
     <div class="logo">
-      <svg viewBox="0 0 100 100"><path d="M30 70V30h8l24 26V30h8v40h-8L38 44v26z" fill="#2DE2C0"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2DE2C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12h4l2 5 4-12 2 7h6"/></svg>
     </div>
     <div>
       <h1>NEXDESK</h1>
       <div class="sub">Support Operations</div>
     </div>
   </div>
-  <div class="top-spacer"></div>
-  <div class="conn"><span class="dot"></span>SECURE INTAKE</div>
-  <a href="nexarch-website.html" class="back-link">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  <span class="intake-pill">Secure Intake</span>
+  <a class="back-link" href="https://resitch-source.github.io/NEXARCH.IO/nexarch-website.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
     <span>Back to site</span>
   </a>
-</div>
+</header>
 
-<!-- View -->
-<div class="view" id="view">
-  <div class="view-head">
-    <div class="eyebrow">Technical Support · Ticket Intake</div>
-    <h2>Raise a Support Ticket</h2>
-    <p>Submit a technical issue to the NEXARCH engineering team. Our Live AI Triage classifies and prioritises your ticket in real time so the right engineer responds faster.</p>
-  </div>
+<main class="wrap">
+  <div class="eyebrow">Technical Support · Ticket Intake</div>
+  <h1 class="page-title">Raise a Support Ticket</h1>
+  <p class="page-sub">Submit a technical issue to the NEXARCH engineering team. Our Live AI Triage classifies and
+    prioritises your ticket in real time so the right engineer responds faster.</p>
 
-  <div class="intake-grid">
-
-    <!-- ── FORM ── -->
-    <div class="panel">
-      <div class="panel-head">
-        <h3>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          New Ticket
-        </h3>
-        <span class="step">All fields marked <span style="color:var(--teal)">*</span> required</span>
-      </div>
-      <div class="panel-body">
-        <div class="form-grid" id="ticket-form">
-
-          <!-- Contact -->
-          <div class="section-label">Contact Details</div>
-          <div class="row-2">
-            <div class="field"><label>Full Name <span class="req">*</span></label>
-              <input id="t-name" placeholder="Juan Dela Cruz"></div>
-            <div class="field"><label>Company / Organisation <span class="req">*</span></label>
-              <input id="t-company" placeholder="ABC Corporation"></div>
-          </div>
-          <div class="row-2">
-            <div class="field"><label>Email Address <span class="req">*</span></label>
-              <input id="t-email" type="email" placeholder="juan@company.com"></div>
-            <div class="field"><label>Phone / Mobile</label>
-              <input id="t-phone" placeholder="+63 9XX XXX XXXX"></div>
-          </div>
-
-          <!-- System -->
-          <div class="section-label">System Information</div>
-          <div class="row-2">
-            <div class="field"><label>Plant / Site Name <span class="req">*</span></label>
-              <input id="t-site" placeholder="e.g. Holcim Lugait Plant"></div>
-            <div class="field"><label>System / Equipment</label>
-              <input id="t-system" placeholder="e.g. PCS 7 CEMAT, Allen-Bradley PLC"></div>
-          </div>
-          <div class="row-2">
-            <div class="field"><label>Product / Platform</label>
-              <select id="t-product">
-                <option value="">Select product…</option>
-                <optgroup label="SIEMENS">
-                  <option>Siemens PCS 7 CEMAT</option>
-                  <option>Siemens PCS Neo DCS</option>
-                  <option>Siemens Braumat</option>
-                  <option>Siemens TIA Portal / S7 PLC</option>
-                  <option>Siemens WinCC SCADA</option>
-                  <option>Siemens MES (SIMATIC IT)</option>
-                </optgroup>
-                <optgroup label="ROCKWELL / ALLEN-BRADLEY">
-                  <option>Rockwell PlantPAx DCS</option>
-                  <option>Allen-Bradley ControlLogix / CompactLogix</option>
-                  <option>FactoryTalk View SE / ME</option>
-                  <option>FactoryTalk MES</option>
-                </optgroup>
-                <optgroup label="SCHNEIDER">
-                  <option>Schneider BrewMax</option>
-                  <option>Schneider EcoStruxure / Modicon M580</option>
-                  <option>AVEVA / Wonderware SCADA</option>
-                </optgroup>
-                <optgroup label="OTHER BRANDS">
-                  <option>Emerson DeltaV DCS</option>
-                  <option>Emerson Ovation DCS</option>
-                  <option>Honeywell Experion PKS</option>
-                  <option>GE Mark VIe / iFIX SCADA</option>
-                  <option>ABB System 800xA</option>
-                  <option>Yokogawa CENTUM VP</option>
-                  <option>Mitsubishi MELSEC iQ-R</option>
-                </optgroup>
-                <optgroup label="GENERAL">
-                  <option>HMI / Operator Interface</option>
-                  <option>VFD / Motor Drive</option>
-                  <option>Field Instruments</option>
-                  <option>SCADA / Historian</option>
-                  <option>Network / Communications</option>
-                  <option>Other</option>
-                </optgroup>
-              </select>
-            </div>
-            <div class="field"><label>Support Type <span class="req">*</span></label>
-              <select id="t-type">
-                <option value="">Select type…</option>
-                <option>Troubleshooting / Fault Diagnosis</option>
-                <option>System Recovery / Restore</option>
-                <option>Configuration / Programming</option>
-                <option>Hardware Replacement</option>
-                <option>Software Update / Upgrade</option>
-                <option>Backup / Restore</option>
-                <option>Performance Issue</option>
-                <option>Network / Communication Fault</option>
-                <option>Training / Guidance</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Priority -->
-          <div class="section-label">Priority Level</div>
-          <div class="pri-grid" id="pri-grid">
-            <label class="pri-opt low" data-pri="Low">
-              <input type="radio" name="priority" value="Low">
-              <span class="pip"></span><span class="pl">Low</span><span class="pd">Scheduled</span>
-            </label>
-            <label class="pri-opt medium on" data-pri="Medium">
-              <input type="radio" name="priority" value="Medium" checked>
-              <span class="pip"></span><span class="pl">Medium</span><span class="pd">24 hrs</span>
-            </label>
-            <label class="pri-opt high" data-pri="High">
-              <input type="radio" name="priority" value="High">
-              <span class="pip"></span><span class="pl">High</span><span class="pd">4 hrs</span>
-            </label>
-            <label class="pri-opt critical" data-pri="Critical">
-              <input type="radio" name="priority" value="Critical">
-              <span class="pip"></span><span class="pl">Critical</span><span class="pd">Immediate</span>
-            </label>
-          </div>
-
-          <!-- Issue -->
-          <div class="section-label">Issue Description</div>
-          <div class="field"><label>Issue Title / Subject <span class="req">*</span></label>
-            <input id="t-title" placeholder="Short summary of the issue" oninput="triage()"></div>
-          <div class="field"><label>Detailed Description <span class="req">*</span></label>
-            <textarea id="t-desc" placeholder="Describe the symptom, equipment, error messages, and what the system was doing when the fault occurred…" oninput="triage()"></textarea></div>
-          <div class="field"><label>Steps Already Taken</label>
-            <textarea id="t-steps" style="min-height:80px" placeholder="What troubleshooting has already been attempted?"></textarea></div>
-
-          <!-- Status + submit -->
-          <div class="form-status" id="form-status"></div>
-          <div class="form-foot">
-            <span class="foot-note">🔒 Logged securely to NEXARCH Support · resitch@gmail.com</span>
-            <button class="btn btn-primary" id="submit-btn" onclick="submitTicket()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
-              Raise Ticket
-            </button>
-          </div>
-
+  <div class="grid" id="grid">
+    <!-- FORM -->
+    <section class="panel form-panel" id="formPanel">
+      <div class="fset">
+        <div class="fset-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Contact Details
+        </div>
+        <div class="frow">
+          <div class="field"><label>Full Name <span class="req">*</span></label><input id="f_name" placeholder="Juan dela Cruz" autocomplete="name"></div>
+          <div class="field"><label>Company / Organisation <span class="req">*</span></label><input id="f_company" placeholder="e.g. Republic Cement" autocomplete="organization"></div>
+          <div class="field"><label>Email Address <span class="req">*</span></label><input id="f_email" type="email" placeholder="name@company.com" autocomplete="email"></div>
+          <div class="field"><label>Phone / Mobile</label><input id="f_phone" placeholder="+63 9XX XXX XXXX" autocomplete="tel"></div>
         </div>
       </div>
-    </div>
 
-    <!-- ── LIVE AI TRIAGE ── -->
-    <div class="triage" id="triage-panel">
+      <div class="fset">
+        <div class="fset-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          System Information
+        </div>
+        <div class="frow">
+          <div class="field"><label>Plant / Site Name <span class="req">*</span></label><input id="f_site" placeholder="e.g. Norzagaray Plant, Line 2"></div>
+          <div class="field"><label>System / Equipment</label><input id="f_system" placeholder="e.g. Kiln drive, Boiler feedwater"></div>
+          <div class="field full"><label>Product / Platform</label>
+            <select id="f_product">
+              <option value="">Select product…</option>
+              <optgroup label="SIEMENS">
+                <option>Siemens PCS 7 CEMAT</option>
+                <option>Siemens PCS Neo DCS</option>
+                <option>Siemens Braumat</option>
+                <option>Siemens TIA Portal / S7 PLC</option>
+                <option>Siemens WinCC SCADA</option>
+                <option>Siemens MES (SIMATIC IT)</option>
+              </optgroup>
+              <optgroup label="ROCKWELL / ALLEN-BRADLEY">
+                <option>Rockwell PlantPAx DCS</option>
+                <option>Allen-Bradley ControlLogix / CompactLogix</option>
+                <option>FactoryTalk View SE / ME</option>
+                <option>FactoryTalk MES</option>
+              </optgroup>
+              <optgroup label="SCHNEIDER">
+                <option>Schneider BrewMax</option>
+                <option>Schneider EcoStruxure / Modicon M580</option>
+                <option>AVEVA / Wonderware SCADA</option>
+              </optgroup>
+              <optgroup label="OTHER BRANDS">
+                <option>Emerson DeltaV DCS</option>
+                <option>Emerson Ovation DCS</option>
+                <option>Honeywell Experion PKS</option>
+                <option>GE Mark VIe / iFIX SCADA</option>
+                <option>ABB System 800xA</option>
+                <option>Yokogawa CENTUM VP</option>
+                <option>Mitsubishi MELSEC iQ-R</option>
+              </optgroup>
+              <optgroup label="GENERAL">
+                <option>HMI / Operator Interface</option>
+                <option>VFD / Motor Drive</option>
+                <option>Field Instruments</option>
+                <option>SCADA / Historian</option>
+                <option>Network / Communications</option>
+                <option>Web App / Software</option>
+                <option>Other</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="field full"><label>Support Type <span class="req">*</span></label>
+            <select id="f_supportType">
+              <option value="">Select type…</option>
+              <option>Troubleshooting / Fault Diagnosis</option>
+              <option>System Recovery / Restore</option>
+              <option>Configuration / Programming</option>
+              <option>Hardware Replacement</option>
+              <option>Software Update / Upgrade</option>
+              <option>Backup / Restore</option>
+              <option>Performance Issue</option>
+              <option>Network / Communication Fault</option>
+              <option>Training / Guidance</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="fset">
+        <div class="fset-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 5 4-12 2 7h6"/></svg>
+          Priority Level
+        </div>
+        <div class="pri-grid" id="priGrid">
+          <button type="button" class="pri-opt" data-p="low" onclick="App.setPriority('low',true)"><div class="dot"></div><div class="lvl">Low</div><div class="sla">Scheduled</div></button>
+          <button type="button" class="pri-opt sel" data-p="medium" onclick="App.setPriority('medium',true)"><div class="dot"></div><div class="lvl">Medium</div><div class="sla">24 HRS</div></button>
+          <button type="button" class="pri-opt" data-p="high" onclick="App.setPriority('high',true)"><div class="dot"></div><div class="lvl">High</div><div class="sla">4 HRS</div></button>
+          <button type="button" class="pri-opt" data-p="critical" onclick="App.setPriority('critical',true)"><div class="dot"></div><div class="lvl">Critical</div><div class="sla">Immediate</div></button>
+        </div>
+      </div>
+
+      <div class="fset">
+        <div class="fset-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg>
+          Issue Description
+        </div>
+        <div class="frow">
+          <div class="field full"><label>Issue Title / Subject <span class="req">*</span></label>
+            <input id="f_title" placeholder="e.g. Siemens S7-1200 dropped to STOP mode" oninput="App.onTriageInput()"></div>
+          <div class="field full"><label>Detailed Description <span class="req">*</span></label>
+            <textarea id="f_description" placeholder="Describe the symptom, when it started, error messages, affected area…" oninput="App.onTriageInput()"></textarea></div>
+          <div class="field full"><label>Steps Already Taken</label>
+            <textarea id="f_stepsTaken" placeholder="What have you tried so far? (optional)"></textarea></div>
+        </div>
+      </div>
+
+      <div class="submitbar">
+        <div class="secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Logged securely to NEXARCH Support · resitch@gmail.com
+        </div>
+        <button class="btn-submit" id="submitBtn" onclick="App.submit()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Raise Ticket
+        </button>
+      </div>
+    </section>
+
+    <!-- LIVE AI TRIAGE -->
+    <aside class="panel triage" id="triagePanel">
       <div class="triage-head">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
-        <span class="ttl">Live AI Triage</span>
-        <span class="live"><span class="dot"></span><span id="triage-state">STANDBY</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+        <h3>Live AI Triage</h3>
+        <div class="triage-status" id="triageStatus"><span class="pulse"></span><span id="triageStatusText">Standby</span></div>
       </div>
-      <div class="readout" id="readout">
-        <p style="color:var(--muted);font-size:12.5px;text-align:center;padding:24px 6px;line-height:1.6">
-          Start typing an issue title or description — the AI will classify the category, suggest a priority, and surface related cases in real time.
-        </p>
+      <div class="triage-body" id="triageBody">
+        <div class="triage-empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <div>Start typing an issue title or description — the AI will classify the category, suggest a priority, and surface related cases in real time.</div>
+        </div>
       </div>
-    </div>
-
+    </aside>
   </div>
-</div>
 
-<div class="foot">NEXARCH SYSTEMS ENGINEERING · NEXDESK SUPPORT CONSOLE · PRECISION. SCALE. CONTROL.</div>
+  <div class="pagefoot">NEXARCH Systems Engineering · NEXDESK Support Console · Precision. Scale. Control.</div>
+</main>
+
+<div class="toast" id="toast"><span id="toastIc"></span><span id="toastMsg"></span></div>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   CONFIG — replace with your deployed Apps Script Web App URL
-   (the ticketing Apps Script that writes to your Support Sheet)
-═══════════════════════════════════════════════════════════════ */
-var TS_SHEETS_URL = 'https://script.google.com/macros/s/YOUR_TICKET_SCRIPT_ID/exec';
-
-/* ── Priority selector highlight ── */
-document.querySelectorAll('.pri-opt').forEach(function(opt){
-  opt.addEventListener('click', function(){
-    document.querySelectorAll('.pri-opt').forEach(function(o){ o.classList.remove('on'); });
-    opt.classList.add('on');
-    opt.querySelector('input').checked = true;
-  });
-});
-
-/* ── Lightweight client-side triage simulation (NEXDESK signature) ── */
-var CATEGORIES = [
-  { cat:'PLC / Controller', kw:['plc','controller','logix','s7','melsec','modicon','cpu','ladder','program','logic'] },
-  { cat:'SCADA / HMI',      kw:['scada','hmi','wincc','factorytalk','ifix','screen','display','operator','panel','graphic'] },
-  { cat:'DCS / Process',    kw:['dcs','pcs','cemat','deltav','experion','centum','800xa','ovation','braumat','batch'] },
-  { cat:'Drives / Motors',  kw:['vfd','drive','motor','inverter','sinamics','altivar','acs','frequency','speed'] },
-  { cat:'Network / Comms',  kw:['network','comms','communication','profinet','ethernet','modbus','profibus','offline','disconnect','timeout'] },
-  { cat:'Field Instruments',kw:['transmitter','sensor','instrument','rosemount','measurement','flow','pressure','level','temperature'] }
-];
-var PRI_HINT = {
-  critical:['down','stopped','outage','emergency','shutdown','trip','fire','danger','production loss','no production','critical'],
-  high:['urgent','fault','fail','error','alarm','not working','cannot','unable','crash','frozen'],
-  low:['question','how to','request','schedule','minor','cosmetic','enquiry','info']
+/* ════════════════════════════════════════════════════════════
+   CONFIG  — paste your Apps Script Web App /exec URL here
+════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  // Deploy the NEXARCH ticketing Apps Script as a Web App (Execute as: Me,
+  // Access: Anyone) and paste the /exec URL below. Leave blank to test the
+  // form + AI triage offline (submissions fall back to email).
+  TS_SHEETS_URL: '',
+  NOTIFY_EMAIL: 'resitch@gmail.com',
+  SLA_HOURS: { critical: 4, high: 12, medium: 24, low: 72 }
 };
 
-function triage(){
-  var title = document.getElementById('t-title').value.toLowerCase();
-  var desc  = document.getElementById('t-desc').value.toLowerCase();
-  var text  = title + ' ' + desc;
-  if(text.trim().length < 3){ return; }
+/* ════════════════════════════════════════════════════════════
+   ML ENGINE  — client-side, zero-cost (mirrors the NEXDESK app)
+════════════════════════════════════════════════════════════ */
+const CATEGORIES = {
+  'PLC / Controller':    ['plc','s7-1200','siemens','ladder','rung','cpu','controller','tia','step7','program','logic','allen bradley','rockwell','firmware','controllogix','compactlogix','pcs 7','cemat','pcs neo','plantpax'],
+  'SCADA / HMI':         ['scada','hmi','wincc','screen','display','tag','alarm screen','operator','panel','visualization','faceplate','trend','factorytalk','wonderware','aveva','ifix','experion','800xa','centum','historian'],
+  'Network / OT':        ['network','switch','ethernet','profinet','modbus','ip','ping','vlan','firewall','router','rs-232','rs-485','timeout','disconnect','latency','gateway','communication','comms'],
+  'Instrumentation':     ['sensor','transmitter','flow','pressure','temperature','level','calibration','4-20ma','signal','reading','drift','probe','flowmeter','rtd','thermocouple','field instrument'],
+  'Drives / Motor':      ['vfd','drive','motor','inverter','overload','trip','frequency','torque','encoder','soft starter','contactor','overcurrent'],
+  'Power / Electrical':  ['power','voltage','outage','breaker','ups','grounding','phase','relay','transformer','earth fault','surge','generator'],
+  'Software / Reports':  ['report','dashboard','export','login','account','license','database','sql','data','excel','password','crash'],
+  'Web Apps':            ['web app','webapp','pwa','website','web page','browser','frontend','front-end','github pages','apps script','service worker','manifest','offline mode','cache','deploy','deployment','404','blank page','white screen','console error','cors','fetch','endpoint','json','responsive','mobile view','chrome','safari','install prompt','single-file','html','css','javascript','google sheets'],
+  'Process / Tuning':    ['tuning','pid','setpoint','loop','overshoot','oscillation','control','unstable','response','deadband','cascade']
+};
+const PRIORITY_SIGNALS = {
+  critical:['down','stopped','outage','emergency','fire','safety','tripped','production halt','no power','line stopped','shutdown','offline plant','urgent','immediately','critical'],
+  high:['intermittent','failing','degraded','slow','overheating','alarm','warning','error','not working','fault','unstable','frequent','repeated'],
+  low:['question','request','documentation','training','minor','cosmetic','enhancement','how to','clarification','schedule','quote']
+};
+const NEG_WORDS=['down','stopped','urgent','fail','error','critical','angry','frustrated','unacceptable','asap','immediately','broken','dead','lost','crash','emergency','halt','worst','terrible','no response'];
+const POS_WORDS=['thanks','thank you','great','resolved','working','appreciate','good','fixed','perfect','helpful','please','kindly'];
 
-  document.getElementById('triage-state').textContent = 'ANALYZING';
+/* Compact reference set for similarity (representative past cases + KB) */
+const REF = [
+  {id:'NX-1042', label:'Boiler control PLC tripped to STOP — production halted', text:'siemens s7-1200 plc stop mode boiler feedwater production down urgent sf led'},
+  {id:'NX-1041', label:'PROFINET intermittent disconnect on kiln drive network', text:'profinet network switch disconnect timeout kiln drive intermittent diagnostic'},
+  {id:'NX-1040', label:'Conveyor VFD trips on overcurrent during startup', text:'vfd drive motor overcurrent trip conveyor startup parameters frequent'},
+  {id:'NX-1039', label:'PID loop on cooler oscillating around setpoint', text:'pid loop tuning oscillation setpoint cooler temperature unstable control manual'},
+  {id:'NX-1038', label:'4-20mA pressure transmitter reading drifting', text:'4-20ma pressure transmitter calibration drift sensor signal reading'},
+  {id:'NX-1037', label:'Cannot log in to production reporting dashboard', text:'login dashboard report password account cannot access starlink'},
+  {id:'NX-1036', label:'WinCC HMI showing #### on turbine tags', text:'wincc hmi scada tag value display turbine plc offline comms'},
+  {id:'NX-1043', label:'Booking PWA shows blank screen after GitHub Pages deploy', text:'web app pwa blank white screen github pages deploy console error google sheets'},
+  {id:'KB-01', label:'KB · Siemens S7-1200 goes to STOP mode unexpectedly', text:'siemens s7-1200 plc stop mode diagnostic buffer tia portal cpu fault watchdog'},
+  {id:'KB-02', label:'KB · PROFINET device intermittently disconnects', text:'profinet network disconnect switch cable shielding grounding watchdog timeout'},
+  {id:'KB-03', label:'KB · VFD trips on overcurrent during start', text:'vfd overcurrent trip motor acceleration ramp drive parameters'},
+  {id:'KB-04', label:'KB · 4-20mA transmitter reading drifts over time', text:'4-20ma transmitter calibration drift loop resistance two-point'},
+  {id:'KB-05', label:'KB · PID loop oscillates around setpoint', text:'pid loop oscillation tuning proportional gain setpoint dead time'},
+  {id:'KB-06', label:'KB · UPS does not hold load during brownout', text:'ups power brownout battery load voltage outage'},
+  {id:'KB-07', label:'KB · Cannot log in to reporting dashboard', text:'login dashboard password report account session starlink cgnat'},
+  {id:'KB-08', label:'KB · Web app on GitHub Pages shows 404 or blank screen', text:'web app github pages 404 blank screen deploy console error branch casing'},
+  {id:'KB-09', label:'KB · PWA will not install / Google Sheets backend not loading', text:'pwa install service worker apps script google sheets offline cors https'}
+];
 
-  // ── classify ──
-  var scored = CATEGORIES.map(function(c){
-    var hits = c.kw.reduce(function(n,k){ return n + (text.indexOf(k)>-1?1:0); }, 0);
-    return { cat:c.cat, score:hits };
-  }).sort(function(a,b){ return b.score - a.score; });
+const ML = {
+  tokenize(s){ return (s||'').toLowerCase().replace(/[^a-z0-9\- ]/g,' ').split(/\s+/).filter(Boolean); },
+  classify(text){
+    const t=' '+(text||'').toLowerCase()+' '; const scores={};
+    for(const [cat,kws] of Object.entries(CATEGORIES)){ let s=0; kws.forEach(k=>{ if(t.includes(k)) s+=(k.length>5?2:1.4); }); scores[cat]=s; }
+    const ranked=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+    const total=ranked.reduce((a,[,v])=>a+v,0)||1; const top=ranked[0];
+    return { category: top[1]>0?top[0]:'General Support',
+      confidence: top[1]>0?Math.min(96,Math.round(top[1]/total*100)+38):35,
+      ranked: ranked.slice(0,3).map(([c,v])=>({cat:c,pct:Math.round(v/total*100)})) };
+  },
+  priority(text){
+    const t=' '+(text||'').toLowerCase()+' '; let score=40;
+    PRIORITY_SIGNALS.critical.forEach(k=>{ if(t.includes(k)) score+=22; });
+    PRIORITY_SIGNALS.high.forEach(k=>{ if(t.includes(k)) score+=11; });
+    PRIORITY_SIGNALS.low.forEach(k=>{ if(t.includes(k)) score-=14; });
+    if(/[A-Z]{4,}/.test(text||'')) score+=4; if((text||'').includes('!')) score+=3;
+    score=Math.max(8,Math.min(99,score));
+    let level=score>=78?'critical':score>=55?'high':score>=30?'medium':'low';
+    return {level,score:Math.round(score)};
+  },
+  sentiment(text){
+    const t=' '+(text||'').toLowerCase()+' '; let s=0;
+    NEG_WORDS.forEach(w=>{ if(t.includes(w)) s-=1; }); POS_WORDS.forEach(w=>{ if(t.includes(w)) s+=1; });
+    const label=s<=-2?'Frustrated':s<0?'Concerned':s>0?'Positive':'Neutral';
+    return {label, score:Math.max(0,Math.min(100,50+s*16))};
+  },
+  resolveEstimate(priority,category){
+    const base=CONFIG.SLA_HOURS[priority]||24;
+    const complexity={'PLC / Controller':1.3,'SCADA / HMI':1.15,'Network / OT':1.25,'Instrumentation':1.1,
+      'Drives / Motor':1.2,'Power / Electrical':1.35,'Software / Reports':.8,'Process / Tuning':1.4,'Web Apps':.85,'General Support':.9}[category]||1;
+    return {hours:Math.max(1,Math.round(base*0.55*complexity)), sla:base};
+  },
+  vectorize(text){ const toks=this.tokenize(text); const v={}; toks.forEach(t=>{ if(t.length>2) v[t]=(v[t]||0)+1; }); return v; },
+  cosine(a,b){ let dot=0,na=0,nb=0; for(const k in a){ na+=a[k]*a[k]; if(b[k]) dot+=a[k]*b[k]; } for(const k in b){ nb+=b[k]*b[k]; } return (na&&nb)?dot/Math.sqrt(na*nb):0; },
+  similar(text,limit=3){ const qv=this.vectorize(text);
+    return REF.map(p=>({...p,score:this.cosine(qv,this.vectorize(p.text))})).filter(p=>p.score>0.04).sort((a,b)=>b.score-a.score).slice(0,limit); }
+};
 
-  var topHits = scored[0].score;
-  var conf = topHits === 0 ? 42 : Math.min(96, 55 + topHits*14);
-  var ranked = scored.slice(0,3).map(function(s,i){
-    var pct = topHits===0 ? [42,31,18][i] : Math.max(8, Math.round(conf * (s.score+0.4)/(topHits+1.2)) - i*9);
-    return { cat:s.cat, pct:pct };
-  });
+const ICONS = {
+  spinner:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M2 12h4M4.9 19.1l2.8-2.8"/></svg>',
+  ok:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+  err:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>',
+  warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>'
+};
 
-  // ── priority ──
-  var pri = 'medium', pscore = 50;
-  if(PRI_HINT.critical.some(function(k){return text.indexOf(k)>-1;})){ pri='critical'; pscore=94; }
-  else if(PRI_HINT.high.some(function(k){return text.indexOf(k)>-1;})){ pri='high'; pscore=76; }
-  else if(PRI_HINT.low.some(function(k){return text.indexOf(k)>-1;})){ pri='low'; pscore=30; }
+/* ════════════════════════════════════════════════════════════
+   APP
+════════════════════════════════════════════════════════════ */
+const App = {
+  priority:'medium', aiPriority:null, manualPriority:false, _t:null,
 
-  // auto-select priority in form
-  var priCap = pri.charAt(0).toUpperCase()+pri.slice(1);
-  document.querySelectorAll('.pri-opt').forEach(function(o){
-    var on = o.dataset.pri === priCap;
-    o.classList.toggle('on', on);
-    if(on) o.querySelector('input').checked = true;
-  });
+  val(id){ return (document.getElementById(id).value||'').trim(); },
 
-  // ── sentiment ──
-  var sent = 'Neutral', sentCol = 'var(--muted)';
-  if(PRI_HINT.critical.some(function(k){return text.indexOf(k)>-1;})){ sent='Frustrated'; sentCol='var(--crit)'; }
-  else if(PRI_HINT.high.some(function(k){return text.indexOf(k)>-1;})){ sent='Concerned'; sentCol='var(--high)'; }
+  setPriority(p, manual){
+    this.priority=p; if(manual){ this.manualPriority=true; }
+    document.querySelectorAll('.pri-opt').forEach(el=>el.classList.toggle('sel', el.dataset.p===p));
+  },
 
-  // ── est resolve ──
-  var est = pri==='critical'?2 : pri==='high'?4 : pri==='medium'?12 : 48;
-  var sla = pri==='critical'?1 : pri==='high'?4 : pri==='medium'?24 : 72;
+  onTriageInput(){
+    clearTimeout(this._t);
+    const st=document.getElementById('triageStatus'); const stt=document.getElementById('triageStatusText');
+    st.classList.add('ready'); stt.textContent='Analyzing…';
+    this._t=setTimeout(()=>this.runTriage(), 280);
+  },
 
-  var priCol = {critical:'var(--crit)',high:'var(--high)',medium:'var(--med)',low:'var(--low)'}[pri];
+  runTriage(){
+    const title=this.val('f_title'), desc=this.val('f_description');
+    const text=(title+' '+desc).trim();
+    const st=document.getElementById('triageStatus'), stt=document.getElementById('triageStatusText');
+    const body=document.getElementById('triageBody');
+    if(text.length<4){
+      st.classList.remove('ready'); stt.textContent='Standby';
+      body.innerHTML=`<div class="triage-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <div>Start typing an issue title or description — the AI will classify the category, suggest a priority, and surface related cases in real time.</div></div>`;
+      return;
+    }
+    const cls=ML.classify(text), pri=ML.priority(text), sent=ML.sentiment(text);
+    const est=ML.resolveEstimate(pri.level, cls.category), sim=ML.similar(text,3);
+    stt.textContent='Ready';
 
-  // ── related cases (simulated) ──
-  var sims = [];
-  if(topHits>0){
-    var base = scored[0].cat.replace(/[^A-Z]/g,'').slice(0,3) || 'GEN';
-    sims = [
-      { id:'NX-'+(1000+Math.floor(Math.random()*40)), label:scored[0].cat+' — resolved similar fault', pct:Math.round(conf-8) },
-      { id:'KB-'+(200+Math.floor(Math.random()*30)), label:scored[0].cat+' troubleshooting guide', pct:Math.round(conf-18) }
-    ];
+    // auto-suggest priority unless user picked manually
+    this.aiPriority=pri.level;
+    if(!this.manualPriority) this.setPriority(pri.level, false);
+    document.querySelectorAll('.pri-opt').forEach(el=>el.classList.toggle('ai-pick', el.dataset.p===pri.level));
+
+    const priClass={critical:'crit',high:'high',medium:'medium',low:'low'}[pri.level];
+    const priColor={critical:'var(--crit)',high:'var(--high)',medium:'var(--med)',low:'var(--low)'}[pri.level];
+    const sentColor=sent.label==='Frustrated'?'var(--crit)':sent.label==='Concerned'?'var(--high)':sent.label==='Positive'?'var(--ok)':'var(--muted)';
+
+    body.innerHTML=`
+      <div class="tlabel">Predicted Category <b>${cls.confidence}%</b></div>
+      <div class="conf-bar"><i style="width:${cls.confidence}%"></i></div>
+      <div class="chips" style="margin-top:10px">
+        ${cls.ranked.filter(r=>r.pct>0).map((r,i)=>`<span class="chip ${i===0?'lead':''}">${r.cat} <b>${r.pct}%</b></span>`).join('') || `<span class="chip lead">${cls.category}</span>`}
+      </div>
+
+      <div class="tlabel">Priority Signal <b class="${priClass}">${pri.level.toUpperCase()}</b></div>
+      <div class="sigbar"><i style="width:${pri.score}%;background:${priColor}"></i></div>
+
+      <div class="chips" style="margin-top:14px">
+        <span class="chip">Sentiment <b style="color:${sentColor}">${sent.label}</b></span>
+        <span class="chip">Est. resolve <b>${est.hours}h</b></span>
+        <span class="chip">SLA <b>${est.sla}h</b></span>
+      </div>
+
+      ${sim.length?`<div class="divider"></div>
+        <div class="tlabel">Related Cases &amp; Articles</div>
+        ${sim.map(s=>`<div class="rel"><span class="rid">${s.id}</span><span class="rlabel">${s.label}</span><span class="rpct">${Math.round(s.score*100)}%</span></div>`).join('')}`:''}
+    `;
+  },
+
+  markInvalid(ids){
+    document.querySelectorAll('.field.invalid').forEach(f=>f.classList.remove('invalid'));
+    let first=null;
+    ids.forEach(id=>{ const el=document.getElementById(id); if(el){ el.closest('.field').classList.add('invalid'); if(!first) first=el; } });
+    if(first){ first.focus(); first.scrollIntoView({behavior:'smooth',block:'center'}); }
+  },
+
+  generateRef(){
+    const d=new Date(), p=n=>String(n).padStart(2,'0');
+    const rnd=Math.random().toString(36).substring(2,6).toUpperCase();
+    return 'NX-'+String(d.getFullYear()).slice(-2)+p(d.getMonth()+1)+p(d.getDate())+'-'+rnd;
+  },
+
+  collect(){
+    return {
+      type:'ticket',
+      ticketRef:this.generateRef(),
+      timestamp:new Date().toLocaleString('en-PH'),
+      priority:this.priority.charAt(0).toUpperCase()+this.priority.slice(1),
+      name:this.val('f_name'), company:this.val('f_company'),
+      email:this.val('f_email'), phone:this.val('f_phone'),
+      site:this.val('f_site'), system:this.val('f_system'),
+      product:this.val('f_product'), supportType:this.val('f_supportType'),
+      title:this.val('f_title'), description:this.val('f_description'),
+      stepsTaken:this.val('f_stepsTaken'), source:'Website'
+    };
+  },
+
+  async submit(){
+    const req=[['f_name','name'],['f_company','company'],['f_email','email'],
+      ['f_site','site'],['f_supportType','supportType'],['f_title','title'],['f_description','description']];
+    const missing=req.filter(([id])=>!this.val(id)).map(([id])=>id);
+    const email=this.val('f_email');
+    if(missing.length){ this.markInvalid(missing); this.toast('err','Please complete the required fields.'); return; }
+    if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ this.markInvalid(['f_email']); this.toast('err','Please enter a valid email address.'); return; }
+    document.querySelectorAll('.field.invalid').forEach(f=>f.classList.remove('invalid'));
+
+    const payload=this.collect();
+    const btn=document.getElementById('submitBtn');
+    btn.disabled=true; btn.innerHTML=`${ICONS.spinner} Submitting…`;
+
+    let delivered=false;
+    if(CONFIG.TS_SHEETS_URL){
+      try{
+        // Apps Script /exec returns no CORS headers, so we fire the write in
+        // no-cors mode (simple text/plain request → no preflight). The response
+        // is opaque; the ticket ref is generated client-side so we don't need it.
+        await fetch(CONFIG.TS_SHEETS_URL, {
+          method:'POST', mode:'no-cors', redirect:'follow',
+          headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify(payload)
+        });
+        delivered=true;
+      }catch(e){ delivered=false; }
+    }
+    this.showSuccess(payload, delivered);
+  },
+
+  showSuccess(t, delivered){
+    const grid=document.getElementById('grid');
+    const cls=ML.classify(t.title+' '+t.description);
+    const mailSubject=encodeURIComponent(`[${t.priority.toUpperCase()}] Support Ticket ${t.ticketRef} — ${t.title}`);
+    const mailBody=encodeURIComponent(
+      `Ticket Ref: ${t.ticketRef}\nPriority: ${t.priority}\nSupport Type: ${t.supportType}\n\n`+
+      `Name: ${t.name}\nCompany: ${t.company}\nEmail: ${t.email}\nPhone: ${t.phone}\n\n`+
+      `Site: ${t.site}\nSystem: ${t.system}\nProduct: ${t.product}\n\n`+
+      `Issue: ${t.title}\n\n${t.description}\n\nSteps already taken:\n${t.stepsTaken||'None specified'}`);
+    const mailto=`mailto:${CONFIG.NOTIFY_EMAIL}?subject=${mailSubject}&body=${mailBody}`;
+
+    grid.innerHTML=`<section class="panel" style="grid-column:1/-1">
+      <div class="success">
+        <div class="ok-ic">${ICONS.ok}</div>
+        <h2>Ticket ${delivered?'Submitted':'Ready to Send'}</h2>
+        <p>${delivered
+          ? 'Your ticket has been logged to NEXARCH Support. An engineer will respond within the SLA window for its priority.'
+          : 'We could not reach the support server right now. Your reference is reserved below — tap “Email this ticket” to send it directly, and we will pick it up.'}</p>
+        <div class="refbox"><span class="k">Reference</span><span class="v">${t.ticketRef}</span></div>
+        <div class="summary">
+          <div class="sr"><span class="sk">Priority</span><span class="sv">${t.priority}</span></div>
+          <div class="sr"><span class="sk">Category (AI)</span><span class="sv">${cls.category}</span></div>
+          <div class="sr"><span class="sk">Support type</span><span class="sv">${t.supportType||'—'}</span></div>
+          <div class="sr"><span class="sk">Company</span><span class="sv">${t.company}</span></div>
+          <div class="sr"><span class="sk">Site</span><span class="sv">${t.site}</span></div>
+        </div>
+        <div class="actions">
+          ${!delivered?`<a class="primary" href="${mailto}">${ICONS.ok} Email this ticket</a>`:''}
+          <button class="${delivered?'primary':'ghost'}" onclick="location.reload()">Raise another ticket</button>
+          ${window.opener && !window.opener.closed
+            ? `<button class="ghost" onclick="window.close()">Close window</button>`
+            : `<a class="ghost" href="https://resitch-source.github.io/NEXARCH.IO/nexarch-website.html">Back to site</a>`}
+        </div>
+      </div></section>`;
+    window.scrollTo({top:0,behavior:'smooth'});
+    this.toast(delivered?'ok':'warn', delivered?`Ticket ${t.ticketRef} logged.`:`Ticket ${t.ticketRef} reserved — send by email.`);
+  },
+
+  toast(type,msg){
+    const el=document.getElementById('toast');
+    document.getElementById('toastIc').innerHTML=ICONS[type==='ok'?'ok':type==='warn'?'warn':'err'];
+    document.getElementById('toastMsg').textContent=msg;
+    el.className='toast show '+(type==='ok'?'ok':type==='warn'?'warn':'err');
+    clearTimeout(this._tt); this._tt=setTimeout(()=>el.classList.remove('show'),4200);
   }
-
-  document.getElementById('readout').innerHTML =
-    '<div class="gauge"><div class="gl"><span>Predicted category</span><span class="gv">'+conf+'%</span></div>'+
-    '<div class="track"><div class="fill" style="width:'+conf+'%"></div></div>'+
-    '<div class="conf-row" style="margin-top:9px">'+ranked.map(function(r,i){
-      return '<span class="conf-tag">'+(i===0?'<b>'+r.cat+'</b>':r.cat)+' '+r.pct+'%</span>';
-    }).join('')+'</div></div>'+
-    '<div class="gauge"><div class="gl"><span>Priority signal</span><span class="gv" style="color:'+priCol+'">'+pri.toUpperCase()+'</span></div>'+
-    '<div class="track"><div class="fill" style="width:'+pscore+'%;background:linear-gradient(90deg,'+priCol+'88,'+priCol+');box-shadow:0 0 12px '+priCol+'66"></div></div></div>'+
-    '<div class="conf-row">'+
-      '<span class="conf-tag">Sentiment <b style="color:'+sentCol+'">'+sent+'</b></span>'+
-      '<span class="conf-tag">Est. resolve <b>'+est+'h</b></span>'+
-      '<span class="conf-tag">SLA <b>'+sla+'h</b></span>'+
-    '</div>'+
-    (sims.length ? '<div><div class="gl" style="font-family:var(--f-mono);font-size:10px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:2px">Related cases & articles</div>'+
-      sims.map(function(x){ return '<div class="sim-item"><span class="id">'+x.id+'</span><span class="mt">'+x.label+'</span><span class="conf-tag" style="padding:2px 7px">'+x.pct+'%</span></div>'; }).join('')+'</div>' : '');
-
-  setTimeout(function(){ document.getElementById('triage-state').textContent = 'READY'; }, 400);
-}
-
-/* ── Ticket reference generator ── */
-function genRef(){
-  var d = new Date();
-  return 'NX-' + String(d.getFullYear()).slice(-2) +
-    String(d.getMonth()+1).padStart(2,'0') +
-    String(d.getDate()).padStart(2,'0') + '-' +
-    Math.random().toString(36).substring(2,6).toUpperCase();
-}
-
-/* ── Submit ── */
-async function submitTicket(){
-  var g = function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
-  var name=g('t-name'), company=g('t-company'), email=g('t-email'), phone=g('t-phone'),
-      site=g('t-site'), system=g('t-system'), product=g('t-product'), type=g('t-type'),
-      title=g('t-title'), desc=g('t-desc'), steps=g('t-steps');
-  var priEl = document.querySelector('input[name="priority"]:checked');
-  var priority = priEl ? priEl.value : 'Medium';
-  var st = document.getElementById('form-status');
-  var btn = document.getElementById('submit-btn');
-
-  function showStatus(cls, html){
-    st.className = 'form-status ' + cls;
-    st.style.display = 'flex';
-    st.innerHTML = html;
-  }
-
-  // validation
-  if(!name||!company||!email||!site||!type||!title||!desc){
-    showStatus('err','<span>⚠</span><span>Please complete all required fields marked with *.</span>');
-    st.scrollIntoView({behavior:'smooth', block:'center'});
-    return;
-  }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-    showStatus('err','<span>⚠</span><span>Please enter a valid email address.</span>');
-    return;
-  }
-
-  btn.disabled = true;
-  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.9" y1="4.9" x2="7.8" y2="7.8"/><line x1="16.2" y1="16.2" x2="19.1" y2="19.1"/></svg> Submitting…';
-  st.style.display = 'none';
-
-  var ticketRef = genRef();
-  var payload = {
-    type:'ticket', ticketRef:ticketRef, timestamp:new Date().toLocaleString('en-PH'),
-    name:name, company:company, email:email, phone:phone,
-    site:site, system:system, product:product, supportType:type,
-    priority:priority, title:title, description:desc, stepsTaken:steps,
-    status:'Open', source:'NEXDESK Intake'
-  };
-
-  try{
-    await fetch(TS_SHEETS_URL, {
-      method:'POST', mode:'no-cors',
-      headers:{'content-type':'application/json'},
-      body:JSON.stringify(payload)
-    });
-  }catch(err){}
-
-  // success screen
-  document.getElementById('view').innerHTML =
-    '<div class="panel" style="max-width:560px;margin:40px auto">'+
-      '<div class="success-card">'+
-        '<div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>'+
-        '<h3>Ticket Raised Successfully</h3>'+
-        '<p>Your support ticket has been logged with the NEXARCH engineering team.</p>'+
-        '<div class="big-ref">'+ticketRef+'</div>'+
-        '<div class="success-meta">'+
-          '<span class="conf-tag">Priority <b>'+priority+'</b></span>'+
-          '<span class="conf-tag">Type <b>'+type+'</b></span>'+
-          '<span class="conf-tag">Status <b>Open</b></span>'+
-        '</div>'+
-        '<p>A confirmation will be sent to <b style="color:var(--ink)">'+email+'</b>. Our team responds based on the assigned priority level.</p>'+
-        '<p style="font-family:var(--f-mono);font-size:11px;color:var(--faint);margin-top:14px">Urgent? Call +63 905 251 5051 · resitch@gmail.com</p>'+
-        '<div style="display:flex;gap:10px;justify-content:center;margin-top:24px">'+
-          '<button class="btn btn-primary" onclick="location.reload()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Raise Another</button>'+
-          '<a href="nexarch-website.html" class="btn btn-ghost">Back to Site</a>'+
-        '</div>'+
-      '</div>'+
-    '</div>';
-  window.scrollTo({top:0, behavior:'smooth'});
-}
+};
 </script>
 </body>
 </html>
