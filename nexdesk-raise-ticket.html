@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0B0E14">
+<meta name="description" content="NEXDESK — Raise a technical support ticket with NEXARCH Systems Engineering.">
+<title>NEXDESK · Raise a Support Ticket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230B0E14'/><path d='M30 70V30h8l24 26V30h8v40h-8L38 44v26z' fill='%232DE2C0'/></svg>">
+<style>
+/* ============================================================
+   NEXDESK — Public Ticket Intake
+   Phosphor-teal signature on deep slate.
+============================================================ */
+:root{
+  --void:#0B0E14; --panel:#131822; --panel-2:#1A2130; --panel-3:#222B3B;
+  --line:#232C3B; --line-2:#2E394C;
+  --ink:#E6ECF5; --muted:#8B97AB; --faint:#5C6678;
+  --teal:#2DE2C0; --teal-dim:#1c8f7d; --teal-glow:rgba(45,226,192,.18);
+  --crit:#FF4D5E; --high:#FF9F40; --med:#FFD23F; --low:#3DB9F5; --ok:#36D399;
+  --crit-bg:rgba(255,77,94,.12); --high-bg:rgba(255,159,64,.12);
+  --med-bg:rgba(255,210,63,.12); --low-bg:rgba(61,185,245,.12); --ok-bg:rgba(54,211,153,.12);
+  --r:14px; --r-sm:9px; --r-lg:20px;
+  --f-disp:'Chakra Petch',sans-serif; --f-body:'Inter',sans-serif; --f-mono:'JetBrains Mono',monospace;
+  --sh:0 1px 0 rgba(255,255,255,.02) inset, 0 16px 40px rgba(0,0,0,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--f-body);background:var(--void);color:var(--ink);
+  font-size:14px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh;
+  background-image:
+    radial-gradient(900px 500px at 100% -10%, rgba(45,226,192,.06), transparent 60%),
+    radial-gradient(700px 500px at -10% 110%, rgba(91,140,255,.05), transparent 60%);
+  background-attachment:fixed;
+}
+::selection{background:var(--teal-glow);color:#fff}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:14px}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:20px;border:2px solid var(--void)}
+::-webkit-scrollbar-track{background:transparent}
+
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:14px;
+  padding:14px 26px;background:rgba(11,14,20,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,#16201d,#0f1318);
+  border:1px solid var(--line-2);display:grid;place-items:center;flex:none;box-shadow:0 0 22px var(--teal-glow)}
+.brand .logo svg{width:23px;height:23px}
+.brand h1{font-family:var(--f-disp);font-size:19px;font-weight:700;letter-spacing:.5px;line-height:1}
+.brand .sub{font-family:var(--f-mono);font-size:9.5px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+.top-spacer{flex:1}
+.conn{display:flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:11px;color:var(--muted);
+  padding:7px 12px;border:1px solid var(--line);border-radius:20px;background:var(--panel)}
+.conn .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);
+  padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);transition:.15s}
+.back-link:hover{border-color:var(--line-2);color:var(--ink)}
+.back-link svg{width:16px;height:16px}
+
+/* ---------- View ---------- */
+.view{padding:30px 26px 60px;max-width:1180px;width:100%;margin:0 auto;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.view-head{margin-bottom:26px}
+.view-head .eyebrow{font-family:var(--f-mono);font-size:10.5px;letter-spacing:2.5px;color:var(--teal);
+  text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.view-head .eyebrow::before{content:"";width:18px;height:1px;background:var(--teal)}
+.view-head h2{font-family:var(--f-disp);font-size:30px;font-weight:700;letter-spacing:.3px;line-height:1.1}
+.view-head p{color:var(--muted);font-size:14px;margin-top:7px;max-width:620px}
+
+/* ---------- Layout ---------- */
+.intake-grid{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+
+/* ---------- Panel ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 20px;border-bottom:1px solid var(--line)}
+.panel-head h3{font-family:var(--f-disp);font-size:15.5px;font-weight:600;letter-spacing:.3px;display:flex;align-items:center;gap:9px}
+.panel-head h3 svg{width:17px;height:17px;color:var(--teal)}
+.panel-head .step{font-family:var(--f-mono);font-size:10.5px;letter-spacing:1.5px;color:var(--faint);text-transform:uppercase}
+.panel-body{padding:20px}
+
+/* ---------- Form ---------- */
+.form-grid{display:grid;gap:18px}
+.section-label{font-family:var(--f-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);display:flex;align-items:center;gap:9px;margin-top:4px}
+.section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+.field label{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:7px}
+.field label .req{color:var(--teal)}
+.field input,.field select,.field textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);
+  border-radius:10px;padding:11px 13px;color:var(--ink);outline:none;transition:.15s;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal-dim);box-shadow:0 0 0 3px var(--teal-glow);background:var(--panel)}
+.field input::placeholder,.field textarea::placeholder{color:var(--faint)}
+.field textarea{min-height:120px;line-height:1.6}
+.field select{cursor:pointer}
+.field select option{background:var(--panel-2)}
+.field select optgroup{background:var(--void);color:var(--teal);font-family:var(--f-mono)}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* Priority selector */
+.pri-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pri-opt{position:relative;border:1px solid var(--line);border-radius:10px;padding:13px 8px;text-align:center;
+  cursor:pointer;transition:.16s;background:var(--panel-2)}
+.pri-opt input{position:absolute;opacity:0;width:0;height:0}
+.pri-opt .pip{width:9px;height:9px;border-radius:50%;margin:0 auto 8px;background:currentColor;box-shadow:0 0 9px currentColor}
+.pri-opt .pl{font-family:var(--f-mono);font-size:10px;letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.pri-opt .pd{font-size:10px;color:var(--faint);margin-top:4px}
+.pri-opt.low{color:var(--low)} .pri-opt.medium{color:var(--med)}
+.pri-opt.high{color:var(--high)} .pri-opt.critical{color:var(--crit)}
+.pri-opt:hover{transform:translateY(-2px);border-color:currentColor}
+.pri-opt.on{border-color:currentColor;background:rgba(45,226,192,.04);box-shadow:0 0 0 2px currentColor inset}
+
+/* ---------- Triage console (signature) ---------- */
+.triage{background:linear-gradient(165deg,#10171f,#0c1117);border:1px solid var(--line-2);
+  border-radius:var(--r);overflow:hidden;position:relative;position:sticky;top:84px}
+.triage::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(45,226,192,.012) 3px,transparent 4px);
+  pointer-events:none}
+.triage-head{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.triage-head>svg{width:16px;height:16px;flex:0 0 auto;color:var(--teal)}
+.triage-head .ttl{font-family:var(--f-disp);font-size:14px;font-weight:600;letter-spacing:.5px}
+.triage-head .live{margin-left:auto;font-family:var(--f-mono);font-size:9.5px;letter-spacing:1.5px;
+  color:var(--teal);display:flex;align-items:center;gap:6px}
+.triage-head .live .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);
+  box-shadow:0 0 9px var(--teal);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.readout{padding:16px 18px;display:flex;flex-direction:column;gap:15px}
+.gauge .gl{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10.5px;
+  letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.gauge .gv{font-weight:700;color:var(--ink)}
+.gauge .track{height:8px;background:#0a0e14;border:1px solid var(--line);border-radius:6px;overflow:hidden;position:relative}
+.gauge .fill{height:100%;border-radius:6px;width:0;transition:width .7s cubic-bezier(.2,.8,.2,1);
+  background:linear-gradient(90deg,var(--teal-dim),var(--teal));box-shadow:0 0 12px var(--teal-glow)}
+.conf-row{display:flex;gap:8px;flex-wrap:wrap}
+.conf-tag{font-family:var(--f-mono);font-size:11px;padding:5px 10px;border-radius:7px;
+  background:var(--panel-2);border:1px solid var(--line);color:var(--muted)}
+.conf-tag b{color:var(--teal)}
+.sim-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.sim-item .id{font-family:var(--f-mono);font-size:11px;color:var(--teal)}
+.sim-item .mt{font-size:12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:11px;
+  font-weight:600;font-size:13.5px;transition:.16s;white-space:nowrap}
+.btn svg{width:17px;height:17px;stroke-width:2.1}
+.btn-primary{background:var(--teal);color:#04130f;box-shadow:0 6px 18px var(--teal-glow)}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-ghost{background:var(--panel);border:1px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--line-2);background:var(--panel-2)}
+.form-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px;
+  padding-top:18px;border-top:1px solid var(--line)}
+.foot-note{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);letter-spacing:.5px}
+
+/* ---------- Status ---------- */
+.form-status{padding:13px 16px;border-radius:11px;font-size:13.5px;border:1px solid;display:none;align-items:flex-start;gap:10px}
+.form-status.err{background:var(--crit-bg);border-color:rgba(255,77,94,.3);color:#ffb3ba}
+.form-status.ok{background:var(--ok-bg);border-color:rgba(54,211,153,.3);color:#a8edcf}
+.ticket-ref{font-family:var(--f-mono);font-weight:700;letter-spacing:2px;color:var(--teal)}
+
+/* ---------- Success card ---------- */
+.success-card{text-align:center;padding:40px 28px}
+.success-card .sicon{width:72px;height:72px;border-radius:20px;background:var(--ok-bg);
+  display:grid;place-items:center;margin:0 auto 20px;border:1px solid rgba(54,211,153,.3)}
+.success-card .sicon svg{width:38px;height:38px;color:var(--ok)}
+.success-card h3{font-family:var(--f-disp);font-size:22px;font-weight:700;margin-bottom:8px}
+.success-card .big-ref{font-family:var(--f-mono);font-size:24px;font-weight:700;color:var(--teal);
+  letter-spacing:3px;margin:16px 0;padding:14px;background:var(--panel-2);border:1px dashed var(--teal-dim);border-radius:12px}
+.success-card p{color:var(--muted);font-size:14px;line-height:1.7;max-width:420px;margin:0 auto 8px}
+.success-meta{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px 0}
+
+/* ---------- Footer ---------- */
+.foot{text-align:center;padding:30px 20px;color:var(--faint);font-family:var(--f-mono);font-size:11px;letter-spacing:1px;
+  border-top:1px solid var(--line);margin-top:20px}
+
+/* ---------- Responsive ---------- */
+@media(max-width:880px){
+  .intake-grid{grid-template-columns:1fr}
+  .triage{position:relative;top:0}
+  .view{padding:24px 16px 50px}
+  .view-head h2{font-size:24px}
+  .row-2{grid-template-columns:1fr}
+  .pri-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .topbar{padding:12px 16px}
+  .brand h1{font-size:16px}
+  .back-link span{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="brand">
+    <div class="logo">
+      <svg viewBox="0 0 100 100"><path d="M30 70V30h8l24 26V30h8v40h-8L38 44v26z" fill="#2DE2C0"/></svg>
+    </div>
+    <div>
+      <h1>NEXDESK</h1>
+      <div class="sub">Support Operations</div>
+    </div>
+  </div>
+  <div class="top-spacer"></div>
+  <div class="conn"><span class="dot"></span>SECURE INTAKE</div>
+  <a href="nexarch-website.html" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <span>Back to site</span>
+  </a>
+</div>
+
+<!-- View -->
+<div class="view" id="view">
+  <div class="view-head">
+    <div class="eyebrow">Technical Support · Ticket Intake</div>
+    <h2>Raise a Support Ticket</h2>
+    <p>Submit a technical issue to the NEXARCH engineering team. Our Live AI Triage classifies and prioritises your ticket in real time so the right engineer responds faster.</p>
+  </div>
+
+  <div class="intake-grid">
+
+    <!-- ── FORM ── -->
+    <div class="panel">
+      <div class="panel-head">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          New Ticket
+        </h3>
+        <span class="step">All fields marked <span style="color:var(--teal)">*</span> required</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-grid" id="ticket-form">
+
+          <!-- Contact -->
+          <div class="section-label">Contact Details</div>
+          <div class="row-2">
+            <div class="field"><label>Full Name <span class="req">*</span></label>
+              <input id="t-name" placeholder="Juan Dela Cruz"></div>
+            <div class="field"><label>Company / Organisation <span class="req">*</span></label>
+              <input id="t-company" placeholder="ABC Corporation"></div>
+          </div>
+          <div class="row-2">
+            <div class="field"><label>Email Address <span class="req">*</span></label>
+              <input id="t-email" type="email" placeholder="juan@company.com"></div>
+            <div class="field"><label>Phone / Mobile</label>
+              <input id="t-phone" placeholder="+63 9XX XXX XXXX"></div>
+          </div>
+
+          <!-- System -->
+          <div class="section-label">System Information</div>
+          <div class="row-2">
+            <div class="field"><label>Plant / Site Name <span class="req">*</span></label>
+              <input id="t-site" placeholder="e.g. Holcim Lugait Plant"></div>
+            <div class="field"><label>System / Equipment</label>
+              <input id="t-system" placeholder="e.g. PCS 7 CEMAT, Allen-Bradley PLC"></div>
+          </div>
+          <div class="row-2">
+            <div class="field"><label>Product / Platform</label>
+              <select id="t-product">
+                <option value="">Select product…</option>
+                <optgroup label="SIEMENS">
+                  <option>Siemens PCS 7 CEMAT</option>
+                  <option>Siemens PCS Neo DCS</option>
+                  <option>Siemens Braumat</option>
+                  <option>Siemens TIA Portal / S7 PLC</option>
+                  <option>Siemens WinCC SCADA</option>
+                  <option>Siemens MES (SIMATIC IT)</option>
+                </optgroup>
+                <optgroup label="ROCKWELL / ALLEN-BRADLEY">
+                  <option>Rockwell PlantPAx DCS</option>
+                  <option>Allen-Bradley ControlLogix / CompactLogix</option>
+                  <option>FactoryTalk View SE / ME</option>
+                  <option>FactoryTalk MES</option>
+                </optgroup>
+                <optgroup label="SCHNEIDER">
+                  <option>Schneider BrewMax</option>
+                  <option>Schneider EcoStruxure / Modicon M580</option>
+                  <option>AVEVA / Wonderware SCADA</option>
+                </optgroup>
+                <optgroup label="OTHER BRANDS">
+                  <option>Emerson DeltaV DCS</option>
+                  <option>Emerson Ovation DCS</option>
+                  <option>Honeywell Experion PKS</option>
+                  <option>GE Mark VIe / iFIX SCADA</option>
+                  <option>ABB System 800xA</option>
+                  <option>Yokogawa CENTUM VP</option>
+                  <option>Mitsubishi MELSEC iQ-R</option>
+                </optgroup>
+                <optgroup label="GENERAL">
+                  <option>HMI / Operator Interface</option>
+                  <option>VFD / Motor Drive</option>
+                  <option>Field Instruments</option>
+                  <option>SCADA / Historian</option>
+                  <option>Network / Communications</option>
+                  <option>Other</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="field"><label>Support Type <span class="req">*</span></label>
+              <select id="t-type">
+                <option value="">Select type…</option>
+                <option>Troubleshooting / Fault Diagnosis</option>
+                <option>System Recovery / Restore</option>
+                <option>Configuration / Programming</option>
+                <option>Hardware Replacement</option>
+                <option>Software Update / Upgrade</option>
+                <option>Backup / Restore</option>
+                <option>Performance Issue</option>
+                <option>Network / Communication Fault</option>
+                <option>Training / Guidance</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Priority -->
+          <div class="section-label">Priority Level</div>
+          <div class="pri-grid" id="pri-grid">
+            <label class="pri-opt low" data-pri="Low">
+              <input type="radio" name="priority" value="Low">
+              <span class="pip"></span><span class="pl">Low</span><span class="pd">Scheduled</span>
+            </label>
+            <label class="pri-opt medium on" data-pri="Medium">
+              <input type="radio" name="priority" value="Medium" checked>
+              <span class="pip"></span><span class="pl">Medium</span><span class="pd">24 hrs</span>
+            </label>
+            <label class="pri-opt high" data-pri="High">
+              <input type="radio" name="priority" value="High">
+              <span class="pip"></span><span class="pl">High</span><span class="pd">4 hrs</span>
+            </label>
+            <label class="pri-opt critical" data-pri="Critical">
+              <input type="radio" name="priority" value="Critical">
+              <span class="pip"></span><span class="pl">Critical</span><span class="pd">Immediate</span>
+            </label>
+          </div>
+
+          <!-- Issue -->
+          <div class="section-label">Issue Description</div>
+          <div class="field"><label>Issue Title / Subject <span class="req">*</span></label>
+            <input id="t-title" placeholder="Short summary of the issue" oninput="triage()"></div>
+          <div class="field"><label>Detailed Description <span class="req">*</span></label>
+            <textarea id="t-desc" placeholder="Describe the symptom, equipment, error messages, and what the system was doing when the fault occurred…" oninput="triage()"></textarea></div>
+          <div class="field"><label>Steps Already Taken</label>
+            <textarea id="t-steps" style="min-height:80px" placeholder="What troubleshooting has already been attempted?"></textarea></div>
+
+          <!-- Status + submit -->
+          <div class="form-status" id="form-status"></div>
+          <div class="form-foot">
+            <span class="foot-note">🔒 Logged securely to NEXARCH Support · resitch@gmail.com</span>
+            <button class="btn btn-primary" id="submit-btn" onclick="submitTicket()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+              Raise Ticket
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LIVE AI TRIAGE ── -->
+    <div class="triage" id="triage-panel">
+      <div class="triage-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+        <span class="ttl">Live AI Triage</span>
+        <span class="live"><span class="dot"></span><span id="triage-state">STANDBY</span></span>
+      </div>
+      <div class="readout" id="readout">
+        <p style="color:var(--muted);font-size:12.5px;text-align:center;padding:24px 6px;line-height:1.6">
+          Start typing an issue title or description — the AI will classify the category, suggest a priority, and surface related cases in real time.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="foot">NEXARCH SYSTEMS ENGINEERING · NEXDESK SUPPORT CONSOLE · PRECISION. SCALE. CONTROL.</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   CONFIG — replace with your deployed Apps Script Web App URL
+   (the ticketing Apps Script that writes to your Support Sheet)
+═══════════════════════════════════════════════════════════════ */
+var TS_SHEETS_URL = 'https://script.google.com/macros/s/YOUR_TICKET_SCRIPT_ID/exec';
+
+/* ── Priority selector highlight ── */
+document.querySelectorAll('.pri-opt').forEach(function(opt){
+  opt.addEventListener('click', function(){
+    document.querySelectorAll('.pri-opt').forEach(function(o){ o.classList.remove('on'); });
+    opt.classList.add('on');
+    opt.querySelector('input').checked = true;
+  });
+});
+
+/* ── Lightweight client-side triage simulation (NEXDESK signature) ── */
+var CATEGORIES = [
+  { cat:'PLC / Controller', kw:['plc','controller','logix','s7','melsec','modicon','cpu','ladder','program','logic'] },
+  { cat:'SCADA / HMI',      kw:['scada','hmi','wincc','factorytalk','ifix','screen','display','operator','panel','graphic'] },
+  { cat:'DCS / Process',    kw:['dcs','pcs','cemat','deltav','experion','centum','800xa','ovation','braumat','batch'] },
+  { cat:'Drives / Motors',  kw:['vfd','drive','motor','inverter','sinamics','altivar','acs','frequency','speed'] },
+  { cat:'Network / Comms',  kw:['network','comms','communication','profinet','ethernet','modbus','profibus','offline','disconnect','timeout'] },
+  { cat:'Field Instruments',kw:['transmitter','sensor','instrument','rosemount','measurement','flow','pressure','level','temperature'] }
+];
+var PRI_HINT = {
+  critical:['down','stopped','outage','emergency','shutdown','trip','fire','danger','production loss','no production','critical'],
+  high:['urgent','fault','fail','error','alarm','not working','cannot','unable','crash','frozen'],
+  low:['question','how to','request','schedule','minor','cosmetic','enquiry','info']
+};
+
+function triage(){
+  var title = document.getElementById('t-title').value.toLowerCase();
+  var desc  = document.getElementById('t-desc').value.toLowerCase();
+  var text  = title + ' ' + desc;
+  if(text.trim().length < 3){ return; }
+
+  document.getElementById('triage-state').textContent = 'ANALYZING';
+
+  // ── classify ──
+  var scored = CATEGORIES.map(function(c){
+    var hits = c.kw.reduce(function(n,k){ return n + (text.indexOf(k)>-1?1:0); }, 0);
+    return { cat:c.cat, score:hits };
+  }).sort(function(a,b){ return b.score - a.score; });
+
+  var topHits = scored[0].score;
+  var conf = topHits === 0 ? 42 : Math.min(96, 55 + topHits*14);
+  var ranked = scored.slice(0,3).map(function(s,i){
+    var pct = topHits===0 ? [42,31,18][i] : Math.max(8, Math.round(conf * (s.score+0.4)/(topHits+1.2)) - i*9);
+    return { cat:s.cat, pct:pct };
+  });
+
+  // ── priority ──
+  var pri = 'medium', pscore = 50;
+  if(PRI_HINT.critical.some(function(k){return text.indexOf(k)>-1;})){ pri='critical'; pscore=94; }
+  else if(PRI_HINT.high.some(function(k){return text.indexOf(k)>-1;})){ pri='high'; pscore=76; }
+  else if(PRI_HINT.low.some(function(k){return text.indexOf(k)>-1;})){ pri='low'; pscore=30; }
+
+  // auto-select priority in form
+  var priCap = pri.charAt(0).toUpperCase()+pri.slice(1);
+  document.querySelectorAll('.pri-opt').forEach(function(o){
+    var on = o.dataset.pri === priCap;
+    o.classList.toggle('on', on);
+    if(on) o.querySelector('input').checked = true;
+  });
+
+  // ── sentiment ──
+  var sent = 'Neutral', sentCol = 'var(--muted)';
+  if(PRI_HINT.critical.some(function(k){return text.indexOf(k)>-1;})){ sent='Frustrated'; sentCol='var(--crit)'; }
+  else if(PRI_HINT.high.some(function(k){return text.indexOf(k)>-1;})){ sent='Concerned'; sentCol='var(--high)'; }
+
+  // ── est resolve ──
+  var est = pri==='critical'?2 : pri==='high'?4 : pri==='medium'?12 : 48;
+  var sla = pri==='critical'?1 : pri==='high'?4 : pri==='medium'?24 : 72;
+
+  var priCol = {critical:'var(--crit)',high:'var(--high)',medium:'var(--med)',low:'var(--low)'}[pri];
+
+  // ── related cases (simulated) ──
+  var sims = [];
+  if(topHits>0){
+    var base = scored[0].cat.replace(/[^A-Z]/g,'').slice(0,3) || 'GEN';
+    sims = [
+      { id:'NX-'+(1000+Math.floor(Math.random()*40)), label:scored[0].cat+' — resolved similar fault', pct:Math.round(conf-8) },
+      { id:'KB-'+(200+Math.floor(Math.random()*30)), label:scored[0].cat+' troubleshooting guide', pct:Math.round(conf-18) }
+    ];
+  }
+
+  document.getElementById('readout').innerHTML =
+    '<div class="gauge"><div class="gl"><span>Predicted category</span><span class="gv">'+conf+'%</span></div>'+
+    '<div class="track"><div class="fill" style="width:'+conf+'%"></div></div>'+
+    '<div class="conf-row" style="margin-top:9px">'+ranked.map(function(r,i){
+      return '<span class="conf-tag">'+(i===0?'<b>'+r.cat+'</b>':r.cat)+' '+r.pct+'%</span>';
+    }).join('')+'</div></div>'+
+    '<div class="gauge"><div class="gl"><span>Priority signal</span><span class="gv" style="color:'+priCol+'">'+pri.toUpperCase()+'</span></div>'+
+    '<div class="track"><div class="fill" style="width:'+pscore+'%;background:linear-gradient(90deg,'+priCol+'88,'+priCol+');box-shadow:0 0 12px '+priCol+'66"></div></div></div>'+
+    '<div class="conf-row">'+
+      '<span class="conf-tag">Sentiment <b style="color:'+sentCol+'">'+sent+'</b></span>'+
+      '<span class="conf-tag">Est. resolve <b>'+est+'h</b></span>'+
+      '<span class="conf-tag">SLA <b>'+sla+'h</b></span>'+
+    '</div>'+
+    (sims.length ? '<div><div class="gl" style="font-family:var(--f-mono);font-size:10px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:2px">Related cases & articles</div>'+
+      sims.map(function(x){ return '<div class="sim-item"><span class="id">'+x.id+'</span><span class="mt">'+x.label+'</span><span class="conf-tag" style="padding:2px 7px">'+x.pct+'%</span></div>'; }).join('')+'</div>' : '');
+
+  setTimeout(function(){ document.getElementById('triage-state').textContent = 'READY'; }, 400);
+}
+
+/* ── Ticket reference generator ── */
+function genRef(){
+  var d = new Date();
+  return 'NX-' + String(d.getFullYear()).slice(-2) +
+    String(d.getMonth()+1).padStart(2,'0') +
+    String(d.getDate()).padStart(2,'0') + '-' +
+    Math.random().toString(36).substring(2,6).toUpperCase();
+}
+
+/* ── Submit ── */
+async function submitTicket(){
+  var g = function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
+  var name=g('t-name'), company=g('t-company'), email=g('t-email'), phone=g('t-phone'),
+      site=g('t-site'), system=g('t-system'), product=g('t-product'), type=g('t-type'),
+      title=g('t-title'), desc=g('t-desc'), steps=g('t-steps');
+  var priEl = document.querySelector('input[name="priority"]:checked');
+  var priority = priEl ? priEl.value : 'Medium';
+  var st = document.getElementById('form-status');
+  var btn = document.getElementById('submit-btn');
+
+  function showStatus(cls, html){
+    st.className = 'form-status ' + cls;
+    st.style.display = 'flex';
+    st.innerHTML = html;
+  }
+
+  // validation
+  if(!name||!company||!email||!site||!type||!title||!desc){
+    showStatus('err','<span>⚠</span><span>Please complete all required fields marked with *.</span>');
+    st.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    showStatus('err','<span>⚠</span><span>Please enter a valid email address.</span>');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.9" y1="4.9" x2="7.8" y2="7.8"/><line x1="16.2" y1="16.2" x2="19.1" y2="19.1"/></svg> Submitting…';
+  st.style.display = 'none';
+
+  var ticketRef = genRef();
+  var payload = {
+    type:'ticket', ticketRef:ticketRef, timestamp:new Date().toLocaleString('en-PH'),
+    name:name, company:company, email:email, phone:phone,
+    site:site, system:system, product:product, supportType:type,
+    priority:priority, title:title, description:desc, stepsTaken:steps,
+    status:'Open', source:'NEXDESK Intake'
+  };
+
+  try{
+    await fetch(TS_SHEETS_URL, {
+      method:'POST', mode:'no-cors',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+  }catch(err){}
+
+  // success screen
+  document.getElementById('view').innerHTML =
+    '<div class="panel" style="max-width:560px;margin:40px auto">'+
+      '<div class="success-card">'+
+        '<div class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>'+
+        '<h3>Ticket Raised Successfully</h3>'+
+        '<p>Your support ticket has been logged with the NEXARCH engineering team.</p>'+
+        '<div class="big-ref">'+ticketRef+'</div>'+
+        '<div class="success-meta">'+
+          '<span class="conf-tag">Priority <b>'+priority+'</b></span>'+
+          '<span class="conf-tag">Type <b>'+type+'</b></span>'+
+          '<span class="conf-tag">Status <b>Open</b></span>'+
+        '</div>'+
+        '<p>A confirmation will be sent to <b style="color:var(--ink)">'+email+'</b>. Our team responds based on the assigned priority level.</p>'+
+        '<p style="font-family:var(--f-mono);font-size:11px;color:var(--faint);margin-top:14px">Urgent? Call +63 905 251 5051 · resitch@gmail.com</p>'+
+        '<div style="display:flex;gap:10px;justify-content:center;margin-top:24px">'+
+          '<button class="btn btn-primary" onclick="location.reload()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Raise Another</button>'+
+          '<a href="nexarch-website.html" class="btn btn-ghost">Back to Site</a>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
