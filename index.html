@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+section{scroll-margin-top:84px}
 :root{--cyan:#00D4FF;--blue:#0066CC;--dark:#050D1A;--mid:#0A1E3A;--deep:#071525;--white:#FFFFFF;--grey:#8899BB;--grey2:#4A6080;--dim:#4A8FAF;--accent:#00FFCC}
 html{scroll-behavior:smooth}
 body{background:var(--dark);color:var(--white);font-family:'Rajdhani',sans-serif;overflow-x:hidden;cursor:none}
@@ -24,12 +25,13 @@ a{text-decoration:none;color:inherit}
 @keyframes scanD{from{top:-2px}to{top:100vh}}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(5,13,26,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,.1);transition:background .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(5,13,26,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,.1);transition:background .3s;gap:20px}
 nav.scrolled{background:rgba(5,13,26,.97);border-bottom-color:rgba(0,212,255,.2)}
-.nl{display:flex;align-items:center;gap:10px}
-.nl svg{width:260px;height:62px}
-.nr{display:flex;align-items:center;gap:32px}
-.nr a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);transition:color .2s;position:relative}
+.nl{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nl svg{width:210px;height:50px}
+#logo-link:hover{filter:drop-shadow(0 0 12px rgba(0,212,255,.45))}
+.nr{display:flex;align-items:center;gap:22px;flex-wrap:nowrap}
+.nr a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);transition:color .2s;position:relative;white-space:nowrap}
 .nr a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .2s}
 .nr a:hover{color:var(--cyan)}.nr a:hover::after{transform:scaleX(1)}
 .ncta{padding:9px 22px;border:1px solid var(--cyan);background:rgba(0,212,255,.08);color:var(--cyan)!important;font-family:'Orbitron',monospace;font-size:10px!important;letter-spacing:3px!important;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:background .2s!important}
@@ -57,9 +59,9 @@ section{position:relative;z-index:2}
 .hh1 .w3{display:block;background:linear-gradient(90deg,var(--cyan),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 16px rgba(0,212,255,.4));opacity:0;animation:fsu .7s ease forwards .8s}
 .hd{font-size:15px;font-weight:300;color:rgba(180,210,230,.8);line-height:1.7;max-width:480px;margin-bottom:32px;opacity:0;animation:fsu .7s ease forwards 1s}
 .hbtns{display:flex;gap:16px;align-items:center;opacity:0;animation:fsu .7s ease forwards 1.2s}
-.bp{padding:14px 34px;background:var(--cyan);color:var(--dark);font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:3px;border:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:transform .2s,box-shadow .2s;cursor:none}
+.bp{padding:14px 34px;background:var(--cyan);color:var(--dark);font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:3px;border:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:transform .2s,box-shadow .2s;cursor:pointer}
 .bp:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,.4)}
-.bs{padding:13px 30px;border:1px solid rgba(0,212,255,.4);background:transparent;color:var(--cyan);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:border-color .2s,background .2s;cursor:none}
+.bs{padding:13px 30px;border:1px solid rgba(0,212,255,.4);background:transparent;color:var(--cyan);font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:border-color .2s,background .2s;cursor:pointer}
 .bs:hover{border-color:var(--cyan);background:rgba(0,212,255,.08)}
 .hst{display:flex;gap:36px;margin-top:48px;padding-top:36px;border-top:1px solid rgba(0,212,255,.1);opacity:0;animation:fsu .7s ease forwards 1.4s}
 .hsv{font-family:'Orbitron',monospace;font-size:30px;font-weight:700;color:var(--cyan);filter:drop-shadow(0 0 8px rgba(0,212,255,.4));display:block}
@@ -178,7 +180,7 @@ section{position:relative;z-index:2}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--cyan)}
 .fg input::placeholder,.fg textarea::placeholder{color:var(--grey2)}
 .fg select option{background:var(--mid)}
-.fsub{padding:13px 36px;background:var(--cyan);color:var(--dark);border:none;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:3px;align-self:flex-start;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:box-shadow .2s,transform .2s;cursor:none}
+.fsub{padding:13px 36px;background:var(--cyan);color:var(--dark);border:none;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:3px;align-self:flex-start;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:box-shadow .2s,transform .2s;cursor:pointer}
 .fsub:hover{box-shadow:0 6px 20px rgba(0,212,255,.4);transform:translateY(-2px)}
 
 /* CTA */
@@ -232,8 +234,8 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
   footer{padding:40px 24px 20px}
 }
 
-/* Tablet hamburger (769–1024) */
-@media (min-width:769px) and (max-width:1024px){
+/* Tablet/laptop hamburger (769–1180) — 9 nav links need more room */
+@media (min-width:769px) and (max-width:1180px){
   .nr#nav-links{display:none!important}
   #hamburger{display:flex!important}
   #mobile-menu{top:68px!important}
@@ -573,6 +575,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
 <!-- NAV -->
 <nav id="nav">
   <div class="nl">
+    <a href="#hero" id="logo-link" aria-label="Back to top" style="display:flex;align-items:center;transition:filter .25s">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 90">
       <defs>
         <linearGradient id="nC" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00D4FF"/><stop offset="100%" style="stop-color:#0066CC"/></linearGradient>
@@ -623,6 +626,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
       <rect x="91" y="69" width="340" height=".8" fill="url(#nA)" opacity=".5"/>
       <text x="92" y="81" font-family="'Rajdhani','Arial Narrow',sans-serif" font-size="8" letter-spacing="4" fill="#00D4FF" opacity=".4">PRECISION.  SCALE.  CONTROL.</text>
     </svg>
+    </a>
   </div>
   <div class="nr" id="nav-links">
     <a href="#about">About</a>
@@ -1759,172 +1763,350 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
     <div class="sh reveal">
       <div class="stag">Digital Solutions</div>
       <h2 class="stitle">Web <span>Applications</span> & Platforms</h2>
-      <p class="ssub">Beyond automation, NEXARCH builds production-grade web applications — from MES/MOM consoles and ERP systems to industry-specific platforms. Explore our live demos.</p>
+      <p class="ssub">Beyond automation, NEXARCH builds production-grade web applications across manufacturing, enterprise, healthcare, retail, legal, sports, agriculture, transport, and smart living. Explore our live demos.</p>
       <div class="sline"></div>
     </div>
 
     <div class="wa-grid">
-
-      <!-- NEXDESK -->
       <div class="wa-card reveal">
         <div class="wa-preview">
-          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">nexdesk.nexarch.io</span></div>
-          <div class="wa-screen">
-            <div class="wa-screen-bg" style="background:radial-gradient(700px 300px at 80% 0%,rgba(45,226,192,.12),transparent 60%),#0B0E14"></div>
-            <div class="wa-logo-big">
-              <svg width="52" height="52" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#131822" stroke="#2DE2C0" stroke-opacity=".3"/><path d="M30 70V30h8l24 26V30h8v40h-8L38 44v26z" fill="#2DE2C0"/></svg>
-              <div style="font-family:'Orbitron',monospace;font-size:14px;font-weight:700;letter-spacing:3px;color:#2DE2C0">NEXDESK</div>
-            </div>
-          </div>
-        </div>
-        <div class="wa-body">
-          <div class="wa-head">
-            <div class="wa-icon" style="background:rgba(45,226,192,.1);color:#2DE2C0;border-color:rgba(45,226,192,.3)">🎫</div>
-            <div><div class="wa-name">NEXDESK</div><div class="wa-tag">Support Console</div></div>
-          </div>
-          <p class="wa-desc">Technical support ticketing & operations console with Live AI Triage that auto-classifies, prioritises, and routes tickets in real time. Backed by Google Sheets.</p>
-          <div class="wa-chips"><span class="wa-chip">AI TRIAGE</span><span class="wa-chip">TICKETING</span><span class="wa-chip">PWA</span><span class="wa-chip">SLA TRACKING</span></div>
-          <div class="wa-actions">
-            <a href="nexdesk-raise-ticket.html" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
-            <span class="wa-status live">● Live</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- NEXARCH MOM/MES -->
-      <div class="wa-card reveal">
-        <div class="wa-preview">
-          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">mom.nexarch.io</span></div>
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">DEMO.NEXMOM</span></div>
           <div class="wa-screen">
             <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 20% 100%,rgba(0,212,255,.14),transparent 60%),#050D1A"></div>
             <div class="wa-logo-big">
               <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0A1E3A" stroke="#00D4FF" stroke-opacity=".3"/><g stroke="#00D4FF" stroke-width="2.5" fill="none"><rect x="16" y="16" width="13" height="13" rx="2"/><rect x="35" y="16" width="13" height="13" rx="2"/><rect x="16" y="35" width="13" height="13" rx="2"/><rect x="35" y="35" width="13" height="13" rx="2"/></g><circle cx="32" cy="32" r="4" fill="#00D4FF"/></svg>
-              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#00D4FF">NEXARCH MOM</div>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#00D4FF">NEXMOM</div>
             </div>
           </div>
         </div>
         <div class="wa-body">
           <div class="wa-head">
-            <div class="wa-icon" style="background:rgba(0,212,255,.1);color:var(--cyan)">🏭</div>
-            <div><div class="wa-name">MOM / MES</div><div class="wa-tag">Manufacturing Ops</div></div>
+            <div class="wa-icon" style="background:#00D4FF1a;color:#00D4FF;border-color:#00D4FF4d">🏭</div>
+            <div><div class="wa-name">NEXMOM</div><div class="wa-tag">Manufacturing Ops · MES/MOM</div></div>
           </div>
-          <p class="wa-desc">Manufacturing Operations Management console — production scheduling with Gantt job boards, OEE dashboards, work orders, genealogy, and ISA-95 MES workflows.</p>
+          <p class="wa-desc">Manufacturing Operations Management & Execution System — production scheduling with Gantt boards, OEE dashboards, work orders, genealogy, and ISA-95 workflows.</p>
           <div class="wa-chips"><span class="wa-chip">ISA-95</span><span class="wa-chip">OEE</span><span class="wa-chip">GANTT</span><span class="wa-chip">WORK ORDERS</span></div>
           <div class="wa-actions">
-            <a href="nexarch-mom.html" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <a href="https://nexarchses-dotcom.github.io/DEMO.NEXMOM/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
             <span class="wa-status live">● Live</span>
           </div>
         </div>
       </div>
-
-      <!-- NEXARCH ERP -->
       <div class="wa-card reveal">
         <div class="wa-preview">
-          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">erp.nexarch.io</span></div>
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">DEMO.NEXDESK</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(700px 300px at 80% 0%,rgba(45,226,192,.12),transparent 60%),#0B0E14"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#131822" stroke="#2DE2C0" stroke-opacity=".3"/><path d="M30 70V30h8l24 26V30h8v40h-8L38 44v26z" fill="#2DE2C0"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#2DE2C0">NEXDESK</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#2DE2C01a;color:#2DE2C0;border-color:#2DE2C04d">🎫</div>
+            <div><div class="wa-name">NEXDESK</div><div class="wa-tag">Support Console · AI Triage</div></div>
+          </div>
+          <p class="wa-desc">Technical support ticketing & operations console with Live AI Triage that auto-classifies, prioritises, and routes tickets in real time. Backed by Google Sheets.</p>
+          <div class="wa-chips"><span class="wa-chip">AI TRIAGE</span><span class="wa-chip">TICKETING</span><span class="wa-chip">PWA</span><span class="wa-chip">SLA</span></div>
+          <div class="wa-actions">
+            <a href="https://nexarchses-dotcom.github.io/DEMO.NEXDESK/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">DEMO.NEXCYBER.SENTRA</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 50% 0%,rgba(255,77,94,.14),transparent 60%),#140a0c"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1410" stroke="#FF4D5E" stroke-opacity=".3"/><path d="M32 14l14 5v11c0 9-6 16-14 20-8-4-14-11-14-20V19z" fill="none" stroke="#FF4D5E" stroke-width="2.5" stroke-linejoin="round"/><path d="M26 32l4 4 8-9" fill="none" stroke="#FF4D5E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#FF4D5E">NEXCYBER</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#FF4D5E1a;color:#FF4D5E;border-color:#FF4D5E4d">🛡️</div>
+            <div><div class="wa-name">NEXCYBER</div><div class="wa-tag">SENTRA · OT Cybersecurity</div></div>
+          </div>
+          <p class="wa-desc">OT/ICS cybersecurity monitoring platform — asset discovery, threat detection, IEC 62443 compliance dashboards, and security event management for industrial networks.</p>
+          <div class="wa-chips"><span class="wa-chip">IEC 62443</span><span class="wa-chip">OT SECURITY</span><span class="wa-chip">SIEM</span><span class="wa-chip">MONITORING</span></div>
+          <div class="wa-actions">
+            <a href="https://nexarchses-dotcom.github.io/DEMO.NEXCYBER.SENTRA/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">DEMO.NEXERP</span></div>
           <div class="wa-screen">
             <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 100% 0%,rgba(0,102,204,.18),transparent 60%),#050D1A"></div>
             <div class="wa-logo-big">
-              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0A1E3A" stroke="#00D4FF" stroke-opacity=".3"/><path d="M20 44V24l12-7 12 7v20" fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 30h24M20 37h24" stroke="#0066CC" stroke-width="2"/><circle cx="32" cy="20" r="2.5" fill="#00D4FF"/></svg>
-              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#00D4FF">NEXARCH ERP</div>
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0A1E3A" stroke="#00D4FF" stroke-opacity=".3"/><path d="M20 44V24l12-7 12 7v20" fill="none" stroke="#00D4FF" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 30h24M20 37h24" stroke="#00D4FF" stroke-opacity=".6" stroke-width="2"/><circle cx="32" cy="20" r="2.5" fill="#00D4FF"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#00D4FF">NEXERP</div>
             </div>
           </div>
         </div>
         <div class="wa-body">
           <div class="wa-head">
-            <div class="wa-icon" style="background:rgba(0,212,255,.1);color:var(--cyan)">📊</div>
-            <div><div class="wa-name">ERP SUITE</div><div class="wa-tag">Enterprise Resource</div></div>
+            <div class="wa-icon" style="background:#00D4FF1a;color:#00D4FF;border-color:#00D4FF4d">📊</div>
+            <div><div class="wa-name">NEXERP</div><div class="wa-tag">Enterprise Resource Planning</div></div>
           </div>
-          <p class="wa-desc">Enterprise Resource Planning application covering inventory, procurement, sales, finance, and reporting — built single-file with a Google Apps Script backend.</p>
-          <div class="wa-chips"><span class="wa-chip">INVENTORY</span><span class="wa-chip">FINANCE</span><span class="wa-chip">PROCUREMENT</span><span class="wa-chip">REPORTS</span></div>
+          <p class="wa-desc">Full ERP suite — inventory, procurement, sales, finance, double-entry accounting, Philippine statutory payroll (SSS, PhilHealth, Pag-IBIG, BIR), and reporting.</p>
+          <div class="wa-chips"><span class="wa-chip">ERP</span><span class="wa-chip">PAYROLL</span><span class="wa-chip">ACCOUNTING</span><span class="wa-chip">21 MODULES</span></div>
           <div class="wa-actions">
-            <a href="nexarch-erp.html" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <a href="https://nexarchses-dotcom.github.io/DEMO.NEXERP/#dashboard" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
             <span class="wa-status live">● Live</span>
           </div>
         </div>
       </div>
-
-      <!-- NEXA Supervisory Agent -->
       <div class="wa-card reveal">
         <div class="wa-preview">
-          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">nexa.nexarch.io</span></div>
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">DEMO.NEXDENTAL</span></div>
           <div class="wa-screen">
-            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 50% 0%,rgba(0,255,204,.14),transparent 60%),#050D1A"></div>
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 30% 0%,rgba(56,189,248,.14),transparent 60%),#06141f"></div>
             <div class="wa-logo-big">
-              <svg width="50" height="50" viewBox="0 0 64 64"><defs><radialGradient id="nexaG" cx="50%" cy="50%"><stop offset="0%" stop-color="#00FFCC"/><stop offset="100%" stop-color="#0066CC"/></radialGradient></defs><rect width="64" height="64" rx="14" fill="#0A1E3A" stroke="#00FFCC" stroke-opacity=".3"/><circle cx="32" cy="32" r="13" fill="none" stroke="url(#nexaG)" stroke-width="2.5"/><circle cx="32" cy="32" r="5" fill="url(#nexaG)"/><circle cx="32" cy="14" r="2.5" fill="#00FFCC"/><circle cx="50" cy="32" r="2.5" fill="#00FFCC"/><circle cx="32" cy="50" r="2.5" fill="#00FFCC"/><circle cx="14" cy="32" r="2.5" fill="#00FFCC"/></svg>
-              <div style="font-family:'Orbitron',monospace;font-size:15px;font-weight:700;letter-spacing:3px;color:#00FFCC">NEXA</div>
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1620" stroke="#38BDF8" stroke-opacity=".3"/><path d="M24 18c-5 0-8 4-8 9 0 6 3 8 4 14 .5 3 1 7 3 7s2-6 5-6 3 6 5 6 2.5-4 3-7c1-6 4-8 4-14 0-5-3-9-8-9-3 0-4 2-6 2s-3-2-6-2z" fill="none" stroke="#38BDF8" stroke-width="2.3" stroke-linejoin="round"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#38BDF8">NEXDENTAL</div>
             </div>
           </div>
         </div>
         <div class="wa-body">
           <div class="wa-head">
-            <div class="wa-icon" style="background:rgba(0,255,204,.1);color:var(--accent);border-color:rgba(0,255,204,.3)">🤖</div>
-            <div><div class="wa-name">NEXA AGENT</div><div class="wa-tag">AI Supervisory</div></div>
+            <div class="wa-icon" style="background:#38BDF81a;color:#38BDF8;border-color:#38BDF84d">🦷</div>
+            <div><div class="wa-name">NEXDENTAL</div><div class="wa-tag">Dental Practice Mgmt</div></div>
           </div>
-          <p class="wa-desc">AI supervisory agent that monitors plant data, surfaces anomalies, and provides natural-language insights across your OT/IT systems — your always-on engineering co-pilot.</p>
-          <div class="wa-chips"><span class="wa-chip">AI AGENT</span><span class="wa-chip">ANOMALY DETECT</span><span class="wa-chip">IIoT</span><span class="wa-chip">NLP</span></div>
+          <p class="wa-desc">Dental clinic management system — patient charts, appointment scheduling, treatment planning, odontogram, billing, and clinical records management.</p>
+          <div class="wa-chips"><span class="wa-chip">DENTAL</span><span class="wa-chip">ODONTOGRAM</span><span class="wa-chip">SCHEDULING</span><span class="wa-chip">BILLING</span></div>
           <div class="wa-actions">
-            <a href="nexa-agent.html" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <a href="https://nexarchses-dotcom.github.io/DEMO.NEXDENTAL/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
             <span class="wa-status live">● Live</span>
           </div>
         </div>
       </div>
-
-      <!-- CYRABELL -->
       <div class="wa-card reveal">
         <div class="wa-preview">
-          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">cyrabell.io</span></div>
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">RajahTupas-MS</span></div>
           <div class="wa-screen">
-            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 30% 0%,rgba(138,99,255,.16),transparent 60%),#0d0a1a"></div>
-            <div class="wa-logo-big">
-              <svg width="50" height="50" viewBox="0 0 64 64"><defs><linearGradient id="cyraG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A78BFA"/><stop offset="100%" stop-color="#6D28D9"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#15102a" stroke="#A78BFA" stroke-opacity=".3"/><path d="M32 16c-8 0-14 6-14 14s6 14 14 14c4 0 7-1.5 9.5-4" fill="none" stroke="url(#cyraG)" stroke-width="3" stroke-linecap="round"/><circle cx="42" cy="24" r="3.5" fill="url(#cyraG)"/></svg>
-              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#A78BFA">CYRABELL</div>
-            </div>
-          </div>
-        </div>
-        <div class="wa-body">
-          <div class="wa-head">
-            <div class="wa-icon" style="background:rgba(167,139,250,.1);color:#A78BFA;border-color:rgba(167,139,250,.3)">🔔</div>
-            <div><div class="wa-name">CYRABELL</div><div class="wa-tag">Multi-Vertical Platform</div></div>
-          </div>
-          <p class="wa-desc">Configurable multi-vertical platform — one codebase, different manifests power catering (Appetina), transit (Pinoy Sakay), sports (Mata sa Agila), and more, with embedded AI (Cyra).</p>
-          <div class="wa-chips"><span class="wa-chip">MULTI-VERTICAL</span><span class="wa-chip">AI · CYRA</span><span class="wa-chip">3-TIER DATA</span><span class="wa-chip">PWA</span></div>
-          <div class="wa-actions">
-            <a href="cyrabell.html" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
-            <span class="wa-status live">● Live</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- MEDICORE -->
-      <div class="wa-card reveal">
-        <div class="wa-preview">
-          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">medicore.health</span></div>
-          <div class="wa-screen">
-            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 70% 0%,rgba(0,200,150,.16),transparent 60%),#04140f"></div>
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 70% 0%,rgba(16,185,129,.16),transparent 60%),#04140f"></div>
             <div class="wa-logo-big">
               <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1f18" stroke="#10B981" stroke-opacity=".3"/><path d="M14 32h8l4-10 6 20 5-14 3 7h10" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#10B981">MEDICORE</div>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#10B981">RAJAH TUPAS</div>
             </div>
           </div>
         </div>
         <div class="wa-body">
           <div class="wa-head">
-            <div class="wa-icon" style="background:rgba(16,185,129,.1);color:#10B981;border-color:rgba(16,185,129,.3)">⚕️</div>
-            <div><div class="wa-name">MEDICORE</div><div class="wa-tag">Medical PWA</div></div>
+            <div class="wa-icon" style="background:#10B9811a;color:#10B981;border-color:#10B9814d">⚕️</div>
+            <div><div class="wa-name">RAJAH TUPAS</div><div class="wa-tag">Medical Services</div></div>
           </div>
-          <p class="wa-desc">Complete medical platform — patient records, appointments, e-prescriptions, and clinical workflows. Built on React/TypeScript with NestJS microservices and PostgreSQL.</p>
-          <div class="wa-chips"><span class="wa-chip">REACT/TS</span><span class="wa-chip">NESTJS</span><span class="wa-chip">EHR</span><span class="wa-chip">HIPAA-READY</span></div>
+          <p class="wa-desc">Comprehensive medical services platform — patient records, appointments, e-prescriptions, diagnostics, and clinical workflows for healthcare providers.</p>
+          <div class="wa-chips"><span class="wa-chip">EHR</span><span class="wa-chip">APPOINTMENTS</span><span class="wa-chip">CLINICAL</span><span class="wa-chip">PWA</span></div>
           <div class="wa-actions">
-            <a href="medicore.html" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
-            <span class="wa-status soon">◐ Beta</span>
+            <a href="https://resitch-source.github.io/RajahTupas-MS-Dev/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
           </div>
         </div>
       </div>
-
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">Everose-Inventory</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 40% 0%,rgba(255,184,0,.14),transparent 60%),#15110a"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1a1408" stroke="#FFB800" stroke-opacity=".3"/><path d="M32 16l16 8v16l-16 8-16-8V24z" fill="none" stroke="#FFB800" stroke-width="2.5" stroke-linejoin="round"/><path d="M16 24l16 8 16-8M32 32v16" stroke="#FFB800" stroke-width="2" stroke-opacity=".7"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#FFB800">EVEROSE</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#FFB8001a;color:#FFB800;border-color:#FFB8004d">🛒</div>
+            <div><div class="wa-name">EVEROSE</div><div class="wa-tag">Appliance Center · Inventory</div></div>
+          </div>
+          <p class="wa-desc">Inventory & purchasing system for an appliance retail center — stock control, purchase orders, supplier management, sales tracking, and reporting.</p>
+          <div class="wa-chips"><span class="wa-chip">INVENTORY</span><span class="wa-chip">PURCHASING</span><span class="wa-chip">RETAIL</span><span class="wa-chip">POS</span></div>
+          <div class="wa-actions">
+            <a href="https://resitch-source.github.io/Everose-InventoryPurchasing-Dev/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">CYRABELL-LMS</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 30% 0%,rgba(167,139,250,.16),transparent 60%),#15102a"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1a1020" stroke="#A78BFA" stroke-opacity=".3"/><path d="M32 14v36M20 22h24M24 50h16" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round"/><path d="M20 22l-5 11h10zM44 22l-5 11h10z" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linejoin="round"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#A78BFA">CYRABELL LMS</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#A78BFA1a;color:#A78BFA;border-color:#A78BFA4d">⚖️</div>
+            <div><div class="wa-name">CYRABELL LMS</div><div class="wa-tag">Legal Management</div></div>
+          </div>
+          <p class="wa-desc">Legal practice management system — case files, client matters, document management, hearing schedules, billing, and deadline tracking for law firms.</p>
+          <div class="wa-chips"><span class="wa-chip">LEGAL</span><span class="wa-chip">CASE MGMT</span><span class="wa-chip">DOCUMENTS</span><span class="wa-chip">BILLING</span></div>
+          <div class="wa-actions">
+            <a href="https://resitch-source.github.io/CYRABELL-LMS/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">CYRABELL-PICKLEBALL</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 60% 0%,rgba(132,204,22,.14),transparent 60%),#0e1408"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1a14" stroke="#84CC16" stroke-opacity=".3"/><circle cx="28" cy="26" r="12" fill="none" stroke="#84CC16" stroke-width="2.5"/><g stroke="#84CC16" stroke-width="1.3" stroke-opacity=".7"><line x1="20" y1="20" x2="36" y2="32"/><line x1="36" y1="20" x2="20" y2="32"/><line x1="28" y1="14" x2="28" y2="38"/><line x1="16" y1="26" x2="40" y2="26"/></g><path d="M36 36l10 12" stroke="#84CC16" stroke-width="3" stroke-linecap="round"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#84CC16">CYRABELL</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#84CC161a;color:#84CC16;border-color:#84CC164d">🏓</div>
+            <div><div class="wa-name">CYRABELL</div><div class="wa-tag">Pickleball Management</div></div>
+          </div>
+          <p class="wa-desc">Pickleball club management system — court bookings, tournament brackets, player rankings, membership, and match scheduling with live scoring.</p>
+          <div class="wa-chips"><span class="wa-chip">BOOKINGS</span><span class="wa-chip">TOURNAMENTS</span><span class="wa-chip">RANKINGS</span><span class="wa-chip">SCORING</span></div>
+          <div class="wa-actions">
+            <a href="https://resitch-source.github.io/CYRABELL-PICKLEBALL/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">MataSaAgila-Tennis</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 50% 0%,rgba(132,204,22,.14),transparent 60%),#0a1408"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1a10" stroke="#84CC16" stroke-opacity=".3"/><circle cx="32" cy="32" r="14" fill="none" stroke="#84CC16" stroke-width="2.5"/><path d="M22 21c6 5 6 17 0 22M42 21c-6 5-6 17 0 22" fill="none" stroke="#84CC16" stroke-width="1.6" stroke-opacity=".7"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#84CC16">MATA SA AGILA</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#84CC161a;color:#84CC16;border-color:#84CC164d">🎾</div>
+            <div><div class="wa-name">MATA SA AGILA</div><div class="wa-tag">Tennis · Line Call & Scoring</div></div>
+          </div>
+          <p class="wa-desc">Tennis line-call and scoring PWA — court calibration, shot classification, bounce heatmaps, live scoring, and TV broadcast display modes.</p>
+          <div class="wa-chips"><span class="wa-chip">LINE CALL</span><span class="wa-chip">SCORING</span><span class="wa-chip">HEATMAPS</span><span class="wa-chip">BROADCAST</span></div>
+          <div class="wa-actions">
+            <a href="https://resitch-source.github.io/MataSaAgila-Tennis/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">Cyrabell-ChickenFarm</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 40% 0%,rgba(255,122,0,.14),transparent 60%),#15110a"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1a1408" stroke="#FF7A00" stroke-opacity=".3"/><path d="M26 44c-4 0-8-3-8-9s4-11 11-11c2-4 5-6 9-5-1 3-3 4-3 6 4 1 7 4 7 9 0 7-5 11-11 11" fill="none" stroke="#FF7A00" stroke-width="2.3" stroke-linejoin="round"/><circle cx="38" cy="28" r="1.6" fill="#FF7A00"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#FF7A00">CYRABELL</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#FF7A001a;color:#FF7A00;border-color:#FF7A004d">🐔</div>
+            <div><div class="wa-name">CYRABELL</div><div class="wa-tag">Poultry Farm Mgmt</div></div>
+          </div>
+          <p class="wa-desc">Poultry farm management system — flock tracking, feed management, egg production logging, health records, mortality monitoring, and yield analytics.</p>
+          <div class="wa-chips"><span class="wa-chip">POULTRY</span><span class="wa-chip">FLOCK</span><span class="wa-chip">PRODUCTION</span><span class="wa-chip">ANALYTICS</span></div>
+          <div class="wa-actions">
+            <a href="https://resitch-source.github.io/Cyrabell-ChickenFarm/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">PinoySakay</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 70% 0%,rgba(99,102,241,.16),transparent 60%),#0a0d1a"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1020" stroke="#6366F1" stroke-opacity=".3"/><path d="M16 38V28h22l6 6h4v4" fill="none" stroke="#6366F1" stroke-width="2.5" stroke-linejoin="round"/><circle cx="24" cy="42" r="4" fill="none" stroke="#6366F1" stroke-width="2.3"/><circle cx="42" cy="42" r="4" fill="none" stroke="#6366F1" stroke-width="2.3"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#6366F1">PINOY SAKAY</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#6366F11a;color:#6366F1;border-color:#6366F14d">🚐</div>
+            <div><div class="wa-name">PINOY SAKAY</div><div class="wa-tag">Fleet · Transit Mgmt</div></div>
+          </div>
+          <p class="wa-desc">Jeepney transit & fleet management PWA for Iligan City — GPS tracking, route management, SMS dispatch, driver records, and trip scheduling.</p>
+          <div class="wa-chips"><span class="wa-chip">GPS</span><span class="wa-chip">TRANSIT</span><span class="wa-chip">SMS</span><span class="wa-chip">DISPATCH</span></div>
+          <div class="wa-actions">
+            <a href="https://resitch-source.github.io/PinoySakay/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">CYRABELL_SmartHome</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 50% 0%,rgba(45,226,192,.14),transparent 60%),#06140f"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1a18" stroke="#2DE2C0" stroke-opacity=".3"/><path d="M18 32l14-12 14 12v14H18z" fill="none" stroke="#2DE2C0" stroke-width="2.5" stroke-linejoin="round"/><circle cx="32" cy="36" r="3.5" fill="#2DE2C0"/><path d="M26 30a8 8 0 0 1 12 0" fill="none" stroke="#2DE2C0" stroke-width="1.6" stroke-opacity=".7"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#2DE2C0">CYRABELL</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#2DE2C01a;color:#2DE2C0;border-color:#2DE2C04d">🏠</div>
+            <div><div class="wa-name">CYRABELL</div><div class="wa-tag">Smart Home Control</div></div>
+          </div>
+          <p class="wa-desc">Smart home automation dashboard — device control, lighting & climate scenes, energy monitoring, security cameras, and IoT device management.</p>
+          <div class="wa-chips"><span class="wa-chip">IoT</span><span class="wa-chip">AUTOMATION</span><span class="wa-chip">ENERGY</span><span class="wa-chip">SECURITY</span></div>
+          <div class="wa-actions">
+            <a href="https://resitch-source.github.io/CYRABELL_SmartHome/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
+      <div class="wa-card reveal">
+        <div class="wa-preview">
+          <div class="wa-browser-bar"><span class="wa-dot r"></span><span class="wa-dot y"></span><span class="wa-dot g"></span><span class="wa-url">CyraBill</span></div>
+          <div class="wa-screen">
+            <div class="wa-screen-bg" style="background:radial-gradient(600px 280px at 60% 0%,rgba(16,185,129,.16),transparent 60%),#04140f"></div>
+            <div class="wa-logo-big">
+              <svg width="50" height="50" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0a1620" stroke="#10B981" stroke-opacity=".3"/><rect x="16" y="22" width="32" height="20" rx="3" fill="none" stroke="#10B981" stroke-width="2.5"/><path d="M16 29h32" stroke="#10B981" stroke-width="3"/><path d="M22 36h6" stroke="#10B981" stroke-width="2" stroke-linecap="round"/></svg>
+              <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:#10B981">CYRABILL</div>
+            </div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-head">
+            <div class="wa-icon" style="background:#10B9811a;color:#10B981;border-color:#10B9814d">💳</div>
+            <div><div class="wa-name">CYRABILL</div><div class="wa-tag">Payment Systems</div></div>
+          </div>
+          <p class="wa-desc">Billing & payments platform — invoicing, double-entry ledger, AML compliance engine, payment tracking, GCash/BPI integration, and financial reporting.</p>
+          <div class="wa-chips"><span class="wa-chip">BILLING</span><span class="wa-chip">LEDGER</span><span class="wa-chip">AML</span><span class="wa-chip">PAYMENTS</span></div>
+          <div class="wa-actions">
+            <a href="https://resitch-source.github.io/CyraBill/" target="_blank" rel="noopener" class="wa-demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>LIVE DEMO</a>
+            <span class="wa-status live">● Live</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
 
 <!-- CERTS -->
 <section id="certs">
@@ -2022,7 +2204,7 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
       <div class="fc"><h4>Partners</h4><a href="#products">Siemens</a><a href="#products">Allen-Bradley</a><a href="#products">Schneider Electric</a><a href="#products">Emerson</a><a href="#products">Honeywell</a><a href="#products">GE Vernova</a><a href="#products">ABB</a><a href="#products">Yokogawa</a><a href="#products">Mitsubishi</a></div>
       <div class="fc"><h4>Clients</h4><a href="#clients">Republic Cement</a><a href="#clients">Holcim Lugait</a><a href="#clients">SMBC</a><a href="#clients">SMPC</a><a href="#clients">Busco Sugar</a><a href="#clients">NGCP</a><a href="#clients">Wilmar</a><a href="#clients">Asia Brewery</a><a href="#clients">URC</a><a href="#clients">NPC</a><a href="#clients">Pilmico</a><a href="#clients">Roxas IT-Park</a><a href="#clients">Kings Energy</a><a href="#clients">Iligan Waterworks</a><a href="#clients">Roxas Water District</a></div>
       <div class="fc"><h4>Company</h4><a href="#about">About</a><a href="#leadership">Leadership</a><a href="#why">Why NEXARCH</a><a href="#certs">Certifications</a><a href="#contact">Contact</a><a href="#contact">Careers</a></div>
-      <div class="fc"><h4>Web Apps</h4><a href="#webapps">NEXDESK</a><a href="#webapps">MOM / MES</a><a href="#webapps">ERP Suite</a><a href="#webapps">NEXA Agent</a><a href="#webapps">Cyrabell</a><a href="#webapps">MediCore</a></div>
+      <div class="fc"><h4>Web Apps</h4><a href="#webapps">NEXMOM MES/MOM</a><a href="#webapps">NEXDESK</a><a href="#webapps">NEXCYBER Sentra</a><a href="#webapps">NEXERP</a><a href="#webapps">NEXDENTAL</a><a href="#webapps">Medical · Legal · Retail</a><a href="#webapps">Sports · Poultry · Fleet</a><a href="#webapps">Smart Home · Payments</a></div>
       <div class="fc"><h4>Support</h4><a href="nexdesk-raise-ticket.html" onclick="return openTicketPopup(event)" style="color:var(--warn)">🎫 Raise a Ticket</a><a href="mailto:resitch@gmail.com">resitch@gmail.com</a><a href="tel:+639052515051">+63 905 251 5051</a></div>
     </div>
     <div class="fbot">
@@ -2040,186 +2222,6 @@ footer{background:rgba(3,8,16,.98);border-top:1px solid rgba(0,212,255,.1);paddi
   <span id="ts-fab-lbl">TICKET</span>
 </a>
 
-<!-- ═══ TECH SUPPORT TICKET MODAL ═══ -->
-<div id="ts-overlay" onclick="tsOverlayClick(event)">
-  <div id="ts-modal">
-
-    <!-- Header -->
-    <div id="ts-header">
-      <div id="ts-icon">🎫</div>
-      <div>
-        <div id="ts-htitle">RAISE A SUPPORT TICKET</div>
-        <div id="ts-hsub">NEXARCH Technical Support · resitch@gmail.com</div>
-      </div>
-      <button id="ts-hclose" onclick="closeTicket()">✕</button>
-    </div>
-
-    <!-- Body -->
-    <div id="ts-body">
-
-      <!-- Contact Info -->
-      <div class="ts-section">
-        <div class="ts-section-title">Contact Information</div>
-        <div class="ts-row">
-          <div class="ts-group">
-            <div class="ts-label">Full Name <span>*</span></div>
-            <input class="ts-input" id="ts-name" placeholder="Juan Dela Cruz"/>
-          </div>
-          <div class="ts-group">
-            <div class="ts-label">Company / Organisation <span>*</span></div>
-            <input class="ts-input" id="ts-company" placeholder="ABC Corporation"/>
-          </div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-group">
-            <div class="ts-label">Email Address <span>*</span></div>
-            <input class="ts-input" id="ts-email" type="email" placeholder="juan@company.com"/>
-          </div>
-          <div class="ts-group">
-            <div class="ts-label">Phone / Mobile</div>
-            <input class="ts-input" id="ts-phone" placeholder="+63 9XX XXX XXXX"/>
-          </div>
-        </div>
-      </div>
-
-      <!-- System / Site Info -->
-      <div class="ts-section">
-        <div class="ts-section-title">System Information</div>
-        <div class="ts-row">
-          <div class="ts-group">
-            <div class="ts-label">Plant / Site Name <span>*</span></div>
-            <input class="ts-input" id="ts-site" placeholder="e.g. Holcim Lugait Plant"/>
-          </div>
-          <div class="ts-group">
-            <div class="ts-label">System / Equipment</div>
-            <input class="ts-input" id="ts-system" placeholder="e.g. Siemens PCS 7 CEMAT, Allen-Bradley PLC"/>
-          </div>
-        </div>
-        <div class="ts-row">
-          <div class="ts-group">
-            <div class="ts-label">Product / Platform</div>
-            <select class="ts-select" id="ts-product">
-              <option value="">Select product…</option>
-              <optgroup label="── SIEMENS ──">
-                <option>Siemens PCS 7 CEMAT</option>
-                <option>Siemens PCS Neo DCS</option>
-                <option>Siemens Braumat</option>
-                <option>Siemens TIA Portal / S7 PLC</option>
-                <option>Siemens WinCC SCADA</option>
-                <option>Siemens MES (SIMATIC IT)</option>
-              </optgroup>
-              <optgroup label="── ROCKWELL / AB ──">
-                <option>Rockwell PlantPAx DCS</option>
-                <option>Allen-Bradley ControlLogix / CompactLogix</option>
-                <option>FactoryTalk View SE / ME</option>
-                <option>FactoryTalk MES</option>
-              </optgroup>
-              <optgroup label="── SCHNEIDER ──">
-                <option>Schneider BrewMax</option>
-                <option>Schneider EcoStruxure / Modicon M580</option>
-                <option>AVEVA / Wonderware SCADA</option>
-              </optgroup>
-              <optgroup label="── OTHER BRANDS ──">
-                <option>Emerson DeltaV DCS</option>
-                <option>Emerson Ovation DCS</option>
-                <option>Honeywell Experion PKS</option>
-                <option>GE Mark VIe / iFIX SCADA</option>
-                <option>ABB System 800xA</option>
-                <option>Yokogawa CENTUM VP</option>
-                <option>Mitsubishi MELSEC iQ-R</option>
-              </optgroup>
-              <optgroup label="── OTHER ──">
-                <option>HMI / Operator Interface</option>
-                <option>VFD / Motor Drive</option>
-                <option>Field Instruments</option>
-                <option>SCADA / Historian</option>
-                <option>Network / Communications</option>
-                <option>Other</option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="ts-group">
-            <div class="ts-label">Support Type <span>*</span></div>
-            <select class="ts-select" id="ts-type">
-              <option value="">Select type…</option>
-              <option>Troubleshooting / Fault Diagnosis</option>
-              <option>System Recovery / Restore</option>
-              <option>Configuration / Programming</option>
-              <option>Hardware Replacement</option>
-              <option>Software Update / Upgrade</option>
-              <option>Backup / Restore</option>
-              <option>Performance Issue</option>
-              <option>Network / Communication Fault</option>
-              <option>Training / Guidance</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Priority -->
-      <div class="ts-section">
-        <div class="ts-section-title">Priority Level</div>
-        <div class="ts-priority-row">
-          <label class="ts-priority p-low" id="pr-low">
-            <input type="radio" name="ts-priority" value="Low"/>
-            <span class="ts-p-icon">🟢</span>
-            <span class="ts-p-lbl">LOW</span>
-          </label>
-          <label class="ts-priority p-medium selected" id="pr-medium">
-            <input type="radio" name="ts-priority" value="Medium" checked/>
-            <span class="ts-p-icon">🟡</span>
-            <span class="ts-p-lbl">MEDIUM</span>
-          </label>
-          <label class="ts-priority p-high" id="pr-high">
-            <input type="radio" name="ts-priority" value="High"/>
-            <span class="ts-p-icon">🟠</span>
-            <span class="ts-p-lbl">HIGH</span>
-          </label>
-          <label class="ts-priority p-critical" id="pr-critical">
-            <input type="radio" name="ts-priority" value="Critical"/>
-            <span class="ts-p-icon">🔴</span>
-            <span class="ts-p-lbl">CRITICAL</span>
-          </label>
-        </div>
-        <div style="font-size:11px;color:rgba(255,184,0,.4);letter-spacing:1px;font-family:'Share Tech Mono',monospace">
-          Low=Scheduled · Medium=Within 24hrs · High=Within 4hrs · Critical=Immediate
-        </div>
-      </div>
-
-      <!-- Issue Description -->
-      <div class="ts-section">
-        <div class="ts-section-title">Issue Description</div>
-        <div class="ts-row-1">
-          <div class="ts-group">
-            <div class="ts-label">Issue Title / Subject <span>*</span></div>
-            <input class="ts-input" id="ts-title" placeholder="Brief description of the issue"/>
-          </div>
-        </div>
-        <div class="ts-row-1">
-          <div class="ts-group">
-            <div class="ts-label">Detailed Description <span>*</span></div>
-            <textarea class="ts-textarea" id="ts-desc" rows="4" placeholder="Describe the issue in detail: what happened, when it started, what error messages appear, what was the system doing before the fault…"></textarea>
-          </div>
-        </div>
-        <div class="ts-row-1">
-          <div class="ts-group">
-            <div class="ts-label">Steps Already Taken</div>
-            <textarea class="ts-textarea" id="ts-steps" rows="2" placeholder="What troubleshooting steps have already been attempted?"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- Submit -->
-      <div id="ts-status" class="ts-status"></div>
-      <div class="ts-footer">
-        <div class="ts-note">🔒 Ticket logged to NEXARCH Support · resitch@gmail.com</div>
-        <button class="ts-submit" id="ts-submit-btn" onclick="submitTicket()">RAISE TICKET →</button>
-      </div>
-
-    </div>
-  </div>
-</div>
 
 </footer>
 
@@ -2341,26 +2343,15 @@ Format: Write ONLY the email body text — no subject line, no markdown, no prea
   `.trim();
 
   try {
-    // Step 1: Generate AI auto-response email
-    const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': '',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-request-allowed': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 600,
-        messages: [{ role: 'user', content: enquirySummary }]
-      })
-    });
-
-    const aiData = await aiRes.json();
-    const autoReply = aiData.content && aiData.content[0]
-      ? aiData.content[0].text
-      : `Dear ${fname},\n\nThank you for reaching out to NEXARCH. We have received your enquiry regarding ${service || 'our engineering services'} and will respond within 1 business day.\n\nBest regards,\nThe NEXARCH Engineering Team\nresitch@gmail.com`;
+    // Step 1: Generate auto-response email — AI via GAS proxy if configured,
+    // otherwise a professional static template (works offline / GitHub Pages)
+    let autoReply = null;
+    if (typeof nxAskAI === 'function') {
+      autoReply = await nxAskAI([{ role: 'user', content: enquirySummary }], 600);
+    }
+    if (!autoReply) {
+      autoReply = `Dear ${fname},\n\nThank you for reaching out to NEXARCH Systems Engineering. We have received your enquiry regarding ${service || 'our engineering services'} and a NEXARCH engineer will be in touch within 1 business day.\n\nWith 27+ years of OT/IT integration experience across cement, mining, power, and food & beverage industries — and deep expertise in Siemens, Rockwell, Schneider, and all major automation platforms — we are confident we can support your project.\n\nBest regards,\nThe NEXARCH Engineering Team\nresitch@gmail.com | +63 905 251 5051 | www.nexarch.io`;
+    }
 
     // Step 2: Send message to chatbot panel — open it and show conversation
     const chatBox = document.getElementById('chat-box');
@@ -2492,17 +2483,71 @@ function showEmailPreview(name, email, body, service) {
   });
 }
 
-/* ═══ CHATBOT ═══ */
+/* ═══ CHATBOT — GAS AI proxy + offline knowledge base ═══ */
+/* Paste your unified nexdesk-backend /exec URL below (same one the ticket
+   form uses). With it set, the bot answers via Claude AI through Apps Script.
+   Without it, the bot still works using the built-in knowledge base. */
+var NEXARCH_GAS_URL = '';
+
+var NX_SYSTEM = "You are NEXARCH's AI assistant — a professional systems engineering advisor. NEXARCH is a systems engineering firm in Buruun, Iligan City, Philippines. Leadership: Engr. R. Sitchon (CEO, ECE, 27+ yrs OT/IT integration, MES, PIMS, IIoT), Engr. L. Sitchon (CTO), Cap. A. Chan (Chief Engineering Officer). 100+ projects, 25+ companies. Products: Siemens PCS 7 CEMAT/PCS Neo/Braumat/MES/TIA Portal/WinCC/S7, Rockwell PlantPAx/FactoryTalk/ControlLogix, Schneider BrewMax/Modicon/EcoStruxure/AVEVA, Emerson DeltaV/Ovation, Honeywell Experion PKS/Safety Manager, GE Vernova Mark VIe/iFIX, ABB 800xA/ACS880, Yokogawa CENTUM VP/ProSafe-RS, Mitsubishi MELSEC iQ-R. Clients: Republic Cement, Holcim Lugait, SMBC, SMPC, Busco Sugar, NGCP, Wilmar, Limkitkai, LGU Region 8, Asia Brewery, URC, NPC, Pilmico, Roxas City IT-Park, Kings Energy, Iligan City Waterworks, Roxas City Water District. Services: System Design, Integration, Resilience Engineering, Optimisation, Consulting, Managed Operations, Training Programs, Engineering Consultancy. Process: Discover, Architect, Integrate, Validate, Operate, Support (24/7). Sectors: Defence, Aerospace, Energy, Telecoms, Smart Cities, Financial, Mining & Metals, Oil & Gas, Food & Beverages. Web apps with live demos: NEXMOM (MES/MOM), NEXDESK (AI ticketing), NEXCYBER Sentra (OT security), NEXERP, NEXDENTAL, Rajah Tupas (medical), Everose (appliance retail), Cyrabell LMS (legal), Cyrabell Pickleball, Mata sa Agila (tennis), Cyrabell ChickenFarm, Pinoy Sakay (fleet), Cyrabell SmartHome, CyraBill (payments). Slogan: Precision. Scale. Control. Contact: resitch@gmail.com, +63 905 251 5051. Respond concisely, under 120 words, plain text.";
+
+/* ── Offline knowledge base: keyword rules → answers ── */
+var NX_KB = [
+  {k:['service','offer','what do you do','capabilit'],a:"NEXARCH offers 8 core services: System Design & Architecture, Systems Integration, Resilience Engineering, Performance Optimisation, Strategic Consulting, Managed Operations, Training Programs (DCS/PLC/SCADA/MES), and Engineering Consultancy (FEED studies, audits, OT cybersecurity). Which one can I tell you more about?"},
+  {k:['plc','scada','dcs','hmi','siemens','rockwell','allen','schneider','emerson','honeywell','yokogawa','abb','mitsubishi','product','platform'],a:"We work across all major automation platforms: Siemens (PCS 7 CEMAT, PCS Neo, Braumat, TIA Portal, WinCC), Rockwell PlantPAx & FactoryTalk, Schneider BrewMax & EcoStruxure, Emerson DeltaV/Ovation, Honeywell Experion PKS, GE Mark VIe, ABB 800xA, Yokogawa CENTUM VP, and Mitsubishi MELSEC. See the Products section for the full catalogue."},
+  {k:['client','portfolio','project','who have you worked','experience','track record'],a:"Our clients include Republic Cement, Holcim Lugait, San Miguel Brewery, SMPC, Busco Sugar, NGCP, Wilmar, Asia Brewery, URC, NPC, Pilmico, Roxas City IT-Park, Kings Energy, Iligan City Waterworks, and Roxas City Water District — 100+ projects across cement, mining, power, beverages, food, water, and smart cities. Scroll to the Clients section for project details."},
+  {k:['web app','webapp','demo','nexmom','nexdesk','nexerp','nexdental','nexcyber','pickleball','tennis','chicken','fleet','smart home','payment','cyrabill','legal','dental','medical'],a:"We build production web applications too! Live demos: NEXMOM (MES/MOM), NEXDESK (AI ticketing), NEXCYBER Sentra (OT security), NEXERP, NEXDENTAL, plus platforms for medical, legal, retail, sports, poultry, fleet, smart home, and payments. Check the Web Apps section — every card has a LIVE DEMO button."},
+  {k:['train','course','learn'],a:"We run Training Programs for operators and engineers: DCS, PLC, SCADA, and MES across Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, and Yokogawa platforms. NGCP is among our training clients. Email resitch@gmail.com to arrange a program for your team."},
+  {k:['support','ticket','help','issue','problem','broken','fault','troubleshoot'],a:"For technical support, click the amber 🎫 Support button (top nav or floating button) to raise a ticket — our AI triage classifies and prioritises it instantly, and an engineer responds within the SLA. Critical issues: call +63 905 251 5051."},
+  {k:['quote','price','cost','how much','proposal','enquir','inquir','hire','engage'],a:"For a quote, use the Contact form below (Start a Project) — tell us your service need and project scope, and a NEXARCH engineer will respond within 1 business day. Or email resitch@gmail.com / call +63 905 251 5051 directly."},
+  {k:['contact','email','phone','call','reach','address','location','where'],a:"You can reach us at resitch@gmail.com or +63 905 251 5051. Office: NEXARCH Building, Buruun, Iligan City, Philippines 9200. Or use the Contact form on this page — we respond within 1 business day."},
+  {k:['leader','ceo','cto','team','founder','who runs','sitchon'],a:"NEXARCH is led by Engr. R. Sitchon (CEO) — an Electronics & Communications Engineer with 27+ years in industrial control systems, OT/IT integration, MES, PIMS and IIoT — alongside Engr. L. Sitchon (CTO) and Cap. A. Chan (Chief Engineering Officer)."},
+  {k:['sector','industr','mining','cement','oil','gas','power','water','food','beverage','defence','aerospace'],a:"We serve 9 sectors: Mining & Metals, Oil & Gas, Energy/Power, Food & Beverages, Water, Smart Cities, Defence, Aerospace, and Telecoms/Financial. Our deepest experience is in cement, mining, brewing, hydro power, and water utilities across the Philippines."},
+  {k:['solar'],a:"Yes — NEXARCH has a solar division for solar PV design and integration alongside our industrial automation work. Email resitch@gmail.com with your site details for an assessment."},
+  {k:['process','methodology','how do you work','approach'],a:"Our engineering process has 6 phases: Discover → Architect → Integrate → Validate → Operate → Support. Support includes 24/7 assistance, preventive maintenance, remote diagnostics, spare parts, trainings, and consultancy."},
+  {k:['hello','hi','hey','good morning','good afternoon','good evening','kumusta','musta'],a:"Hello! Welcome to NEXARCH. I can tell you about our services, automation products, client projects, web app demos, training, or how to get a quote. What would you like to know?"},
+  {k:['thank','salamat'],a:"You're welcome! If you need anything else — a quote, support ticket, or a walkthrough of our capabilities — just ask. Precision. Scale. Control. 🔷"}
+];
+
+function nxLocalAnswer(text){
+  var t=' '+text.toLowerCase()+' ';
+  var best=null,score=0;
+  for(var i=0;i<NX_KB.length;i++){
+    var s=0;
+    for(var j=0;j<NX_KB[i].k.length;j++) if(t.indexOf(NX_KB[i].k[j])>-1) s+=NX_KB[i].k[j].length>4?2:1;
+    if(s>score){score=s;best=NX_KB[i];}
+  }
+  if(best) return best.a;
+  return "I can help with NEXARCH's services, automation products (Siemens, Rockwell, Schneider…), client projects, web app demos, training, support tickets, or getting a quote. Could you rephrase, or email resitch@gmail.com for anything specific?";
+}
+
+/* ── AI via Google Apps Script proxy (works on GitHub Pages) ── */
+async function nxAskAI(messages, maxTokens){
+  if(!NEXARCH_GAS_URL) return null;
+  try{
+    var res = await fetch(NEXARCH_GAS_URL, {
+      method:'POST', redirect:'follow',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({type:'chat', system:NX_SYSTEM, messages:messages, max_tokens:maxTokens||600})
+    });
+    var data = await res.json();
+    if(data && data.content && data.content[0] && data.content[0].text) return data.content[0].text;
+    return null;
+  }catch(e){ return null; }
+}
+
 const chatBtn=document.getElementById('chat-btn'),chatBox=document.getElementById('chat-box'),chatInput=document.getElementById('chat-input'),chatMessages=document.getElementById('chat-messages'),chatClose=document.getElementById('chat-close'),chatSend=document.getElementById('chat-send'),chatBadge=document.getElementById('chat-badge');
 chatBtn.addEventListener('click',()=>{const o=chatBox.classList.toggle('open');chatBtn.classList.toggle('active',o);chatBadge.style.display='none';if(o)setTimeout(()=>chatInput.focus(),300)});
 chatClose.addEventListener('click',()=>{chatBox.classList.remove('open');chatBtn.classList.remove('active')});
 setTimeout(()=>{chatBadge.style.display='flex'},3000);
 
+function escHTML(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function addMsg(text,role){
   const w=document.createElement('div');
   w.className='cm cm-'+role;
-  if(role==='bot') w.innerHTML=`<div class="cm-avatar">NX</div><div class="cm-bubble">${text}</div>`;
-  else w.innerHTML=`<div class="cm-bubble">${text}</div>`;
+  const safe=escHTML(text).replace(/\n/g,'<br>');
+  if(role==='bot') w.innerHTML=`<div class="cm-avatar">NX</div><div class="cm-bubble">${safe}</div>`;
+  else w.innerHTML=`<div class="cm-bubble">${safe}</div>`;
   chatMessages.appendChild(w);
   chatMessages.scrollTop=chatMessages.scrollHeight;
 }
@@ -2514,35 +2559,17 @@ async function sendMessage(){
   const text=chatInput.value.trim();if(!text)return;
   chatInput.value='';addMsg(text,'user');history.push({role:'user',content:text});
   addTyping();chatSend.disabled=true;
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key': '', // handled by proxy
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-request-allowed': 'true'
-      },
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:1000,
-        system:`You are NEXARCH's AI assistant — a professional systems engineering advisor. NEXARCH is a global systems engineering firm. Leadership: Engr. R. Sitchon (CEO) — Electronics and Communications Engineer, 27+ years in industrial control systems, OT/IT integration, MES, PIMS, IIoT across mining, metals, oil & gas and energy; Engr. L. Sitchon (CTO); Cap. A. Chan (Chief Engineering Officer). Key facts: 100+ projects, companies served across multiple industries, ISO/IEC 15288 certified. Technology partners and products: Siemens (SIMATIC PCS 7 CEMAT for cement/mining, PCS Neo DCS, Braumat for brewing/beverages, Siemens MES/SIMATIC IT, TIA Portal, WinCC SCADA, S7-1500 PLCs), Rockwell/Allen-Bradley (PlantPAx DCS, FactoryTalk View SE/ME SCADA, FactoryTalk MES, ControlLogix, Studio 5000), Schneider Electric (BrewMax for brewing, Modicon M580, EcoStruxure, AVEVA SCADA), Emerson (DeltaV DCS, Ovation DCS for power, Rosemount/Fisher instruments, AMS), Honeywell (Experion PKS DCS, Safety Manager SC SIS, Honeywell Forge), GE Vernova (Mark VIe DCS turbine control, iFIX/Cimplicity SCADA, APM/Predix), ABB (System 800xA DCS, ACS880 drives, ABB Ability IIoT), Yokogawa (CENTUM VP DCS, ProSafe-RS SIS, OpreX platform), Mitsubishi (MELSEC iQ-R, GOT2000 HMI, CC-Link IE). Clients and projects: Republic Cement — (1) Siemens S5 to S7 upgrade and PCS 7 CEMAT DCS integration, (2) Packhouse HMI upgrade to WinCC; Holcim Lugait — (1) Packhouse and Coal Plant control system upgrade, (2) Waste Heat Recovery System integration into PCS 7 CEMAT DCS; SMBC — Beverages, Pampanga Plant Braumat DCS upgrade; SMPC — Mining (Bucket Well Wireless Automation, Coal Line 1 CSU, Stacker/Reclaimer CSU); Busco Sugar Milling — Energy Management Systems; NGCP — TIA Portal Training & RTU Integration, Power Distribution Enterprise Control Systems Design; Wilmar Edible Oil — PLC/HMI/VFD Troubleshooting; Limkitkai Refinery — PLC/SCADA Troubleshooting; LGU Region 8 — Public Safety & Security Systems Design; Asia Brewery — Brewery Control Systems Upgrade Design, Brewmaxx Troubleshooting & Recovery; URC — Nova Extruder PLC/HMI Upgrade; NPC — Pulangi IV Hydro IT/OT Systems Design, Hydro Power Plant Enterprise Control Systems Design; Pilmico — MES Design; Roxas City IT-Park — Smart City conceptual design; Kings Energy — Smart Enterprise SCADA design; Iligan City Waterworks — Smart Enterprise SCADA design; Roxas City Water District — Smart Enterprise SCADA design. Services: System Design, Integration, Resilience Engineering, Performance Optimisation, Consulting, Managed Operations, Training Programs (DCS/PLC/SCADA/MES operator and engineer training for Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, Yokogawa), Engineering Consultancy (independent technical advisory, FEED studies, control philosophy, system audits, OT cybersecurity). Engineering Process: Discover, Architect, Integrate, Validate, Operate, Support (24/7 support, preventive maintenance, remote diagnostics, spare parts, on-site intervention, trainings, and consultancy). Sectors: Defence, Aerospace, Energy, Telecoms, Smart Cities, Financial, Mining & Metals, Oil & Gas, Food & Beverages. Solar division available. Web Applications: NEXDESK (support ticketing console with AI triage), MOM/MES (manufacturing ops, ISA-95, OEE, Gantt), ERP Suite, NEXA (AI supervisory agent), Cyrabell (multi-vertical platform), MediCore (medical PWA). Slogan: Precision. Scale. Control. Contact: resitch@gmail.com. Respond concisely under 120 words. Plain text only.`,
-        messages:history
-      })
-    });
-    const data=await res.json();removeTyping();
-    if(data.content&&data.content[0]){
-      const r=data.content[0].text;
-      history.push({role:'assistant',content:r});
-      addMsg(r,'bot');
-    } else if(data.error){
-      addMsg('Error: '+data.error.message+'. Please contact resitch@gmail.com','bot');
-    } else {
-      addMsg('Unexpected response. Please contact resitch@gmail.com','bot');
-    }
-  }catch(err){
-    removeTyping();
-    addMsg('Network error: '+err.message+'. Please contact resitch@gmail.com or call +63 905 251 5051.','bot');
+
+  // Try AI proxy first; fall back to the built-in knowledge base
+  let reply = await nxAskAI(history, 600);
+  if(!reply){
+    // simulate brief think time for natural feel in local mode
+    await new Promise(r=>setTimeout(r, 450));
+    reply = nxLocalAnswer(text);
   }
+  removeTyping();
+  history.push({role:'assistant',content:reply});
+  addMsg(reply,'bot');
   chatSend.disabled=false;chatInput.focus();
 }
 chatSend.addEventListener('click',sendMessage);
@@ -2600,7 +2627,7 @@ document.querySelectorAll('.qr').forEach(btn=>btn.addEventListener('click',()=>{
   function checkWidth() {
     const navH = document.getElementById('nav').offsetHeight;
     menu.style.top = navH + 'px';
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1180) {
       toggleMenu(false);
       menu.style.display = 'none';
     }
@@ -2609,119 +2636,6 @@ document.querySelectorAll('.qr').forEach(btn=>btn.addEventListener('click',()=>{
   checkWidth();
 })();
 
-
-/* ═══ TECH SUPPORT TICKETING ═══ */
-var TS_SHEETS_URL = 'https://script.google.com/macros/s/YOUR_TICKET_SCRIPT_ID/exec';
-
-function openTicket(e) {
-  if (e) e.preventDefault();
-  document.getElementById('ts-overlay').classList.add('ts-open');
-  document.body.style.overflow = 'hidden';
-}
-function closeTicket() {
-  document.getElementById('ts-overlay').classList.remove('ts-open');
-  document.body.style.overflow = '';
-}
-function tsOverlayClick(e) {
-  if (e.target === document.getElementById('ts-overlay')) closeTicket();
-}
-
-// Priority radio highlight
-document.querySelectorAll('.ts-priority input').forEach(function(radio) {
-  radio.addEventListener('change', function() {
-    document.querySelectorAll('.ts-priority').forEach(function(el) { el.classList.remove('selected'); });
-    if (this.checked) this.closest('.ts-priority').classList.add('selected');
-  });
-});
-
-function generateTicketRef() {
-  var d = new Date();
-  return 'NX-' + d.getFullYear().toString().slice(-2) +
-    String(d.getMonth()+1).padStart(2,'0') +
-    String(d.getDate()).padStart(2,'0') + '-' +
-    Math.random().toString(36).substring(2,6).toUpperCase();
-}
-
-async function submitTicket() {
-  var name    = (document.getElementById('ts-name')||{}).value||'';
-  var company = (document.getElementById('ts-company')||{}).value||'';
-  var email   = (document.getElementById('ts-email')||{}).value||'';
-  var phone   = (document.getElementById('ts-phone')||{}).value||'';
-  var site    = (document.getElementById('ts-site')||{}).value||'';
-  var system  = (document.getElementById('ts-system')||{}).value||'';
-  var product = (document.getElementById('ts-product')||{}).value||'';
-  var type    = (document.getElementById('ts-type')||{}).value||'';
-  var priority= '';
-  var prRadio = document.querySelector('input[name="ts-priority"]:checked');
-  if (prRadio) priority = prRadio.value;
-  var title   = (document.getElementById('ts-title')||{}).value||'';
-  var desc    = (document.getElementById('ts-desc')||{}).value||'';
-  var steps   = (document.getElementById('ts-steps')||{}).value||'';
-  var st      = document.getElementById('ts-status');
-  var btn     = document.getElementById('ts-submit-btn');
-
-  // Validation
-  if (!name.trim()||!company.trim()||!email.trim()||!site.trim()||!type||!title.trim()||!desc.trim()) {
-    st.style.display = 'block';
-    st.style.background = 'rgba(255,60,60,.08)';
-    st.style.borderColor = 'rgba(255,60,60,.3)';
-    st.style.color = '#FF8888';
-    st.textContent = '⚠  Please fill in all required fields (marked with *).';
-    return;
-  }
-  var emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRx.test(email.trim())) {
-    st.style.display = 'block'; st.style.background = 'rgba(255,60,60,.08)';
-    st.style.borderColor = 'rgba(255,60,60,.3)'; st.style.color = '#FF8888';
-    st.textContent = '⚠  Please enter a valid email address.'; return;
-  }
-
-  btn.disabled = true; btn.textContent = 'SUBMITTING…';
-  st.style.display = 'none';
-
-  var ticketRef = generateTicketRef();
-  var payload = {
-    type: 'ticket',
-    ticketRef: ticketRef,
-    timestamp: new Date().toLocaleString('en-PH'),
-    name: name.trim(), company: company.trim(),
-    email: email.trim(), phone: phone.trim(),
-    site: site.trim(), system: system.trim(),
-    product: product, supportType: type,
-    priority: priority || 'Medium',
-    title: title.trim(), description: desc.trim(),
-    stepsTaken: steps.trim(),
-    status: 'Open', source: 'NEXARCH Website'
-  };
-
-  try {
-    await fetch(TS_SHEETS_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: {'content-type':'application/json'},
-      body: JSON.stringify(payload)
-    });
-  } catch(err) {}
-
-  // Success
-  st.style.display = 'block';
-  st.style.background = 'rgba(255,184,0,.07)';
-  st.style.borderColor = 'rgba(255,184,0,.3)';
-  st.style.color = '#FFB800';
-  st.innerHTML = '✓ <span class="ts-ticket-ref">' + ticketRef + '</span> — Ticket raised successfully!<br>' +
-    '<span style="font-size:12px;color:rgba(255,255,255,.6)">Confirmation will be sent to ' + email.trim() + '. Our team will respond based on priority level.</span>';
-
-  // Clear form
-  ['ts-name','ts-company','ts-email','ts-phone','ts-site','ts-system','ts-title','ts-desc','ts-steps'].forEach(function(id){
-    var el=document.getElementById(id); if(el) el.value='';
-  });
-  var pd=document.getElementById('ts-product'); if(pd) pd.value='';
-  var td=document.getElementById('ts-type'); if(td) td.value='';
-  document.querySelectorAll('.ts-priority').forEach(function(el){el.classList.remove('selected');});
-  var med=document.getElementById('pr-medium'); if(med){med.classList.add('selected');med.querySelector('input').checked=true;}
-
-  btn.textContent = 'RAISE ANOTHER TICKET →';
-  btn.disabled = false;
-}
 
 /* ═══ SUPPORT TICKET POPUP WINDOW ═══ */
 function openTicketPopup(e){
@@ -2751,7 +2665,7 @@ function openTicketPopup(e){
 </script>
 
 <style>
-#chat-btn{position:fixed;bottom:32px;right:32px;z-index:1000;width:58px;height:58px;border-radius:50%;background:var(--cyan);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,212,255,.55);transition:transform .2s,box-shadow .2s}
+#chat-btn{position:fixed;bottom:32px;right:32px;z-index:1000;width:58px;height:58px;border-radius:50%;background:var(--cyan);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,212,255,.55);transition:transform .2s,box-shadow .2s}
 #chat-btn:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(0,212,255,.75)}
 #chat-btn.active{background:var(--mid);border:2px solid var(--cyan)}
 #chat-badge{position:absolute;top:-5px;right:-5px;width:20px;height:20px;border-radius:50%;background:#FF3B3B;color:#fff;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;animation:bpop .4s ease}
@@ -2766,7 +2680,7 @@ function openTicketPopup(e){
 #chat-status{font-size:10px;letter-spacing:2px;color:var(--cyan);display:flex;align-items:center;gap:5px;margin-top:2px}
 #chat-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#00FF88;box-shadow:0 0 6px #00FF88;animation:gpulse 2s infinite}
 @keyframes gpulse{0%,100%{opacity:1}50%{opacity:.4}}
-#chat-close{background:none;border:none;color:var(--grey);font-size:18px;cursor:none;padding:4px;transition:color .2s;line-height:1}
+#chat-close{background:none;border:none;color:var(--grey);font-size:18px;cursor:pointer;padding:4px;transition:color .2s;line-height:1}
 #chat-close:hover{color:var(--white)}
 #chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:rgba(0,212,255,.2) transparent}
 #chat-messages::-webkit-scrollbar{width:4px}
@@ -2783,13 +2697,13 @@ function openTicketPopup(e){
 @keyframes dbounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
 .cm-bot .cm-bubble:has(.dot){display:flex;gap:5px;align-items:center;padding:12px 16px}
 #chat-quick{padding:8px 14px;display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid rgba(0,212,255,.08);flex-shrink:0}
-.qr{font-size:10px;letter-spacing:1px;color:var(--cyan);border:1px solid rgba(0,212,255,.25);background:rgba(0,212,255,.04);padding:5px 10px;cursor:none;transition:background .2s;white-space:nowrap}
+.qr{font-size:10px;letter-spacing:1px;color:var(--cyan);border:1px solid rgba(0,212,255,.25);background:rgba(0,212,255,.04);padding:5px 10px;cursor:pointer;transition:background .2s;white-space:nowrap}
 .qr:hover{background:rgba(0,212,255,.14)}
 #chat-input-row{padding:11px 14px;border-top:1px solid rgba(0,212,255,.12);display:flex;gap:8px;align-items:center;flex-shrink:0;background:rgba(5,13,26,.6)}
 #chat-input{flex:1;background:rgba(10,30,58,.8);border:1px solid rgba(0,212,255,.15);color:var(--white);padding:9px 12px;font-family:'Rajdhani',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
 #chat-input:focus{border-color:var(--cyan)}
 #chat-input::placeholder{color:var(--grey2)}
-#chat-send{width:36px;height:36px;background:var(--cyan);border:none;color:var(--dark);display:flex;align-items:center;justify-content:center;cursor:none;transition:background .2s,transform .15s;flex-shrink:0}
+#chat-send{width:36px;height:36px;background:var(--cyan);border:none;color:var(--dark);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,transform .15s;flex-shrink:0}
 #chat-send:hover{background:#00FFCC;transform:scale(1.06)}
 #chat-send:disabled{background:var(--grey2);transform:none}
 #chat-send svg{width:15px;height:15px}
