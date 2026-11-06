@@ -690,6 +690,43 @@ footer{margin-top:90px;padding:60px clamp(16px,3vw,40px) 30px;border-top:1px sol
 @keyframes liBar{to{transform:none}}
 @media(prefers-reduced-motion:reduce){.nl-mark,.nl-name,.lh-glow,.lh-r1,.lh-r2,.lh-pulse,.lh-emb,.lh-sweep{animation:none!important}#logo-intro{display:none}}
 </style>
+<style id="train-style">
+#training .tr-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start}
+.ladder{position:relative;display:flex;flex-direction:column;gap:10px}
+.rung{position:relative;display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;border:1px solid color-mix(in srgb,var(--rc) 45%,transparent);
+  background:linear-gradient(100deg,color-mix(in srgb,var(--rc) 16%,#071525),#071525 70%);opacity:0;transform:translateX(-30px) scale(.96);
+  transition:opacity .6s var(--ease),transform .6s var(--ease),box-shadow .3s;margin-left:calc(var(--i)*22px)}
+.ladder.in .rung{opacity:1;transform:none}
+.ladder.in .rung:nth-child(1){transition-delay:1.5s}.ladder.in .rung:nth-child(2){transition-delay:1.25s}.ladder.in .rung:nth-child(3){transition-delay:1s}
+.ladder.in .rung:nth-child(4){transition-delay:.75s}.ladder.in .rung:nth-child(5){transition-delay:.5s}.ladder.in .rung:nth-child(6){transition-delay:.25s}
+.rung:hover{box-shadow:0 0 28px color-mix(in srgb,var(--rc) 35%,transparent)}
+.rung .rl{flex:0 0 74px;font-family:var(--f-mono);font-size:10px;letter-spacing:2px;color:var(--rc)}
+.rung .rt{font-family:var(--f-disp);font-size:13px;font-weight:700;letter-spacing:1px;color:#fff;line-height:1.3}
+.rung .rd{font-size:12.5px;color:var(--grey);margin-top:3px;line-height:1.45}
+.rung.ai{border-width:1.5px;box-shadow:0 0 30px rgba(178,140,255,.25)}
+.rung.ai::after{content:"";position:absolute;inset:0;border-radius:12px;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);background-size:300% 100%;animation:rungSheen 4.5s ease-in-out infinite}
+@keyframes rungSheen{0%{background-position:160% 0}60%,100%{background-position:-60% 0}}
+.tr-tracks{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 0;justify-content:center}
+.tr-tracks span.t{padding:9px 18px;border-radius:30px;border:1px solid var(--line-2);font-family:var(--f-mono);font-size:11px;letter-spacing:3px;color:var(--cyan);background:rgba(0,212,255,.06)}
+.tr-tracks i{color:var(--grey-2);font-style:normal}
+.tr-tracks .ccae{padding:9px 18px;border-radius:30px;border:1.5px solid #B28CFF;font-family:var(--f-mono);font-size:11px;letter-spacing:3px;color:#D8C7FF;background:rgba(178,140,255,.14)}
+.tr-offers{display:grid;gap:14px}
+.tro{background:linear-gradient(160deg,var(--mid),var(--deep));border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;transition:.3s var(--ease)}
+.tro:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.4),0 0 24px var(--glow-soft)}
+.tro .tt{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tro h4{font-family:var(--f-disp);font-size:13px;letter-spacing:1.5px;color:#fff}
+.tro .bd{font-family:var(--f-mono);font-size:8px;letter-spacing:1.5px;padding:3px 8px;border-radius:3px;color:#00FF88;border:1px solid rgba(0,255,136,.3);background:rgba(0,255,136,.06);white-space:nowrap}
+.tro .bd.new{color:#D8C7FF;border-color:rgba(178,140,255,.5);background:rgba(178,140,255,.12)}
+.tro p{font-size:13px;color:var(--grey);margin:8px 0 12px;line-height:1.55;font-weight:300}
+.tro .tg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tro .tg span{font-family:var(--f-mono);font-size:8px;letter-spacing:1px;color:rgba(0,212,255,.7);border:1px solid var(--line);padding:3px 8px;border-radius:3px}
+.tro .go{display:inline-block;font-family:var(--f-disp);font-size:9px;font-weight:700;letter-spacing:2px;padding:10px 16px;border-radius:4px;background:var(--cyan);color:#050D1A;cursor:pointer;border:0}
+.tr-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:34px}
+.tr-cta button{font-family:var(--f-disp);font-size:10px;font-weight:700;letter-spacing:2px;padding:14px 22px;border-radius:4px;cursor:pointer}
+.tr-cta .p{background:var(--cyan);color:#050D1A;border:0}.tr-cta .s{background:transparent;color:var(--cyan);border:1px solid var(--line-2)}
+@media(max-width:900px){#training .tr-grid{grid-template-columns:1fr}.rung{margin-left:calc(var(--i)*8px)}.rung .rl{flex-basis:60px}}
+@media(prefers-reduced-motion:reduce){.rung{transition:none}.rung.ai::after{animation:none}}
+</style>
 </head>
 <body>
 
@@ -1804,6 +1841,17 @@ footer{margin-top:90px;padding:60px clamp(16px,3vw,40px) 30px;border-top:1px sol
 </div>
 </div></section>
 
+<section id="training" style="padding:50px 0 70px"><div class="wrap">
+  <div class="sh reveal"><div class="stag">Training &amp; Certification</div><h2 class="stitle">AI Automation <span>Mastery</span></h2><p class="ssub">Climb the full industrial ladder — from instrumentation to ERP, with the AI layer on top. Learn it Basic → Advanced → Expert and certify with CCAE. Online and onsite, with corporate batches.</p><div class="sline"></div></div>
+  <div class="tr-grid">
+    <div>
+      <div class="ladder reveal" id="ladder"><div class="rung ai" style="--rc:#B28CFF;--i:5"><div class="rl">AI LAYER</div><div><div class="rt">AGENTIC AI · EDGE AI · DIGITAL TWIN · LLM COPILOTS</div><div class="rd">AI that watches, explains and acts on live plant data.</div></div></div><div class="rung" style="--rc:#FFB800;--i:4"><div class="rl">LEVEL 4</div><div><div class="rt">ERP &amp; BUSINESS SYSTEMS</div><div class="rd">Planning, costing, KPIs and enterprise integration.</div></div></div><div class="rung" style="--rc:#84CC16;--i:3"><div class="rl">LEVEL 3</div><div><div class="rt">MES · MOM · PIMS · LIMS</div><div class="rd">ISA-95 production management, genealogy, OEE and lab data.</div></div></div><div class="rung" style="--rc:#2DE2C0;--i:2"><div class="rl">LEVEL 2</div><div><div class="rt">SCADA · HMI</div><div class="rd">Operator screens, alarm management, historians and OPC UA.</div></div></div><div class="rung" style="--rc:#00D4FF;--i:1"><div class="rl">LEVEL 1</div><div><div class="rt">PLC · DCS CONTROL</div><div class="rd">Control logic, loop tuning, interlocks and safety systems.</div></div></div><div class="rung" style="--rc:#38BDF8;--i:0"><div class="rl">LEVEL 0</div><div><div class="rt">INSTRUMENTATION &amp; FIELD DEVICES</div><div class="rd">Sensors, transmitters, valves, calibration and field wiring.</div></div></div></div>
+      <div class="tr-tracks reveal"><span class="t">BASIC</span><i>→</i><span class="t">ADVANCED</span><i>→</i><span class="t">EXPERT</span><i>→</i><span class="ccae">🏅 CCAE CERTIFICATION</span></div>
+    </div>
+    <div class="tr-offers"><div class="tro reveal"><div class="tt"><h4>ONLINE CLASSES</h4><span class="bd">OPEN</span></div><p>Live online sessions that take you up the ladder one level at a time — Basic, Advanced, then Expert.</p><div class="tg"><span>LIVE ONLINE</span><span>BASIC → EXPERT</span><span>HANDS-ON LABS</span></div><button class="go" onclick="enrolTraining('Online Classes')">ENROL / ASK ABOUT RATES</button></div><div class="tro reveal"><div class="tt"><h4>ONSITE TRAINING</h4><span class="bd">OPEN</span></div><p>Our engineers come to your plant or office and train on your own equipment, tags and processes.</p><div class="tg"><span>ONSITE</span><span>YOUR EQUIPMENT</span><span>PRACTICAL</span></div><button class="go" onclick="enrolTraining('Onsite Training')">ENROL / ASK ABOUT RATES</button></div><div class="tro reveal"><div class="tt"><h4>CORPORATE BATCHES</h4><span class="bd">OPEN</span></div><p>Group batches for companies — pick the levels and the AI layer your team needs, with scheduling that fits operations.</p><div class="tg"><span>TEAMS</span><span>CUSTOM SCOPE</span><span>FLEXIBLE</span></div><button class="go" onclick="enrolTraining('Corporate Batch')">ENROL / ASK ABOUT RATES</button></div><div class="tro reveal"><div class="tt"><h4>CCAE CERTIFICATION</h4><span class="bd new">NEW</span></div><p>Finish the ladder and certify your skills: CYRABELL Certified Automation Engineer (CCAE).</p><div class="tg"><span>CERTIFICATION</span><span>BASIC · ADVANCED · EXPERT</span></div><button class="go" onclick="enrolTraining('CCAE Certification')">ENROL / ASK ABOUT RATES</button></div><div class="tro reveal"><div class="tt"><h4>PLANT INTELLIGENCE PILOT</h4><span class="bd new">NEW</span></div><p>A fixed-fee pilot for industrial sites: ask your plant data questions in plain English and get automatic shift summaries.</p><div class="tg"><span>AI PILOT</span><span>FIXED FEE</span><span>OPC · MQTT · MODBUS</span></div><button class="go" onclick="enrolTraining('Plant Intelligence Pilot')">ENROL / ASK ABOUT RATES</button></div></div>
+  </div>
+  <div class="tr-cta reveal"><button class="p" onclick="enrolTraining('AI Automation Mastery')">ENROL NOW · +63 991 421 4989</button><button class="s" onclick="askTraining()">ASK THE AI ASSISTANT</button></div>
+</div></section>
 </div><!-- /tab-solutions -->
 
 <!-- ══════════════════ TAB: WORK ══════════════════ -->
@@ -1997,6 +2045,7 @@ footer{margin-top:90px;padding:60px clamp(16px,3vw,40px) 30px;border-top:1px sol
     <div class="fcol"><h4>SOLUTIONS</h4>
       <a href="#" onclick="goTab('solutions');return false">Automation Products</a>
       <a href="#" onclick="goTab('solutions');scrollToId('webapps');return false">Web Applications</a>
+      <a href="#" onclick="goTab('solutions');scrollToId('training');return false">AI Automation Training</a>
       <a href="#" onclick="goTab('work');return false">Client Portfolio</a>
       <a href="nexdesk-raise-ticket.html" onclick="return openTicketPopup(event)" style="color:#FFB800">🎫 Raise a Ticket</a>
     </div>
@@ -2049,6 +2098,7 @@ footer{margin-top:90px;padding:60px clamp(16px,3vw,40px) 30px;border-top:1px sol
   <div id="chat-quick">
     <button class="qr" onclick="quickAsk('Our Services')">Our Services</button>
     <button class="qr" onclick="quickAsk('Web app demos')">Web Apps</button>
+    <button class="qr" onclick="quickAsk('AI Automation Mastery training and offers')">Training &amp; Offers</button>
     <button class="qr" onclick="quickAsk('Get a quote')">Get a Quote</button>
     <button class="qr" onclick="quickAsk('Contact')">Contact</button>
   </div>
@@ -2394,7 +2444,7 @@ async function submitContact(){
 }
 
 /* ═══════════════ CHATBOT (GAS proxy + offline KB) ═══════════════ */
-var NX_SYSTEM = "You are CYRABELL's AI assistant — a professional systems engineering advisor. CYRABELL Systems Engineering is the company; NEXARCH is CYRABELL's products & solutions brand (covering NEXMOM, NEXDESK, NEXERP, NEXMART, NEXDEN, NEXOPTIC, NEXCYBER and 40+ apps). CYRABELL is a systems engineering firm in Buruun, Iligan City, Philippines. Leadership: Engr. R. Sitchon (CEO & Principal Engineer, PRC-licensed ECE #0014554 from Cebu Institute of Technology, 27+ yrs OT/IT integration, MES, PIMS, IIoT), Engr. L. Sitchon (CTO), Cap. A. Chan (Chief Engineering Officer). International project experience across the Philippines, UAE (Dubai Aluminium/DUBAL 2002-2009; Emirates Global Aluminium Al Taweelah; EMAL; ADB Safegate Abu Dhabi International Airport 2016-2018), Oman (Sohar Aluminium 2009-2014), Saudi Arabia (Ma'aden Alumina Refinery via HATCH), and Mongolia (Oyu Tolgoi underground copper-gold mine, Progesys/Worley 2024). 100+ projects, 25+ companies. Architect of the CYRABELL platform — 40+ AI-enabled enterprise web apps, each a single-file offline-first PWA with embedded CYRA AI (forecasting, anomaly detection, scoring, chatbot). Products: Siemens PCS 7 CEMAT/PCS Neo/Braumat/MES/TIA Portal/WinCC/S7, Rockwell PlantPAx/FactoryTalk/ControlLogix, Schneider BrewMax/Modicon/EcoStruxure/AVEVA, Emerson DeltaV/Ovation, Honeywell Experion PKS/Safety Manager, GE Vernova Mark VIe/iFIX, ABB 800xA/ACS880, Yokogawa CENTUM VP/ProSafe-RS, Mitsubishi MELSEC iQ-R. Clients: Republic Cement, Holcim Lugait, SMBC, SMPC, Busco Sugar, NGCP, Wilmar, Limkitkai, LGU Region 8, Asia Brewery, URC, NPC, Pilmico, Roxas City IT-Park, Kings Energy, Iligan City Waterworks, Roxas City Water District. Services: System Design, Integration, Resilience Engineering, Optimisation, Consulting, Managed Operations, Training Programs, Engineering Consultancy. Process: Discover, Architect, Integrate, Validate, Operate, Support (24/7). Sectors: Defence, Aerospace, Airports & Aviation (airfield lighting ALCMS/A-SMGCS), Energy, Telecoms, Smart Cities, Financial, Mining & Metals (aluminium, copper-gold), Oil & Gas, Cement, Water, Food & Beverages. OT/ICS security standards: ISA-95, IEC 62443, ISO/IEC 27001:2022, NIST CSF 2.0. Web apps with live demos: NEXMOM (MES/MOM), NEXDESK (AI ticketing), NEXCYBER Sentra (OT security), NEXERP, NEXDENTAL, Rajah Tupas (medical), Everose (appliance retail), Cyrabell LMS (legal), Cyrabell Pickleball, Mata sa Agila (tennis), Cyrabell ChickenFarm, Pinoy Sakay (fleet), Cyrabell SmartHome, CyraBill (payments). Slogan: Precision. Scale. Control. Contact: resitch@gmail.com, +63 991 421 4989. Respond concisely, under 120 words, plain text.";
+var NX_SYSTEM = "You are CYRABELL's AI assistant — a professional systems engineering advisor. CYRABELL Systems Engineering is the company; NEXARCH is CYRABELL's products & solutions brand (covering NEXMOM, NEXDESK, NEXERP, NEXMART, NEXDEN, NEXOPTIC, NEXCYBER and 40+ apps). CYRABELL is a systems engineering firm in Buruun, Iligan City, Philippines. Leadership: Engr. R. Sitchon (CEO & Principal Engineer, PRC-licensed ECE #0014554 from Cebu Institute of Technology, 27+ yrs OT/IT integration, MES, PIMS, IIoT), Engr. L. Sitchon (CTO), Cap. A. Chan (Chief Engineering Officer). International project experience across the Philippines, UAE (Dubai Aluminium/DUBAL 2002-2009; Emirates Global Aluminium Al Taweelah; EMAL; ADB Safegate Abu Dhabi International Airport 2016-2018), Oman (Sohar Aluminium 2009-2014), Saudi Arabia (Ma'aden Alumina Refinery via HATCH), and Mongolia (Oyu Tolgoi underground copper-gold mine, Progesys/Worley 2024). 100+ projects, 25+ companies. Architect of the CYRABELL platform — 40+ AI-enabled enterprise web apps, each a single-file offline-first PWA with embedded CYRA AI (forecasting, anomaly detection, scoring, chatbot). Products: Siemens PCS 7 CEMAT/PCS Neo/Braumat/MES/TIA Portal/WinCC/S7, Rockwell PlantPAx/FactoryTalk/ControlLogix, Schneider BrewMax/Modicon/EcoStruxure/AVEVA, Emerson DeltaV/Ovation, Honeywell Experion PKS/Safety Manager, GE Vernova Mark VIe/iFIX, ABB 800xA/ACS880, Yokogawa CENTUM VP/ProSafe-RS, Mitsubishi MELSEC iQ-R. Clients: Republic Cement, Holcim Lugait, SMBC, SMPC, Busco Sugar, NGCP, Wilmar, Limkitkai, LGU Region 8, Asia Brewery, URC, NPC, Pilmico, Roxas City IT-Park, Kings Energy, Iligan City Waterworks, Roxas City Water District. Services: System Design, Integration, Resilience Engineering, Optimisation, Consulting, Managed Operations, Training Programs, Engineering Consultancy. Process: Discover, Architect, Integrate, Validate, Operate, Support (24/7). Sectors: Defence, Aerospace, Airports & Aviation (airfield lighting ALCMS/A-SMGCS), Energy, Telecoms, Smart Cities, Financial, Mining & Metals (aluminium, copper-gold), Oil & Gas, Cement, Water, Food & Beverages. OT/ICS security standards: ISA-95, IEC 62443, ISO/IEC 27001:2022, NIST CSF 2.0. Web apps with live demos: NEXMOM (MES/MOM), NEXDESK (AI ticketing), NEXCYBER Sentra (OT security), NEXERP, NEXDENTAL, Rajah Tupas (medical), Everose (appliance retail), Cyrabell LMS (legal), Cyrabell Pickleball, Mata sa Agila (tennis), Cyrabell ChickenFarm, Pinoy Sakay (fleet), Cyrabell SmartHome, CyraBill (payments). Training: AI Automation Mastery — ladder Level 0 Instrumentation, Level 1 PLC/DCS, Level 2 SCADA/HMI, Level 3 MES/MOM/PIMS/LIMS, Level 4 ERP, AI Layer (Agentic AI, Edge AI, Digital Twin, LLM Copilots); Basic > Advanced > Expert; CCAE certification; online, onsite and corporate batches; rates on request. Other offer: Plant Intelligence Pilot (fixed-fee AI on plant data). 31 featured web apps incl. NEXWATER, NEXAQUA, NEXEGG, NEXCHIPS, NEXTERRA, PAEMS, NEXDRRM, NEXAUTO, NEXPOST, NEXBOX, NEXTENNIS PRO, KITCHEN (pickleball training), NEXVOLLEY, NEXLICENSE. Slogan: Precision. Scale. Control. Contact: resitch@gmail.com, +63 991 421 4989. Respond concisely, under 120 words, plain text.";
 
 var NX_KB = [
   {k:['nexarch','cyrabell','brand','difference','product suite','products and solutions','what is nexarch','what is cyrabell','company name'],a:"CYRABELL Systems Engineering is our company. NEXARCH is our products & solutions brand — the umbrella over 40+ production-grade applications such as NEXMOM (MES/MOM), NEXDESK (AI ticketing), NEXERP, NEXMART, NEXDEN, NEXOPTIC, NEXCYBER and more. In short: CYRABELL is the company; NEXARCH is the product line we build and deliver."},
@@ -2403,6 +2453,7 @@ var NX_KB = [
   {k:['client','portfolio','project','who have you worked','experience','track record'],a:"Our clients include Republic Cement, Holcim Lugait, San Miguel Brewery, SMPC, Busco Sugar, NGCP, Wilmar, Asia Brewery, URC, NPC, Pilmico, Roxas City IT-Park, Kings Energy, Iligan City Waterworks, and Roxas City Water District — 100+ projects across cement, mining, power, beverages, food, water, and smart cities. Scroll to the Clients section for project details."},
   {k:['nexwater','nexaqua','nexegg','nexchips','nexrice','nexshop','nexterra','paems','nexdrrm','nextennis','kitchen','nexvolley','volleyball','nexauto','nexpost','nexbox','plant intelligence','nexlicense','coaching'],a:"More NEXARCH platforms: NEXWATER (water management SCADA), NEXAQUA (fish/shrimp/crab RAS), NEXEGG, NEXCHIPS (banana-chips production), NEXRICE · NEXSHOP, NEXTERRA (GeoAI satellite scanning), PAEMS (agriculture), NEXDRRM (disaster risk management), NEXTENNIS and NEXTENNIS PRO, KITCHEN (pickleball training), NEXVOLLEY, NEXAUTO (RPA), NEXPOST (social scheduler), NEXBOX (voice-AI box, in development), Plant Intelligence (AI on plant data) and NEXLICENSE. Open the Web Apps section and tap REQUEST DEMO, or contact us on +63 991 421 4989."},
   {k:['web app','webapp','demo','nexmom','nexdesk','nexerp','nexdental','nexcyber','pickleball','tennis','chicken','fleet','smart home','payment','cyrabill','legal','dental','medical'],a:"We build production web applications too! Live demos: NEXMOM (MES/MOM), NEXDESK (AI ticketing), NEXCYBER Sentra (OT security), NEXERP, NEXDENTAL, plus platforms for medical, legal, retail, sports, poultry, fleet, smart home, and payments. Check the Web Apps section — every card has a LIVE DEMO button."},
+  {k:['mastery','ladder','ccae','certif','enrol','enroll','ai automation','isa-95','level 0','level 1','level 2','level 3','level 4','ai layer','offers','pilot','rates','price','pricing','batch','onsite','online class','training','course','agentic','copilot','digital twin'],a:"AI AUTOMATION MASTERY — CYRABELL's training & certification program. The ladder, bottom to top: Level 0 Instrumentation & Field Devices, Level 1 PLC/DCS Control, Level 2 SCADA/HMI, Level 3 MES/MOM/PIMS/LIMS, Level 4 ERP & Business Systems, and the AI Layer (Agentic AI, Edge AI, Digital Twin, LLM Copilots). Learn Basic → Advanced → Expert and earn the CCAE certification. Offers: Online Classes, Onsite Training, Corporate Batches, CCAE Certification, and the Plant Intelligence Pilot (fixed-fee AI on your plant data). Rates are on request — enrol via the Contact tab or call +63 991 421 4989."},
   {k:['train','course','learn'],a:"We run Training Programs for operators and engineers: DCS, PLC, SCADA, and MES across Siemens, Rockwell, Schneider, ABB, Emerson, Honeywell, and Yokogawa platforms. NGCP is among our training clients. Email resitch@gmail.com to arrange a program for your team."},
   {k:['support','ticket','help','issue','problem','broken','fault','troubleshoot'],a:"For technical support, click the amber 🎫 Support button (top nav or floating button) to raise a ticket — our AI triage classifies and prioritises it instantly, and an engineer responds within the SLA. Critical issues: call +63 991 421 4989."},
   {k:['quote','price','cost','how much','proposal','enquir','inquir','hire','engage'],a:"For a quote, use the Contact form below (Start a Project) — tell us your service need and project scope, and a CYRABELL engineer will respond within 1 business day. Or email resitch@gmail.com / call +63 991 421 4989 directly."},
@@ -2636,6 +2687,13 @@ animateCounters();
  window.filterApps=function(btn,k){[].forEach.call(document.querySelectorAll('#app-filter .cfilt'),function(b){b.classList.remove('on')});btn.classList.add('on');
   cards.forEach(function(c){var show=(k==='All'||c.getAttribute('data-appcat')===k);c.style.display=show?'':'none';if(show)c.classList.add('in')})}
 })();
+</script>
+<script>
+function enrolTraining(k){goTab('contact');setTimeout(function(){var s=document.getElementById('f-service'),d=document.getElementById('f-desc');
+ if(s){for(var i=0;i<s.options.length;i++){if(s.options[i].text==='Training Programs'){s.selectedIndex=i;break}}}
+ if(d&&!d.value)d.value='I would like to enrol / ask about rates for: '+k+' (AI Automation Mastery).';},350)}
+function askTraining(){var b=document.getElementById('chat-box'),btn=document.getElementById('chat-btn');if(b&&!b.classList.contains('open')){b.classList.add('open');if(btn)btn.classList.add('active');var bd=document.getElementById('chat-badge');if(bd)bd.style.display='none'}
+ quickAsk('Tell me about the AI Automation Mastery training ladder and offers')}
 </script>
 </body>
 </html>
